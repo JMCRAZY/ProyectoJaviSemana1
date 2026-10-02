@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <title>Ejercicio 24 - Neon Tracker</title>
-  <meta name="description" content="Aplicación web oscura Mobile-First de alto rendimiento con JavaScript vanilla y TailwindCSS para registro rápido y métricas visuales neón." />
+  <meta name="description" content="Aplicación web oscura de alta estabilidad con JavaScript vanilla y TailwindCSS para registro rápido y métricas visuales neón." />
   <meta property="og:title" content="Ejercicio 24 - Neon Tracker" />
-  <meta property="og:description" content="Aplicación web oscura Mobile-First con persistencia local, badges de estado neón y controles táctiles optimizados." />
+  <meta property="og:description" content="Gestor de registros robusto con persistencia segura en localStorage, validación rigurosa y notificaciones flotantes neón." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
 
@@ -93,6 +93,16 @@
       min-width: 44px;
     }
 
+    /* Input shake animation for validation errors */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-4px); }
+      40%, 80% { transform: translateX(4px); }
+    }
+    .animate-shake {
+      animation: shake 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
+
     /* Scrollbar */
     ::-webkit-scrollbar {
       width: 6px;
@@ -128,20 +138,20 @@
         <div>
           <div class="flex items-center gap-2 mb-1.5 flex-wrap">
             <span class="inline-block w-2.5 h-2.5 rounded-full bg-neon-cyan animate-pulse"></span>
-            <span class="text-[11px] sm:text-xs font-mono tracking-wider uppercase text-neon-cyan font-bold">Ejercicio 24 · Mobile-First</span>
+            <span class="text-[11px] sm:text-xs font-mono tracking-wider uppercase text-neon-cyan font-bold">Ejercicio 24 · Sistema Estable</span>
             <span class="text-slate-600 hidden xs:inline">·</span>
-            <span class="text-[11px] font-mono text-emerald-400 inline-flex items-center gap-1">
+            <span id="storage-status-badge" class="text-[11px] font-mono text-emerald-400 inline-flex items-center gap-1">
               <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
               </svg>
-              localStorage Activo
+              localStorage Protegido
             </span>
           </div>
           <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
             Control Dinámico & Registros
           </h1>
           <p class="text-xs sm:text-sm text-slate-400 mt-1 max-w-md">
-            Optimizado para dedos y pantallas móviles. Crea, filtra y actualiza tus registros con colores neón.
+            Validación estricta de formularios, notificaciones neón y almacenamiento local blindado con gestión de errores.
           </p>
         </div>
 
@@ -280,7 +290,7 @@
       </div>
     </section>
 
-    <!-- 3. FORMULARIO Y ACCIONES RÁPIDAS MOBILE-FIRST (BOTONES AMPLIOS CÓMODOS AL TACTO) -->
+    <!-- 3. FORMULARIO CON VALIDACIÓN ESTRICTA Y ATRIBUTOS DE SEGURIDAD -->
     <section class="bg-night-900/80 border border-night-800 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-xl">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
         <div>
@@ -288,7 +298,7 @@
             <span class="w-2.5 h-2.5 rounded-full bg-neon-emerald"></span>
             Crear Registro Rápido
           </h2>
-          <p class="text-xs text-slate-400">Botones grandes para registrar fácilmente con una sola mano.</p>
+          <p class="text-xs text-slate-400">Validación de formatos en tiempo real. No se admiten valores vacíos o erróneos.</p>
         </div>
 
         <!-- Presets de Acción Rápida con Touch Targets Amplios (≥ 44px) -->
@@ -318,15 +328,15 @@
         </div>
       </div>
 
-      <!-- Alerta de validación táctil -->
-      <div id="form-error" class="hidden mb-3 p-3 bg-pink-950/60 border border-pink-500/50 rounded-xl text-xs text-pink-300 font-mono flex items-center gap-2.5">
+      <!-- Contenedor de Error Inline Dinámico -->
+      <div id="form-error" class="hidden mb-3 p-3 bg-pink-950/60 border border-pink-500/50 rounded-xl text-xs text-pink-300 font-mono flex items-center gap-2.5 animate-shake">
         <svg class="w-5 h-5 shrink-0 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
         </svg>
         <span id="form-error-msg">Por favor corrige los campos indicados.</span>
       </div>
 
-      <!-- Formulario Mobile-First con inputs amplios (text-base para evitar zoom involuntario en iOS) -->
+      <!-- Formulario Mobile-First con inputs validados -->
       <form id="record-form" class="grid grid-cols-1 sm:grid-cols-12 gap-3" onsubmit="handleFormSubmit(event)" novalidate>
         <!-- Concepto -->
         <div class="sm:col-span-4">
@@ -336,8 +346,10 @@
           <input 
             type="text" 
             id="input-title" 
-            placeholder="Mínimo 3 caracteres..." 
+            placeholder="Ej. Revisión técnica (mín. 3 letras)" 
             maxlength="60"
+            autocomplete="off"
+            oninput="clearFieldValidation(this)"
             class="w-full min-h-[48px] bg-night-950 border border-night-700 focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan rounded-xl px-4 py-3 text-base sm:text-sm text-white placeholder-slate-600 outline-none transition-all-200"
           />
         </div>
@@ -353,6 +365,9 @@
             placeholder="50" 
             min="1" 
             max="1000"
+            step="1"
+            autocomplete="off"
+            oninput="clearFieldValidation(this)"
             class="w-full min-h-[48px] bg-night-950 border border-night-700 focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan rounded-xl px-4 py-3 text-base sm:text-sm text-white font-mono placeholder-slate-600 outline-none transition-all-200"
           />
         </div>
@@ -372,7 +387,7 @@
           </select>
         </div>
 
-        <!-- Botón de Envío Táctil Principal (Grande, min-h-[48px]) -->
+        <!-- Botón de Envío Táctil Principal -->
         <div class="sm:col-span-3 flex items-end">
           <button 
             type="submit" 
@@ -388,7 +403,7 @@
       </form>
     </section>
 
-    <!-- 4. CONSULTAR, FILTRAR Y LISTA INTERACTIVA (MOBILE-FIRST) -->
+    <!-- 4. CONSULTAR, FILTRAR Y LISTA INTERACTIVA -->
     <section class="space-y-4">
       <!-- Filtros táctiles amplios -->
       <div class="bg-night-900/90 border border-night-800 rounded-2xl sm:rounded-3xl p-4 sm:p-5 shadow-lg space-y-3.5">
@@ -445,7 +460,7 @@
 
           <!-- Filtro por Estado (Tabs amplias para dedos, min-h-[44px]) -->
           <div class="sm:col-span-4 flex items-center p-1 bg-night-950 border border-night-800 rounded-xl text-xs font-mono min-h-[44px]">
-            <button type="button" onclick="setFilterState('all')" id="filter-all" class="flex-1 min-h-[36px] py-1.5 rounded-lg text-white bg-night-800 transition-colors text-center font-semibold">
+            <button type="button" onclick="setFilterState('all')" id="filter-all" class="flex-1 min-h-[36px] py-1.5 rounded-lg text-white bg-night-800 transition-colors text-center font-bold">
               Todos
             </button>
             <button type="button" onclick="setFilterState('pending')" id="filter-pending" class="flex-1 min-h-[36px] py-1.5 rounded-lg text-amber-400 hover:text-white transition-colors text-center font-medium">
@@ -480,34 +495,26 @@
           <span class="w-2 h-2 rounded-full bg-neon-pink"></span>
           Toca el check para completar/activar, lápiz para editar o papelera para eliminar.
         </span>
-        <span id="badge-total-items" class="text-xs font-mono text-slate-500">0 en localStorage</span>
+        <span id="badge-total-items" class="text-xs font-mono text-slate-500">0 en almacenamiento</span>
       </div>
 
       <!-- CONTENEDOR DINÁMICO DE LA LISTA -->
       <div id="records-list" class="space-y-3 min-h-[160px]">
       </div>
 
-      <!-- 2. ESTADO VACÍO (EMPTY STATE) CON ÍCONO SVG CLARO Y ACCIONES DIRECTAS -->
+      <!-- ESTADO VACÍO (EMPTY STATE) -->
       <div id="empty-state" class="hidden text-center py-12 sm:py-16 px-6 bg-night-900/40 border border-dashed border-night-800 rounded-3xl relative overflow-hidden">
-        <!-- SVG Claro y Estilizado con acentos Neón -->
         <div class="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-4 relative flex items-center justify-center">
           <div class="absolute inset-0 bg-cyan-500/10 rounded-full blur-xl pointer-events-none"></div>
           
           <svg class="w-16 h-16 sm:w-20 sm:h-20 text-slate-600 relative z-10" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Portapapeles oscuro -->
             <rect x="18" y="16" width="44" height="54" rx="8" fill="#0B0F19" stroke="#24304F" stroke-width="2" />
-            
-            <!-- Clip superior con acento neón cian -->
             <path d="M30 14C30 11.7909 31.7909 10 34 10H46C48.2091 10 50 11.7909 50 14V18H30V14Z" fill="#111728" stroke="#00F5FF" stroke-width="1.8" />
             <circle cx="40" cy="14" r="2" fill="#00F5FF" />
-            
-            <!-- Líneas de lista estilizadas -->
             <line x1="28" y1="28" x2="52" y2="28" stroke="#24304F" stroke-width="2" stroke-linecap="round" />
             <line x1="28" y1="38" x2="48" y2="38" stroke="#24304F" stroke-width="2" stroke-linecap="round" />
             <line x1="28" y1="48" x2="42" y2="48" stroke="#24304F" stroke-width="2" stroke-linecap="round" />
-            
-            <!-- Chispas neón decorativas -->
-            <circle cx="58" cy="22" r="3" fill="#00FF88" className="animate-pulse" />
+            <circle cx="58" cy="22" r="3" fill="#00FF88" />
             <circle cx="22" cy="62" r="2.5" fill="#FFB800" />
             <circle cx="62" cy="56" r="2" fill="#FF007F" />
           </svg>
@@ -520,7 +527,6 @@
           No tienes registros pendientes en este momento o ningún elemento coincide con tus filtros de búsqueda.
         </p>
 
-        <!-- Botones de Acción Directa en el Empty State (Fáciles de tocar) -->
         <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
           <button 
             type="button" 
@@ -549,7 +555,7 @@
 
     <!-- PIE DE PÁGINA LIMPIO -->
     <footer class="pt-6 border-t border-night-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 font-mono gap-2">
-      <div>Ejercicio 24 · Mobile-First Touch & localStorage</div>
+      <div>Ejercicio 24 · Mobile-First Touch & localStorage Seguro</div>
       <div class="flex items-center gap-3">
         <span class="inline-flex items-center gap-1.5">
           <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Modo Oscuro Permanente
@@ -561,7 +567,7 @@
 
   </div>
 
-  <!-- MODAL DE EDICIÓN EN TIEMPO REAL (TOUCH-FRIENDLY) -->
+  <!-- MODAL DE EDICIÓN EN TIEMPO REAL -->
   <div id="edit-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-night-950/85 backdrop-blur-md">
     <div class="bg-night-900 border border-neon-cyan/50 rounded-2xl sm:rounded-3xl p-5 sm:p-6 w-full max-w-md shadow-neon-cyan relative transform transition-all">
       <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-neon-cyan to-neon-emerald rounded-t-3xl"></div>
@@ -576,9 +582,9 @@
         <button onclick="closeEditModal()" class="touch-target-min rounded-xl text-slate-400 hover:text-white hover:bg-night-800 flex items-center justify-center cursor-pointer">✕</button>
       </div>
 
-      <div id="modal-error" class="hidden mb-3 p-2.5 bg-pink-950/60 border border-pink-500/40 rounded-xl text-xs text-pink-300 font-mono"></div>
+      <div id="modal-error" class="hidden mb-3 p-2.5 bg-pink-950/60 border border-pink-500/40 rounded-xl text-xs text-pink-300 font-mono animate-shake"></div>
 
-      <form id="edit-form" onsubmit="saveEdit(event)" class="space-y-3.5">
+      <form id="edit-form" onsubmit="saveEdit(event)" class="space-y-3.5" novalidate>
         <input type="hidden" id="edit-id" />
 
         <div>
@@ -586,8 +592,8 @@
           <input 
             type="text" 
             id="edit-title" 
-            required 
             maxlength="60"
+            oninput="clearFieldValidation(this)"
             class="w-full min-h-[48px] bg-night-950 border border-night-700 focus:border-neon-cyan rounded-xl px-4 py-2.5 text-base sm:text-sm text-white outline-none"
           />
         </div>
@@ -600,7 +606,8 @@
               id="edit-value" 
               min="1" 
               max="1000" 
-              required
+              step="1"
+              oninput="clearFieldValidation(this)"
               class="w-full min-h-[48px] bg-night-950 border border-night-700 focus:border-neon-cyan rounded-xl px-4 py-2.5 text-base sm:text-sm text-white font-mono outline-none"
             />
           </div>
@@ -609,7 +616,7 @@
             <label for="edit-category" class="block text-xs font-mono text-slate-400 mb-1">Categoría</label>
             <select 
               id="edit-category" 
-              class="w-full min-h-[48px] bg-night-950 border border-night-700 focus:border-neon-cyan rounded-xl px-3 py-2.5 text-base sm:text-sm text-white outline-none cursor-pointer"
+              class="w-full min-h-[48px] bg-night-950 border border-night-700 focus:border-neon-cyan rounded-xl px-3.5 py-2.5 text-base sm:text-sm text-white outline-none cursor-pointer"
             >
               <option value="Enfoque">Enfoque (Cian)</option>
               <option value="Salud">Salud (Verde)</option>
@@ -688,23 +695,51 @@
     </div>
   </div>
 
-  <!-- Notificación Toast Flotante -->
-  <div id="toast" class="fixed bottom-5 right-5 left-5 sm:left-auto z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none bg-night-900 border border-cyan-500/40 text-white text-xs font-mono px-4 py-3 rounded-2xl shadow-neon-cyan flex items-center justify-between gap-3">
-    <div class="flex items-center gap-2">
-      <span id="toast-icon" class="text-neon-cyan font-bold">✓</span>
-      <span id="toast-message">Registro guardado</span>
-    </div>
-    <button 
-      id="toast-undo-btn" 
-      onclick="handleUndo()" 
-      class="hidden pointer-events-auto underline text-cyan-300 hover:text-white font-bold px-2 py-1 cursor-pointer"
+  <!-- SISTEMA DE NOTIFICACIONES FLOTANTES (TOASTS) DE ESTILO NEÓN -->
+  <div 
+    id="toast-container" 
+    class="fixed bottom-5 right-5 left-5 sm:left-auto sm:max-w-md z-50 pointer-events-none transition-all duration-300 transform translate-y-24 opacity-0"
+  >
+    <div 
+      id="toast" 
+      class="bg-night-900/95 backdrop-blur-md border px-4 py-3.5 rounded-2xl flex items-center justify-between gap-3 pointer-events-auto transition-all duration-200"
     >
-      Deshacer
-    </button>
+      <div class="flex items-center gap-3 min-w-0">
+        <!-- Ícono del Toast -->
+        <div id="toast-icon-wrap" class="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-sm font-bold">
+          <span id="toast-icon">✓</span>
+        </div>
+        
+        <!-- Mensaje -->
+        <p id="toast-message" class="text-xs sm:text-sm font-medium text-white break-words line-clamp-2">
+          Operación realizada con éxito
+        </p>
+      </div>
+
+      <!-- Acciones Toast -->
+      <div class="flex items-center gap-2 shrink-0">
+        <button 
+          id="toast-undo-btn" 
+          onclick="handleUndo()" 
+          class="hidden text-xs font-mono font-bold underline px-2 py-1 text-cyan-300 hover:text-white transition-colors cursor-pointer"
+        >
+          Deshacer
+        </button>
+        <button 
+          type="button" 
+          onclick="hideToast()" 
+          class="w-6 h-6 rounded-md text-slate-400 hover:text-white flex items-center justify-center text-xs transition-colors cursor-pointer"
+          title="Cerrar notificación"
+        >
+          ✕
+        </button>
+      </div>
+    </div>
   </div>
 
-  <!-- JAVASCRIPT VANILLA -->
+  <!-- JAVASCRIPT VANILLA CON PROTECCIÓN LOCALSTORAGE Y VALIDACIONES ESTRICTAS -->
   <script>
+    // --- 0. CONSTANTES Y CONFIGURACIÓN ---
     const STORAGE_KEY = 'ejercicio24_records';
 
     const CATEGORY_CONFIG = {
@@ -771,45 +806,237 @@
       ];
     }
 
+    // --- 1. GESTOR DE ALMACENAMIENTO SEGURO (PROTEGIDO CON TRY...CATCH) ---
+    const SafeStorage = {
+      isAvailable() {
+        try {
+          const test = '__storage_test__';
+          localStorage.setItem(test, test);
+          localStorage.removeItem(test);
+          return true;
+        } catch (e) {
+          return false;
+        }
+      },
+      get(key, fallback = []) {
+        try {
+          if (!this.isAvailable()) {
+            console.warn('[SafeStorage] localStorage no disponible en este entorno.');
+            return fallback;
+          }
+          const raw = localStorage.getItem(key);
+          if (!raw) return fallback;
+          const parsed = JSON.parse(raw);
+          return Array.isArray(parsed) ? parsed : fallback;
+        } catch (err) {
+          console.error('[SafeStorage] Error al leer datos de localStorage:', err);
+          return fallback;
+        }
+      },
+      set(key, data) {
+        try {
+          if (!this.isAvailable()) {
+            showToast('Almacenamiento no disponible en tu navegador.', 'warning');
+            return false;
+          }
+          const serialized = JSON.stringify(data);
+          localStorage.setItem(key, serialized);
+          return true;
+        } catch (err) {
+          console.error('[SafeStorage] Error al guardar datos en localStorage:', err);
+          showToast('No se pudieron guardar los datos: almacenamiento lleno o restringido.', 'error');
+          return false;
+        }
+      },
+      remove(key) {
+        try {
+          if (this.isAvailable()) {
+            localStorage.removeItem(key);
+          }
+          return true;
+        } catch (err) {
+          console.error('[SafeStorage] Error al eliminar clave en localStorage:', err);
+          return false;
+        }
+      }
+    };
+
+    // Estado en memoria
     let records = [];
     let lastDeletedRecord = null;
 
+    // Filtros activos
     let currentFilterState = 'all';
     let currentFilterCategory = 'all';
     let searchQuery = '';
 
+    // Inicialización al cargar la página
     window.addEventListener('DOMContentLoaded', () => {
-      loadRecordsFromLocalStorage();
-      renderAll();
+      initApp();
     });
 
-    function loadRecordsFromLocalStorage() {
-      try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (raw) {
-          const parsed = JSON.parse(raw);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            records = parsed;
-            return;
-          }
-        }
+    function initApp() {
+      // 1. Lectura protegida de localStorage
+      const stored = SafeStorage.get(STORAGE_KEY, null);
+
+      if (stored && Array.isArray(stored) && stored.length > 0) {
+        records = stored;
+      } else {
+        // Si está vacío o es la primera carga, inicializar con exactamente 2 registros de ejemplo
         records = getTwoDefaultRecords();
-        saveRecordsToLocalStorage();
-      } catch (err) {
-        records = getTwoDefaultRecords();
-        saveRecordsToLocalStorage();
+        SafeStorage.set(STORAGE_KEY, records);
       }
+
+      // 2. Indicador visual del estado de persistencia
+      const statusBadge = document.getElementById('storage-status-badge');
+      if (statusBadge && !SafeStorage.isAvailable()) {
+        statusBadge.innerHTML = `<span class="text-amber-400">⚠ Memoria Temporal (Sin almacenamiento persistente)</span>`;
+        statusBadge.className = 'text-[11px] font-mono text-amber-400 inline-flex items-center gap-1';
+      }
+
+      renderAll();
     }
 
-    function saveRecordsToLocalStorage() {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
-      } catch (err) {
-        console.error('Error escribiendo en localStorage:', err);
-      }
+    function saveState() {
+      return SafeStorage.set(STORAGE_KEY, records);
     }
 
-    // --- FUNCIÓN 1: CREAR REGISTRO ---
+    // --- 2. SISTEMA DE NOTIFICACIONES FLOTANTES (TOASTS NEÓN) ---
+    let toastTimeout = null;
+
+    /**
+     * Muestra una notificación flotante estilo neón sin usar alertas nativas.
+     * @param {string} message - Texto descriptivo.
+     * @param {'success'|'error'|'warning'|'info'} type - Tipo semántico de la notificación.
+     * @param {boolean} showUndo - Si se habilita el botón deshacer.
+     */
+    function showToast(message, type = 'success', showUndo = false) {
+      const container = document.getElementById('toast-container');
+      const toast = document.getElementById('toast');
+      const msgEl = document.getElementById('toast-message');
+      const iconEl = document.getElementById('toast-icon');
+      const iconWrap = document.getElementById('toast-icon-wrap');
+      const undoBtn = document.getElementById('toast-undo-btn');
+
+      if (!container || !toast) return;
+
+      // Limpiar timeout anterior
+      if (toastTimeout) clearTimeout(toastTimeout);
+
+      // Estilos según el tipo
+      let borderClass = 'border-cyan-500/50';
+      let shadowClass = 'shadow-neon-cyan';
+      let iconColor = 'text-cyan-400 bg-cyan-950/80 border border-cyan-500/40';
+      let iconSymbol = '✓';
+
+      if (type === 'error') {
+        borderClass = 'border-pink-500/60';
+        shadowClass = 'shadow-neon-pink';
+        iconColor = 'text-pink-400 bg-pink-950/80 border border-pink-500/50';
+        iconSymbol = '✕';
+      } else if (type === 'warning') {
+        borderClass = 'border-amber-500/60';
+        shadowClass = 'shadow-neon-amber';
+        iconColor = 'text-amber-300 bg-amber-950/80 border border-amber-500/50';
+        iconSymbol = '⚠';
+      } else if (type === 'info') {
+        borderClass = 'border-blue-500/50';
+        shadowClass = 'shadow-neon-cyan';
+        iconColor = 'text-blue-400 bg-blue-950/80 border border-blue-500/40';
+        iconSymbol = '✦';
+      }
+
+      toast.className = `bg-night-900/95 backdrop-blur-md border ${borderClass} ${shadowClass} px-4 py-3.5 rounded-2xl flex items-center justify-between gap-3 pointer-events-auto transition-all duration-200`;
+      iconWrap.className = `w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-sm font-bold ${iconColor}`;
+      iconEl.textContent = iconSymbol;
+      msgEl.textContent = message;
+
+      if (undoBtn) {
+        if (showUndo) undoBtn.classList.remove('hidden');
+        else undoBtn.classList.add('hidden');
+      }
+
+      // Animación de entrada suave
+      container.classList.remove('translate-y-24', 'opacity-0');
+      container.classList.add('translate-y-0', 'opacity-100');
+
+      // Auto ocultar
+      toastTimeout = setTimeout(() => {
+        hideToast();
+      }, showUndo ? 5000 : 3500);
+    }
+
+    function hideToast() {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      container.classList.remove('translate-y-0', 'opacity-100');
+      container.classList.add('translate-y-24', 'opacity-0');
+      if (toastTimeout) clearTimeout(toastTimeout);
+    }
+
+    // --- 3. VALIDACIÓN RIGUROSA DE CAMPOS (REGLAS DE ESTABILIDAD) ---
+
+    function validateRecordData(title, value, category) {
+      // 1. Validar Título/Concepto
+      if (typeof title !== 'string') {
+        return { valid: false, field: 'title', message: 'El concepto debe ser una cadena de texto válida.' };
+      }
+      const trimmed = title.trim();
+      if (!trimmed || trimmed.length === 0) {
+        return { valid: false, field: 'title', message: 'El concepto no puede estar vacío.' };
+      }
+      if (trimmed.length < 3) {
+        return { valid: false, field: 'title', message: 'El concepto debe contener al menos 3 caracteres.' };
+      }
+      if (trimmed.length > 60) {
+        return { valid: false, field: 'title', message: 'El concepto no puede exceder los 60 caracteres.' };
+      }
+      // Evitar que sea exclusivamente números o caracteres especiales
+      if (/^\d+$/.test(trimmed)) {
+        return { valid: false, field: 'title', message: 'El concepto no puede ser únicamente una cifra numérica.' };
+      }
+
+      // 2. Validar Puntos/Valor
+      if (value === null || value === undefined || value === '') {
+        return { valid: false, field: 'value', message: 'El campo de puntos es obligatorio.' };
+      }
+      const num = Number(value);
+      if (isNaN(num) || !Number.isFinite(num)) {
+        return { valid: false, field: 'value', message: 'Los puntos deben ser un número válido.' };
+      }
+      if (!Number.isInteger(num)) {
+        return { valid: false, field: 'value', message: 'Los puntos deben ser un número entero (sin decimales).' };
+      }
+      if (num < 1) {
+        return { valid: false, field: 'value', message: 'Los puntos deben ser mayores a cero (mínimo 1).' };
+      }
+      if (num > 1000) {
+        return { valid: false, field: 'value', message: 'Los puntos no pueden exceder 1,000 unidades.' };
+      }
+
+      // 3. Validar Categoría
+      const validCategories = ['Enfoque', 'Salud', 'Estudio', 'Proyecto', 'General'];
+      if (!validCategories.includes(category)) {
+        return { valid: false, field: 'category', message: 'La categoría seleccionada no es válida.' };
+      }
+
+      return { valid: true, sanitizedTitle: trimmed, sanitizedValue: num };
+    }
+
+    function markFieldInvalid(fieldEl) {
+      if (!fieldEl) return;
+      fieldEl.classList.add('border-pink-500', 'ring-1', 'ring-pink-500', 'animate-shake');
+      setTimeout(() => fieldEl.classList.remove('animate-shake'), 400);
+    }
+
+    function clearFieldValidation(fieldEl) {
+      if (!fieldEl) return;
+      fieldEl.classList.remove('border-pink-500', 'ring-1', 'ring-pink-500');
+      const errorBox = document.getElementById('form-error');
+      if (errorBox) errorBox.classList.add('hidden');
+    }
+
+    // --- 4. MANEJO DE CREAR REGISTRO ---
     function handleFormSubmit(event) {
       event.preventDefault();
       const titleInput = document.getElementById('input-title');
@@ -818,59 +1045,71 @@
       const errorBox = document.getElementById('form-error');
       const errorMsg = document.getElementById('form-error-msg');
 
-      const title = titleInput.value.trim();
-      const val = parseInt(valInput.value, 10);
+      const titleRaw = titleInput.value;
+      const valRaw = valInput.value;
       const cat = catInput.value;
 
-      if (!title || title.length < 3) {
-        errorMsg.textContent = 'El concepto debe tener al menos 3 caracteres.';
+      const validation = validateRecordData(titleRaw, valRaw, cat);
+
+      if (!validation.valid) {
+        errorMsg.textContent = validation.message;
         errorBox.classList.remove('hidden');
-        titleInput.focus();
-        return;
-      }
-      if (isNaN(val) || val < 1 || val > 1000) {
-        errorMsg.textContent = 'El valor debe ser un número entero entre 1 y 1000.';
-        errorBox.classList.remove('hidden');
-        valInput.focus();
+
+        if (validation.field === 'title') {
+          markFieldInvalid(titleInput);
+          titleInput.focus();
+        } else if (validation.field === 'value') {
+          markFieldInvalid(valInput);
+          valInput.focus();
+        }
+        showToast(validation.message, 'warning');
         return;
       }
 
       errorBox.classList.add('hidden');
+      clearFieldValidation(titleInput);
+      clearFieldValidation(valInput);
 
       const newRecord = {
         id: 'rec_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
-        title: title,
-        value: val,
+        title: validation.sanitizedTitle,
+        value: validation.sanitizedValue,
         category: cat,
         completed: false,
         timestamp: Date.now()
       };
 
       records.unshift(newRecord);
-      saveRecordsToLocalStorage();
+      saveState();
       renderAll();
 
       titleInput.value = '';
       valInput.value = '';
       titleInput.focus();
 
-      showToast(`Guardado: "${title}" (+${val} pts)`, '✓');
+      showToast(`Guardado con éxito: "${newRecord.title}" (+${newRecord.value} pts)`, 'success');
     }
 
     function quickAdd(title, value, category) {
+      const validation = validateRecordData(title, value, category);
+      if (!validation.valid) {
+        showToast(validation.message, 'warning');
+        return;
+      }
+
       const newRecord = {
         id: 'rec_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
-        title: title,
-        value: Number(value),
+        title: validation.sanitizedTitle,
+        value: validation.sanitizedValue,
         category: category,
         completed: false,
         timestamp: Date.now()
       };
 
       records.unshift(newRecord);
-      saveRecordsToLocalStorage();
+      saveState();
       renderAll();
-      showToast(`+${value} pts agregados: ${title}`, '⚡');
+      showToast(`+${validation.sanitizedValue} pts agregados: ${validation.sanitizedTitle}`, 'info');
     }
 
     function focusCreateInput() {
@@ -881,7 +1120,7 @@
       }
     }
 
-    // --- FUNCIÓN 2: CONSULTAR / FILTRAR ---
+    // --- 5. CONSULTAR / FILTRAR ---
     function setFilterState(state) {
       currentFilterState = state;
       const buttons = {
@@ -923,13 +1162,13 @@
       if (catSelect) catSelect.value = 'all';
 
       setFilterState('all');
-      showToast('Filtros restablecidos', '↺');
+      showToast('Filtros restablecidos', 'info');
     }
 
     function filterItem(item) {
       if (searchQuery) {
-        const titleMatch = item.title.toLowerCase().includes(searchQuery);
-        const catMatch = item.category.toLowerCase().includes(searchQuery);
+        const titleMatch = (item.title || '').toLowerCase().includes(searchQuery);
+        const catMatch = (item.category || '').toLowerCase().includes(searchQuery);
         if (!titleMatch && !catMatch) return false;
       }
 
@@ -941,16 +1180,16 @@
       return true;
     }
 
-    // --- FUNCIÓN 3: ACTUALIZAR Y ELIMINAR ---
+    // --- 6. ACTUALIZAR Y ELIMINAR ---
     function toggleCompleted(id) {
       const item = records.find(r => r.id === id);
       if (item) {
         item.completed = !item.completed;
-        saveRecordsToLocalStorage();
+        saveState();
         renderAll();
         showToast(
-          item.completed ? `✓ Completado (Verde neón)` : `⏳ Pendiente (Amarillo neón)`,
-          item.completed ? '✓' : '○'
+          item.completed ? `✓ "${item.title}" marcado como Completado.` : `⏳ "${item.title}" cambiado a Pendiente.`,
+          item.completed ? 'success' : 'warning'
         );
       }
     }
@@ -959,11 +1198,20 @@
       const item = records.find(r => r.id === id);
       if (!item) return;
 
-      document.getElementById('edit-id').value = item.id;
-      document.getElementById('edit-title').value = item.title;
-      document.getElementById('edit-value').value = item.value;
-      document.getElementById('edit-category').value = item.category;
-      document.getElementById('edit-completed').value = item.completed ? 'true' : 'false';
+      const idEl = document.getElementById('edit-id');
+      const titleEl = document.getElementById('edit-title');
+      const valEl = document.getElementById('edit-value');
+      const catEl = document.getElementById('edit-category');
+      const compEl = document.getElementById('edit-completed');
+
+      idEl.value = item.id;
+      titleEl.value = item.title;
+      valEl.value = item.value;
+      catEl.value = item.category;
+      compEl.value = item.completed ? 'true' : 'false';
+
+      clearFieldValidation(titleEl);
+      clearFieldValidation(valEl);
 
       const errorBox = document.getElementById('modal-error');
       if (errorBox) errorBox.classList.add('hidden');
@@ -980,35 +1228,41 @@
     function saveEdit(event) {
       event.preventDefault();
       const id = document.getElementById('edit-id').value;
-      const title = document.getElementById('edit-title').value.trim();
-      const val = parseInt(document.getElementById('edit-value').value, 10);
-      const cat = document.getElementById('edit-category').value;
-      const completed = document.getElementById('edit-completed').value === 'true';
-
+      const titleInput = document.getElementById('edit-title');
+      const valInput = document.getElementById('edit-value');
+      const catInput = document.getElementById('edit-category');
+      const compInput = document.getElementById('edit-completed');
       const errorBox = document.getElementById('modal-error');
 
-      if (!title || title.length < 3) {
-        errorBox.textContent = 'El concepto debe tener al menos 3 caracteres.';
-        errorBox.classList.remove('hidden');
-        return;
-      }
-      if (isNaN(val) || val < 1 || val > 1000) {
-        errorBox.textContent = 'El valor debe estar entre 1 y 1000.';
-        errorBox.classList.remove('hidden');
+      const validation = validateRecordData(titleInput.value, valInput.value, catInput.value);
+
+      if (!validation.valid) {
+        if (errorBox) {
+          errorBox.textContent = validation.message;
+          errorBox.classList.remove('hidden');
+        }
+        if (validation.field === 'title') {
+          markFieldInvalid(titleInput);
+          titleInput.focus();
+        } else if (validation.field === 'value') {
+          markFieldInvalid(valInput);
+          valInput.focus();
+        }
+        showToast(validation.message, 'warning');
         return;
       }
 
       const item = records.find(r => r.id === id);
       if (item) {
-        item.title = title;
-        item.value = val;
-        item.category = cat;
-        item.completed = completed;
+        item.title = validation.sanitizedTitle;
+        item.value = validation.sanitizedValue;
+        item.category = catInput.value;
+        item.completed = compInput.value === 'true';
 
-        saveRecordsToLocalStorage();
+        saveState();
         renderAll();
         closeEditModal();
-        showToast(`Actualizado: "${title}"`, '✎');
+        showToast(`Registro actualizado: "${item.title}"`, 'success');
       }
     }
 
@@ -1017,24 +1271,24 @@
       if (index !== -1) {
         const deleted = records.splice(index, 1)[0];
         lastDeletedRecord = { item: deleted, index: index };
-        saveRecordsToLocalStorage();
+        saveState();
         renderAll();
-        showToast(`Eliminado: "${deleted.title}"`, '✕', true);
+        showToast(`Eliminado: "${deleted.title}"`, 'error', true);
       }
     }
 
     function handleUndo() {
       if (lastDeletedRecord) {
         records.splice(lastDeletedRecord.index, 0, lastDeletedRecord.item);
-        saveRecordsToLocalStorage();
+        saveState();
         renderAll();
         const title = lastDeletedRecord.item.title;
         lastDeletedRecord = null;
-        showToast(`Restaurado: "${title}"`, '↺', false);
+        showToast(`Restaurado con éxito: "${title}"`, 'success', false);
       }
     }
 
-    // --- RESTABLECER ALMACENAMIENTO ---
+    // --- 7. RESTABLECER ALMACENAMIENTO (SIN ALERTAS NATIVAS) ---
     function openResetConfirmModal() {
       const modal = document.getElementById('reset-confirm-modal');
       if (modal) modal.classList.remove('hidden');
@@ -1047,25 +1301,26 @@
 
     function executeResetStorage() {
       try {
-        localStorage.removeItem(STORAGE_KEY);
+        SafeStorage.remove(STORAGE_KEY);
         records = getTwoDefaultRecords();
-        saveRecordsToLocalStorage();
+        saveState();
         renderAll();
         closeResetConfirmModal();
-        showToast('Restablecido con 2 ejemplos iniciales', '↺');
+        showToast('localStorage restablecido con 2 ejemplos iniciales.', 'info');
       } catch (err) {
-        showToast('Error al restablecer', '✕');
+        console.error('Error al restablecer:', err);
+        showToast('Ocurrió un error al restablecer el almacenamiento.', 'error');
       }
     }
 
     function restoreTwoDefaults() {
       records = getTwoDefaultRecords();
-      saveRecordsToLocalStorage();
+      saveState();
       renderAll();
-      showToast('2 registros de ejemplo cargados', '✦');
+      showToast('2 registros de ejemplo cargados.', 'info');
     }
 
-    // --- RENDERIZADO VISUAL ---
+    // --- 8. RENDERIZADO VISUAL & COMPONENTES NEÓN ---
     function renderAll() {
       renderHeaderCounters();
       renderSummaryCards();
@@ -1073,7 +1328,6 @@
       renderList();
     }
 
-    // Contador resumen superior con badges neón
     function renderHeaderCounters() {
       const totalValue = records.reduce((acc, curr) => acc + (Number(curr.value) || 0), 0);
       const totalCount = records.length;
@@ -1093,7 +1347,7 @@
       if (heroCompCount) heroCompCount.textContent = completedCount;
       if (heroCompRate) heroCompRate.textContent = `(${completionRate}%)`;
       if (heroPendCount) heroPendCount.textContent = pendingCount;
-      if (badgeTotalItems) badgeTotalItems.textContent = `${totalCount} en localStorage`;
+      if (badgeTotalItems) badgeTotalItems.textContent = `${totalCount} en almacenamiento`;
     }
 
     function renderSummaryCards() {
@@ -1193,7 +1447,6 @@
       if (legendContainer) legendContainer.innerHTML = legendHtml;
     }
 
-    // Lista interactiva con badges neón diferenciados y botones táctiles grandes (≥ 44px)
     function renderList() {
       const listEl = document.getElementById('records-list');
       const emptyEl = document.getElementById('empty-state');
@@ -1220,8 +1473,6 @@
         const isDone = item.completed;
         const timeAgo = formatTimeAgo(item.timestamp);
 
-        // BADGE NEÓN DIFERENCIADO:
-        // Verde neón = Completado | Amarillo/Ámbar neón = Pendiente
         const statusBadgeHtml = isDone
           ? `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono font-bold bg-emerald-950/80 text-emerald-300 border border-emerald-500/50 shadow-[0_0_10px_rgba(0,255,136,0.25)]">
                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -1237,7 +1488,7 @@
             class="group bg-night-900/90 border ${isDone ? 'border-emerald-500/20 bg-night-900/70' : 'border-amber-500/20'} ${config.hoverBorder} rounded-2xl p-3.5 sm:p-4 flex items-center justify-between gap-3 transition-all-200 hover:shadow-lg hover:bg-night-850"
             id="item-${item.id}"
           >
-            <!-- Checkbox de estado táctil grande (Touch Target ≥ 44px) -->
+            <!-- Checkbox táctil grande (≥ 44px) -->
             <div class="flex items-center gap-3 min-w-0 flex-1">
               <button 
                 type="button" 
@@ -1262,10 +1513,8 @@
                 </div>
 
                 <div class="flex items-center gap-2 mt-1.5 flex-wrap">
-                  <!-- Badge Neón Diferenciado de Estado -->
                   ${statusBadgeHtml}
 
-                  <!-- Categoría con punto neón -->
                   <span class="inline-flex items-center gap-1 text-[11px] font-mono ${config.color}">
                     <span class="w-1.5 h-1.5 rounded-full ${config.dot}"></span>
                     ${item.category}
@@ -1277,7 +1526,7 @@
               </div>
             </div>
 
-            <!-- Puntos & Botones Táctiles de Acción (Touch Target ≥ 44px) -->
+            <!-- Puntos & Botones Táctiles (≥ 44px) -->
             <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
               <div class="text-right mr-1 hidden xs:block">
                 <span class="text-lg sm:text-xl font-mono font-bold ${isDone ? 'text-emerald-400' : 'text-amber-300'} tabular-nums">
@@ -1286,7 +1535,7 @@
                 <span class="text-[10px] font-mono text-slate-500 block -mt-1">pts</span>
               </div>
 
-              <!-- Botón Editar (≥ 44px) -->
+              <!-- Botón Editar -->
               <button 
                 type="button" 
                 onclick="openEditModal('${item.id}')"
@@ -1298,7 +1547,7 @@
                 </svg>
               </button>
 
-              <!-- Botón Eliminar (≥ 44px) -->
+              <!-- Botón Eliminar -->
               <button 
                 type="button" 
                 onclick="deleteRecord('${item.id}')"
@@ -1331,36 +1580,10 @@
     }
 
     function escapeHtml(text) {
+      if (typeof text !== 'string') return '';
       const div = document.createElement('div');
       div.textContent = text;
       return div.innerHTML;
-    }
-
-    let toastTimer = null;
-    function showToast(message, icon = '✓', showUndo = false) {
-      const toast = document.getElementById('toast');
-      const toastMsg = document.getElementById('toast-message');
-      const toastIcon = document.getElementById('toast-icon');
-      const toastUndo = document.getElementById('toast-undo-btn');
-
-      if (!toast) return;
-
-      toastMsg.textContent = message;
-      toastIcon.textContent = icon;
-
-      if (toastUndo) {
-        if (showUndo) toastUndo.classList.remove('hidden');
-        else toastUndo.classList.add('hidden');
-      }
-
-      toast.classList.remove('translate-y-24', 'opacity-0');
-      toast.classList.add('translate-y-0', 'opacity-100');
-
-      if (toastTimer) clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => {
-        toast.classList.remove('translate-y-0', 'opacity-100');
-        toast.classList.add('translate-y-24', 'opacity-0');
-      }, showUndo ? 4500 : 2500);
     }
   </script>
 </body>

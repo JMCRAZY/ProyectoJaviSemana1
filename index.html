@@ -44,10 +44,10 @@
             }
           },
           boxShadow: {
-            'neon-cyan': '0 0 20px rgba(0, 245, 255, 0.25)',
-            'neon-pink': '0 0 20px rgba(255, 0, 127, 0.25)',
-            'neon-emerald': '0 0 20px rgba(0, 255, 136, 0.25)',
-            'neon-amber': '0 0 20px rgba(255, 184, 0, 0.25)'
+            'neon-cyan': '0 0 22px rgba(0, 245, 255, 0.28)',
+            'neon-pink': '0 0 22px rgba(255, 0, 127, 0.28)',
+            'neon-emerald': '0 0 22px rgba(0, 255, 136, 0.28)',
+            'neon-amber': '0 0 22px rgba(255, 184, 0, 0.28)'
           }
         }
       }
@@ -64,29 +64,28 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* Ambient background subtle lighting */
+    /* Ambient background lighting */
     .ambient-glow {
       background-image: 
-        radial-gradient(circle at 15% 10%, rgba(0, 245, 255, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 85% 20%, rgba(255, 0, 127, 0.07) 0%, transparent 40%),
+        radial-gradient(circle at 10% 10%, rgba(0, 245, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 20%, rgba(255, 0, 127, 0.07) 0%, transparent 40%),
         radial-gradient(circle at 50% 90%, rgba(0, 255, 136, 0.05) 0%, transparent 50%);
     }
 
-    /* Neon glow borders */
     .border-glow-cyan {
-      box-shadow: 0 0 15px -3px rgba(0, 245, 255, 0.2);
+      box-shadow: 0 0 15px -3px rgba(0, 245, 255, 0.25);
     }
     .border-glow-emerald {
-      box-shadow: 0 0 15px -3px rgba(0, 255, 136, 0.2);
+      box-shadow: 0 0 15px -3px rgba(0, 255, 136, 0.25);
     }
     .border-glow-pink {
-      box-shadow: 0 0 15px -3px rgba(255, 0, 127, 0.2);
+      box-shadow: 0 0 15px -3px rgba(255, 0, 127, 0.25);
     }
     .border-glow-amber {
-      box-shadow: 0 0 15px -3px rgba(255, 184, 0, 0.2);
+      box-shadow: 0 0 15px -3px rgba(255, 184, 0, 0.25);
     }
 
-    /* Scrollbar personalizada */
+    /* Scrollbar */
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -102,7 +101,6 @@
       background: #00F5FF;
     }
 
-    /* Smooth Transitions */
     .transition-all-200 {
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -115,20 +113,20 @@
 
     <!-- 1. ENCABEZADO PRINCIPAL CON INDICADOR / CONTADOR DESTACADO -->
     <header class="bg-night-900/90 backdrop-blur border border-night-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
-      <!-- Glow decorativo superior -->
+      <!-- Glow decorativo superior multicolor -->
       <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-neon-cyan via-neon-emerald to-neon-pink"></div>
       
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <div class="flex items-center gap-2 mb-1">
             <span class="inline-block w-2.5 h-2.5 rounded-full bg-neon-cyan animate-pulse"></span>
-            <span class="text-xs font-mono tracking-wider uppercase text-neon-cyan/90 font-semibold">Sistema Activo · Ejercicio 24</span>
+            <span class="text-xs font-mono tracking-wider uppercase text-neon-cyan font-semibold">Sistema Activo · Ejercicio 24</span>
           </div>
           <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
             Control Dinámico & Registros
           </h1>
           <p class="text-xs sm:text-sm text-slate-400 mt-1 max-w-md">
-            Captura instantánea de métricas con procesamiento en tiempo real y resumen visual en modo oscuro.
+            Módulo integral para crear registros validados, consultar con filtros multidimensionales y actualizar en tiempo real.
           </p>
         </div>
 
@@ -171,7 +169,7 @@
           </svg>
           Panel de Resumen Neón
         </h2>
-        <span class="text-xs font-mono text-slate-500">Métricas en tiempo real</span>
+        <span class="text-xs font-mono text-slate-500">Métricas calculadas en vivo</span>
       </div>
 
       <!-- Tarjetas Neón -->
@@ -190,12 +188,12 @@
         <!-- Tarjeta Neón 2: Esmeralda (Completados) -->
         <div class="bg-night-900 border border-emerald-500/30 rounded-xl p-4 relative overflow-hidden transition-all duration-300 hover:border-emerald-400 hover:shadow-neon-emerald">
           <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-emerald-500/10 rounded-full blur-xl pointer-events-none"></div>
-          <span class="text-[11px] font-mono uppercase text-emerald-400 font-medium block">Eficacia</span>
+          <span class="text-[11px] font-mono uppercase text-emerald-400 font-medium block">Cumplimiento</span>
           <div class="mt-2 flex items-baseline gap-1">
             <span id="stat-completed-rate" class="text-2xl sm:text-3xl font-mono font-bold text-white tabular-nums">0%</span>
             <span id="stat-completed-count" class="text-xs font-mono text-emerald-400/80">(0/0)</span>
           </div>
-          <p class="text-[11px] text-slate-400 mt-1">Tasa de cumplimiento</p>
+          <p class="text-[11px] text-slate-400 mt-1">Tasa de finalizados</p>
         </div>
 
         <!-- Tarjeta Neón 3: Rosa Neón (Máximo Valor) -->
@@ -216,7 +214,7 @@
           <div class="mt-2 flex items-baseline gap-1">
             <span id="stat-top-cat" class="text-lg sm:text-xl font-bold text-white truncate">-</span>
           </div>
-          <p id="stat-top-cat-sub" class="text-[11px] text-slate-400 mt-1">Mayor ponderación</p>
+          <p id="stat-top-cat-sub" class="text-[11px] text-slate-400 mt-1">Mayor acumulación</p>
         </div>
       </div>
 
@@ -224,70 +222,78 @@
       <div class="bg-night-900/60 border border-night-800 rounded-xl p-4">
         <div class="flex items-center justify-between text-xs font-mono mb-2">
           <span class="text-slate-400">Distribución de Puntos por Categoría:</span>
-          <span id="dist-total-pts" class="text-neon-cyan">0 pts totales</span>
+          <span id="dist-total-pts" class="text-neon-cyan font-bold">0 pts totales</span>
         </div>
         <div id="distribution-bar" class="h-3 w-full bg-night-950 rounded-full overflow-hidden flex border border-night-800">
-          <!-- Segmentos generados por JS -->
           <div class="h-full bg-night-800 w-full" title="Sin datos"></div>
         </div>
-        <div id="distribution-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2.5 text-[11px] font-mono text-slate-400">
-          <!-- Leyenda generada por JS -->
+        <div id="distribution-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1.5 mt-2.5 text-[11px] font-mono text-slate-400">
         </div>
       </div>
     </section>
 
-    <!-- 3. ACCIONES RÁPIDAS Y FORMULARIO INMEDIATO -->
+    <!-- 3. FUNCIÓN 1: CREAR / REGISTRAR (FORMULARIO CON VALIDACIONES ROBUSTAS) -->
     <section class="bg-night-900/80 border border-night-800 rounded-2xl p-5 sm:p-6 shadow-xl">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
         <div>
           <h2 class="text-base font-bold text-white flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-neon-emerald"></span>
-            Ingreso Inmediato de Registros
+            <span class="w-2.5 h-2.5 rounded-full bg-neon-emerald"></span>
+            1. Crear / Registrar Nuevo Elemento
           </h2>
-          <p class="text-xs text-slate-400">Usa los botones de acción rápida o escribe los datos en el formulario.</p>
+          <p class="text-xs text-slate-400">Completa y valida los campos para agregar un nuevo registro a la base de datos local.</p>
         </div>
 
         <!-- Presets de Acción Rápida -->
         <div class="flex items-center gap-1.5 flex-wrap">
-          <span class="text-[11px] font-mono text-slate-500 mr-1 hidden sm:inline">Rápido:</span>
-          <button type="button" onclick="quickAdd('Sprint 25m', 25, 'Enfoque')" class="px-2.5 py-1 text-xs font-mono bg-night-950 hover:bg-cyan-950/60 text-cyan-400 border border-cyan-500/30 hover:border-cyan-400 rounded-lg transition-all-200">
+          <span class="text-[11px] font-mono text-slate-500 mr-1 hidden sm:inline">Atajos:</span>
+          <button type="button" onclick="quickAdd('Sprint 25m Enfoque', 25, 'Enfoque')" class="px-2.5 py-1 text-xs font-mono bg-night-950 hover:bg-cyan-950/60 text-cyan-400 border border-cyan-500/30 hover:border-cyan-400 rounded-lg transition-all-200">
             + Sprint 25m
           </button>
-          <button type="button" onclick="quickAdd('Hidratación 500ml', 10, 'Salud')" class="px-2.5 py-1 text-xs font-mono bg-night-950 hover:bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 hover:border-emerald-400 rounded-lg transition-all-200">
-            + Agua 10p
+          <button type="button" onclick="quickAdd('Hidratación & Pausa Activa', 15, 'Salud')" class="px-2.5 py-1 text-xs font-mono bg-night-950 hover:bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 hover:border-emerald-400 rounded-lg transition-all-200">
+            + Salud 15p
           </button>
-          <button type="button" onclick="quickAdd('Lectura / Estudio', 20, 'Estudio')" class="px-2.5 py-1 text-xs font-mono bg-night-950 hover:bg-pink-950/60 text-pink-400 border border-pink-500/30 hover:border-pink-400 rounded-lg transition-all-200">
-            + Lectura 20p
+          <button type="button" onclick="quickAdd('Estudio de Documentación', 30, 'Estudio')" class="px-2.5 py-1 text-xs font-mono bg-night-950 hover:bg-pink-950/60 text-pink-400 border border-pink-500/30 hover:border-pink-400 rounded-lg transition-all-200">
+            + Estudio 30p
           </button>
         </div>
       </div>
 
-      <!-- Formulario Directo -->
-      <form id="record-form" class="grid grid-cols-1 sm:grid-cols-12 gap-3" onsubmit="handleFormSubmit(event)">
+      <!-- Alerta de validación en tiempo de ejecución -->
+      <div id="form-error" class="hidden mb-3 p-2.5 bg-pink-950/50 border border-pink-500/40 rounded-xl text-xs text-pink-300 font-mono flex items-center gap-2">
+        <svg class="w-4 h-4 shrink-0 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+        <span id="form-error-msg">Por favor corrige los campos indicados.</span>
+      </div>
+
+      <!-- Formulario Directo Validador -->
+      <form id="record-form" class="grid grid-cols-1 sm:grid-cols-12 gap-3" onsubmit="handleFormSubmit(event)" novalidate>
         <!-- Concepto -->
-        <div class="sm:col-span-5">
-          <label for="input-title" class="block text-[11px] font-mono text-slate-400 mb-1">Concepto / Actividad</label>
+        <div class="sm:col-span-4">
+          <label for="input-title" class="block text-[11px] font-mono text-slate-400 mb-1">
+            Concepto / Actividad <span class="text-neon-pink">*</span>
+          </label>
           <input 
             type="text" 
             id="input-title" 
-            placeholder="Ej. Revisión de código, Entrenamiento..." 
-            required
+            placeholder="Mínimo 3 caracteres..." 
             maxlength="60"
-            class="w-full bg-night-950 border border-night-700/80 focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-slate-600 outline-none transition-all-200"
+            class="w-full bg-night-950 border border-night-700 focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-slate-600 outline-none transition-all-200"
           />
         </div>
 
         <!-- Valor / Puntos -->
-        <div class="sm:col-span-3">
-          <label for="input-value" class="block text-[11px] font-mono text-slate-400 mb-1">Valor / Puntos (1-1000)</label>
+        <div class="sm:col-span-2">
+          <label for="input-value" class="block text-[11px] font-mono text-slate-400 mb-1">
+            Puntos (1-1000) <span class="text-neon-pink">*</span>
+          </label>
           <input 
             type="number" 
             id="input-value" 
             placeholder="50" 
             min="1" 
             max="1000"
-            required
-            class="w-full bg-night-950 border border-night-700/80 focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan rounded-xl px-3.5 py-2.5 text-sm text-white font-mono placeholder-slate-600 outline-none transition-all-200"
+            class="w-full bg-night-950 border border-night-700 focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan rounded-xl px-3.5 py-2.5 text-sm text-white font-mono placeholder-slate-600 outline-none transition-all-200"
           />
         </div>
 
@@ -296,7 +302,7 @@
           <label for="input-category" class="block text-[11px] font-mono text-slate-400 mb-1">Categoría</label>
           <select 
             id="input-category" 
-            class="w-full bg-night-950 border border-night-700/80 focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan rounded-xl px-3 py-2.5 text-sm text-white outline-none transition-all-200 cursor-pointer"
+            class="w-full bg-night-950 border border-night-700 focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan rounded-xl px-3 py-2.5 text-sm text-white outline-none transition-all-200 cursor-pointer"
           >
             <option value="Enfoque">Enfoque (Cian)</option>
             <option value="Salud">Salud (Verde)</option>
@@ -304,6 +310,16 @@
             <option value="Proyecto">Proyecto (Ámbar)</option>
             <option value="General">General (Azul)</option>
           </select>
+        </div>
+
+        <!-- Fecha del Registro -->
+        <div class="sm:col-span-2">
+          <label for="input-date" class="block text-[11px] font-mono text-slate-400 mb-1">Fecha</label>
+          <input 
+            type="date" 
+            id="input-date" 
+            class="w-full bg-night-950 border border-night-700 focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan rounded-xl px-3 py-2.5 text-sm text-white font-mono outline-none transition-all-200 cursor-pointer"
+          />
         </div>
 
         <!-- Botón de Envío -->
@@ -316,76 +332,130 @@
             <svg class="w-4 h-4 stroke-[2.5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
             </svg>
-            <span>Agregar</span>
+            <span>Registrar</span>
           </button>
         </div>
       </form>
     </section>
 
-    <!-- 4. LISTA VISUAL E INTERACTIVA DE ELEMENTOS -->
+    <!-- 4. FUNCIÓN 2 & 3: CONSULTAR / FILTRAR & ACTUALIZAR / ELIMINAR -->
     <section class="space-y-4">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div class="flex items-center gap-2">
-          <h2 class="text-lg font-bold text-white">Elementos Registrados</h2>
-          <span id="badge-total-items" class="text-xs font-mono px-2 py-0.5 rounded-full bg-night-800 text-slate-300 border border-night-700">0</span>
+      <!-- Barra de Consulta y Filtros Multidimensionales -->
+      <div class="bg-night-900/90 border border-night-800 rounded-2xl p-4 sm:p-5 shadow-lg space-y-3.5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <h2 class="text-base font-bold text-white flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-neon-cyan"></span>
+              2. Consultar & Filtrar Registros
+            </h2>
+            <span id="badge-filtered-count" class="text-xs font-mono px-2 py-0.5 rounded-full bg-night-800 text-neon-cyan border border-night-700">
+              0 mostrados
+            </span>
+          </div>
+
+          <!-- Botón de Restablecer Filtros -->
+          <div class="flex items-center gap-2">
+            <button 
+              type="button" 
+              onclick="resetFilters()" 
+              class="text-xs font-mono text-slate-400 hover:text-neon-cyan transition-colors"
+            >
+              Limpiar Filtros
+            </button>
+            <span class="text-slate-600">·</span>
+            <button 
+              type="button" 
+              onclick="resetDataWithConfirm()" 
+              class="text-xs font-mono text-slate-400 hover:text-pink-400 transition-colors"
+            >
+              Reiniciar Datos
+            </button>
+          </div>
         </div>
 
-        <!-- Controles de Filtro y Búsqueda -->
-        <div class="flex items-center gap-2 flex-wrap">
-          <!-- Búsqueda rápida -->
-          <div class="relative min-w-[160px] sm:min-w-[200px]">
+        <!-- Controles de Filtro en Grid Responsivo -->
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-2.5">
+          <!-- Búsqueda textual en tiempo real -->
+          <div class="sm:col-span-4 relative">
             <input 
               type="text" 
               id="search-input" 
               oninput="handleSearch(this.value)"
-              placeholder="Filtrar por nombre..." 
-              class="w-full bg-night-900 border border-night-800 focus:border-cyan-500 rounded-lg pl-8 pr-3 py-1.5 text-xs text-white placeholder-slate-500 outline-none"
+              placeholder="Buscar por concepto o categoría..." 
+              class="w-full bg-night-950 border border-night-800 focus:border-cyan-500 rounded-xl pl-8 pr-3 py-2 text-xs text-white placeholder-slate-500 outline-none"
             />
-            <svg class="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
 
-          <!-- Filtro de Estado -->
-          <div class="inline-flex p-0.5 bg-night-900 border border-night-800 rounded-lg text-xs font-mono">
-            <button type="button" onclick="setFilter('all')" id="filter-all" class="px-2.5 py-1 rounded-md text-white bg-night-800 transition-colors">
+          <!-- Filtro por Estado (Tabs Segmentadas) -->
+          <div class="sm:col-span-3 flex items-center p-0.5 bg-night-950 border border-night-800 rounded-xl text-xs font-mono">
+            <button type="button" onclick="setFilterState('all')" id="filter-all" class="flex-1 py-1.5 rounded-lg text-white bg-night-800 transition-colors text-center font-medium">
               Todos
             </button>
-            <button type="button" onclick="setFilter('pending')" id="filter-pending" class="px-2.5 py-1 rounded-md text-slate-400 hover:text-white transition-colors">
+            <button type="button" onclick="setFilterState('pending')" id="filter-pending" class="flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition-colors text-center">
               Pendientes
             </button>
-            <button type="button" onclick="setFilter('completed')" id="filter-completed" class="px-2.5 py-1 rounded-md text-slate-400 hover:text-white transition-colors">
-              Completados
+            <button type="button" onclick="setFilterState('completed')" id="filter-completed" class="flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition-colors text-center">
+              Hechos
             </button>
           </div>
 
-          <!-- Botón Limpiar Todo -->
-          <button 
-            type="button" 
-            onclick="resetDataWithConfirm()" 
-            title="Reiniciar lista"
-            class="px-2.5 py-1.5 text-xs font-mono text-slate-400 hover:text-pink-400 hover:bg-pink-950/30 border border-night-800 hover:border-pink-500/30 rounded-lg transition-all-200"
-          >
-            Reiniciar
-          </button>
+          <!-- Filtro por Categoría -->
+          <div class="sm:col-span-3">
+            <select 
+              id="filter-category" 
+              onchange="handleCategoryFilter(this.value)"
+              class="w-full bg-night-950 border border-night-800 focus:border-cyan-500 rounded-xl px-3 py-2 text-xs text-slate-300 font-mono outline-none cursor-pointer"
+            >
+              <option value="all">Todas las Categorías</option>
+              <option value="Enfoque">Enfoque (Cian)</option>
+              <option value="Salud">Salud (Verde)</option>
+              <option value="Estudio">Estudio (Rosa)</option>
+              <option value="Proyecto">Proyecto (Ámbar)</option>
+              <option value="General">General (Azul)</option>
+            </select>
+          </div>
+
+          <!-- Filtro por Fecha -->
+          <div class="sm:col-span-2">
+            <select 
+              id="filter-date-range" 
+              onchange="handleDateRangeFilter(this.value)"
+              class="w-full bg-night-950 border border-night-800 focus:border-cyan-500 rounded-xl px-3 py-2 text-xs text-slate-300 font-mono outline-none cursor-pointer"
+            >
+              <option value="all">Cualquier Fecha</option>
+              <option value="today">Solo Hoy</option>
+              <option value="week">Últimos 7 días</option>
+            </select>
+          </div>
         </div>
       </div>
 
-      <!-- Contenedor de la Lista -->
-      <div id="records-list" class="space-y-2.5 min-h-[140px]">
-        <!-- Los ítems se inyectan dinámicamente -->
+      <!-- Subtítulo de Función 3 -->
+      <div class="flex items-center justify-between px-1">
+        <span class="text-xs font-mono text-slate-400 flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-neon-pink"></span>
+          3. Actualizar / Eliminar: haz clic en el check para cambiar estado, lápiz para editar o basura para borrar.
+        </span>
+        <span id="badge-total-items" class="text-xs font-mono text-slate-500">0 registros en memoria</span>
+      </div>
+
+      <!-- Contenedor Dinámico de la Lista -->
+      <div id="records-list" class="space-y-2.5 min-h-[160px]">
       </div>
 
       <!-- Estado Vacío -->
       <div id="empty-state" class="hidden text-center py-12 px-4 bg-night-900/40 border border-dashed border-night-800 rounded-2xl">
         <div class="w-12 h-12 mx-auto rounded-full bg-night-800/80 flex items-center justify-center text-slate-500 mb-3">
           <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
           </svg>
         </div>
-        <h3 class="text-sm font-semibold text-slate-300">No hay registros para mostrar</h3>
-        <p class="text-xs text-slate-500 mt-1 max-w-xs mx-auto">
-          Ingresa un nuevo registro con el formulario o presiona uno de los botones rápidos superiores.
+        <h3 class="text-sm font-semibold text-slate-300">No se encontraron registros</h3>
+        <p class="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
+          Prueba a relajar los filtros activos o ingresa un nuevo registro con el botón "Registrar".
         </p>
       </div>
     </section>
@@ -404,22 +474,134 @@
 
   </div>
 
-  <!-- Notificación Toast Flotante -->
-  <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none bg-night-900 border border-cyan-500/40 text-white text-xs font-mono px-4 py-2.5 rounded-xl shadow-neon-cyan flex items-center gap-2">
-    <span id="toast-icon" class="text-neon-cyan">✓</span>
-    <span id="toast-message">Registro guardado</span>
+  <!-- MODAL DE EDICIÓN EN TIEMPO REAL (ACTUALIZAR) -->
+  <div id="edit-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-night-950/80 backdrop-blur-sm">
+    <div class="bg-night-900 border border-neon-cyan/50 rounded-2xl p-6 w-full max-w-md shadow-neon-cyan relative transform transition-all">
+      <!-- Glow decorativo superior -->
+      <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-neon-cyan to-neon-emerald rounded-t-2xl"></div>
+
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <svg class="w-5 h-5 text-neon-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+          </svg>
+          Actualizar Elemento
+        </h3>
+        <button onclick="closeEditModal()" class="w-7 h-7 rounded-lg text-slate-400 hover:text-white hover:bg-night-800 flex items-center justify-center">✕</button>
+      </div>
+
+      <!-- Error en el modal -->
+      <div id="modal-error" class="hidden mb-3 p-2 bg-pink-950/50 border border-pink-500/40 rounded-lg text-xs text-pink-300 font-mono"></div>
+
+      <form id="edit-form" onsubmit="saveEdit(event)" class="space-y-3.5">
+        <input type="hidden" id="edit-id" />
+
+        <div>
+          <label for="edit-title" class="block text-xs font-mono text-slate-400 mb-1">Concepto / Actividad</label>
+          <input 
+            type="text" 
+            id="edit-title" 
+            required 
+            maxlength="60"
+            class="w-full bg-night-950 border border-night-700 focus:border-neon-cyan rounded-xl px-3.5 py-2 text-sm text-white outline-none"
+          />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label for="edit-value" class="block text-xs font-mono text-slate-400 mb-1">Puntos (1-1000)</label>
+            <input 
+              type="number" 
+              id="edit-value" 
+              min="1" 
+              max="1000" 
+              required
+              class="w-full bg-night-950 border border-night-700 focus:border-neon-cyan rounded-xl px-3.5 py-2 text-sm text-white font-mono outline-none"
+            />
+          </div>
+
+          <div>
+            <label for="edit-category" class="block text-xs font-mono text-slate-400 mb-1">Categoría</label>
+            <select 
+              id="edit-category" 
+              class="w-full bg-night-950 border border-night-700 focus:border-neon-cyan rounded-xl px-3 py-2 text-sm text-white outline-none cursor-pointer"
+            >
+              <option value="Enfoque">Enfoque (Cian)</option>
+              <option value="Salud">Salud (Verde)</option>
+              <option value="Estudio">Estudio (Rosa)</option>
+              <option value="Proyecto">Proyecto (Ámbar)</option>
+              <option value="General">General (Azul)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label for="edit-date" class="block text-xs font-mono text-slate-400 mb-1">Fecha</label>
+            <input 
+              type="date" 
+              id="edit-date" 
+              required
+              class="w-full bg-night-950 border border-night-700 focus:border-neon-cyan rounded-xl px-3 py-2 text-sm text-white font-mono outline-none cursor-pointer"
+            />
+          </div>
+
+          <div>
+            <label for="edit-completed" class="block text-xs font-mono text-slate-400 mb-1">Estado</label>
+            <select 
+              id="edit-completed" 
+              class="w-full bg-night-950 border border-night-700 focus:border-neon-cyan rounded-xl px-3 py-2 text-sm text-white outline-none cursor-pointer"
+            >
+              <option value="false">⏳ Pendiente</option>
+              <option value="true">✓ Completado</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Botones de Acción Modal -->
+        <div class="flex items-center justify-end gap-2 pt-3 border-t border-night-800">
+          <button 
+            type="button" 
+            onclick="closeEditModal()" 
+            class="px-4 py-2 text-xs font-mono rounded-xl border border-night-700 text-slate-300 hover:bg-night-800 transition-colors"
+          >
+            Cancelar
+          </button>
+          <button 
+            type="submit" 
+            class="px-5 py-2 text-xs font-mono font-bold rounded-xl bg-neon-cyan text-night-950 hover:bg-cyan-300 shadow-neon-cyan transition-colors"
+          >
+            Guardar Cambios
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 
-  <!-- JAVASCRIPT VANILLA -->
+  <!-- Notificación Toast Flotante con Soporte de Deshacer (Undo) -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none bg-night-900 border border-cyan-500/40 text-white text-xs font-mono px-4 py-2.5 rounded-xl shadow-neon-cyan flex items-center gap-3">
+    <div class="flex items-center gap-2">
+      <span id="toast-icon" class="text-neon-cyan font-bold">✓</span>
+      <span id="toast-message">Registro guardado</span>
+    </div>
+    <button 
+      id="toast-undo-btn" 
+      onclick="handleUndo()" 
+      class="hidden pointer-events-auto underline text-cyan-300 hover:text-white font-bold ml-1"
+    >
+      Deshacer
+    </button>
+  </div>
+
+  <!-- JAVASCRIPT VANILLA COMPLETO (3 FUNCIONES PRINCIPALES) -->
   <script>
-    // --- Configuración y Paleta de Categorías Neón ---
+    // --- 0. CONFIGURACIÓN Y PALETA DE CATEGORÍAS NEÓN ---
     const CATEGORY_CONFIG = {
       'Enfoque': {
         color: 'text-cyan-400',
         bg: 'bg-cyan-500/10',
         border: 'border-cyan-500/30',
         hoverBorder: 'hover:border-cyan-400',
-        badgeBg: 'bg-cyan-950 text-cyan-300 border-cyan-500/30',
         barColor: '#00F5FF',
         dot: 'bg-cyan-400'
       },
@@ -428,7 +610,6 @@
         bg: 'bg-emerald-500/10',
         border: 'border-emerald-500/30',
         hoverBorder: 'hover:border-emerald-400',
-        badgeBg: 'bg-emerald-950 text-emerald-300 border-emerald-500/30',
         barColor: '#00FF88',
         dot: 'bg-emerald-400'
       },
@@ -437,7 +618,6 @@
         bg: 'bg-pink-500/10',
         border: 'border-pink-500/30',
         hoverBorder: 'hover:border-pink-400',
-        badgeBg: 'bg-pink-950 text-pink-300 border-pink-500/30',
         barColor: '#FF007F',
         dot: 'bg-pink-400'
       },
@@ -446,7 +626,6 @@
         bg: 'bg-amber-500/10',
         border: 'border-amber-500/30',
         hoverBorder: 'hover:border-amber-400',
-        badgeBg: 'bg-amber-950 text-amber-300 border-amber-500/30',
         barColor: '#FFB800',
         dot: 'bg-amber-400'
       },
@@ -455,32 +634,49 @@
         bg: 'bg-blue-500/10',
         border: 'border-blue-500/30',
         hoverBorder: 'hover:border-blue-400',
-        badgeBg: 'bg-blue-950 text-blue-300 border-blue-500/30',
         barColor: '#3B82F6',
         dot: 'bg-blue-400'
       }
     };
 
-    // Datos iniciales de demostración para el Ejercicio 24
+    // Datos iniciales de demostración
     const DEFAULT_RECORDS = [
-      { id: '1', title: 'Planificación de arquitectura de microservicios', value: 45, category: 'Proyecto', completed: true, timestamp: Date.now() - 3600000 * 4 },
-      { id: '2', title: 'Sprint de desarrollo frontend Ejercicio 24', value: 50, category: 'Enfoque', completed: true, timestamp: Date.now() - 3600000 * 2 },
-      { id: '3', title: 'Revisión técnica de código y tests unitarios', value: 30, category: 'Estudio', completed: false, timestamp: Date.now() - 3600000 * 1 },
-      { id: '4', title: 'Caminata aeróbica e hidratación 1.5L', value: 20, category: 'Salud', completed: false, timestamp: Date.now() - 1800000 }
+      { id: 'rec-1', title: 'Planificación de arquitectura de microservicios', value: 45, category: 'Proyecto', completed: true, timestamp: Date.now() - 3600000 * 5, date: getIsoToday() },
+      { id: 'rec-2', title: 'Sprint de desarrollo frontend Ejercicio 24', value: 50, category: 'Enfoque', completed: true, timestamp: Date.now() - 3600000 * 2, date: getIsoToday() },
+      { id: 'rec-3', title: 'Revisión técnica de código y tests unitarios', value: 30, category: 'Estudio', completed: false, timestamp: Date.now() - 3600000 * 1, date: getIsoToday() },
+      { id: 'rec-4', title: 'Caminata aeróbica e hidratación 1.5L', value: 20, category: 'Salud', completed: false, timestamp: Date.now() - 1800000, date: getIsoDaysAgo(1) }
     ];
 
-    // Estado de la Aplicación
+    // Estado Global de la Aplicación
     let records = [];
-    let currentFilter = 'all'; // 'all' | 'pending' | 'completed'
+    let lastDeletedRecord = null; // Para funcionalidad Deshacer (Undo)
+
+    // Filtros Activos
+    let currentFilterState = 'all'; // 'all' | 'pending' | 'completed'
+    let currentFilterCategory = 'all'; // 'all' | categoría
+    let currentFilterDate = 'all'; // 'all' | 'today' | 'week'
     let searchQuery = '';
 
-    // Inicialización al cargar la página
+    // --- INICIALIZACIÓN ---
     window.addEventListener('DOMContentLoaded', () => {
+      // Establecer fecha de hoy por defecto en el input
+      const dateInput = document.getElementById('input-date');
+      if (dateInput) dateInput.value = getIsoToday();
+
       loadRecords();
       renderAll();
     });
 
-    // Cargar desde LocalStorage con respaldo
+    function getIsoToday() {
+      return new Date().toISOString().split('T')[0];
+    }
+
+    function getIsoDaysAgo(days) {
+      const d = new Date();
+      d.setDate(d.getDate() - days);
+      return d.toISOString().split('T')[0];
+    }
+
     function loadRecords() {
       try {
         const saved = localStorage.getItem('ejercicio24_records');
@@ -495,39 +691,83 @@
       }
     }
 
-    // Guardar en LocalStorage
     function saveRecords() {
       try {
         localStorage.setItem('ejercicio24_records', JSON.stringify(records));
       } catch (e) {
-        console.error('No se pudo guardar en localStorage', e);
+        console.error('Error guardando en localStorage', e);
       }
     }
 
-    // Reestablecer datos con confirmación
-    function resetDataWithConfirm() {
-      if (confirm('¿Deseas reiniciar la lista de registros a los valores iniciales?')) {
-        records = [...DEFAULT_RECORDS];
-        saveRecords();
-        renderAll();
-        showToast('Datos reiniciados con éxito', '↺');
+    // =========================================================================
+    // FUNCIÓN 1: CREAR / REGISTRAR (CON VALIDACIONES ROBUSTAS)
+    // =========================================================================
+
+    function validateRecordForm(title, value, date) {
+      if (!title || title.trim().length < 3) {
+        return 'El concepto o actividad debe tener al menos 3 caracteres.';
       }
+      if (isNaN(value) || value < 1 || value > 1000) {
+        return 'El valor debe ser un número entero positivo entre 1 y 1000.';
+      }
+      if (!date) {
+        return 'Por favor especifica una fecha válida.';
+      }
+      return null; // Válido
     }
 
-    // Cargar datos de ejemplo si se vació
-    function seedInitialData() {
-      records = [
-        { id: Date.now() + '-1', title: 'Diseño de interfaz de usuario con Tailwind', value: 40, category: 'Enfoque', completed: true, timestamp: Date.now() - 7200000 },
-        { id: Date.now() + '-2', title: 'Sesión de entrenamiento de fuerza', value: 35, category: 'Salud', completed: true, timestamp: Date.now() - 3600000 },
-        { id: Date.now() + '-3', title: 'Lectura de documentación oficial JS', value: 25, category: 'Estudio', completed: false, timestamp: Date.now() - 1800000 },
-        { id: Date.now() + '-4', title: 'Depuración y prueba en navegador', value: 30, category: 'Proyecto', completed: false, timestamp: Date.now() - 600000 }
-      ];
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const titleInput = document.getElementById('input-title');
+      const valInput = document.getElementById('input-value');
+      const catInput = document.getElementById('input-category');
+      const dateInput = document.getElementById('input-date');
+      const errorBox = document.getElementById('form-error');
+      const errorMsg = document.getElementById('form-error-msg');
+
+      const title = titleInput.value.trim();
+      const val = parseInt(valInput.value, 10);
+      const cat = catInput.value;
+      const date = dateInput.value || getIsoToday();
+
+      const validationError = validateRecordForm(title, val, date);
+      if (validationError) {
+        errorMsg.textContent = validationError;
+        errorBox.classList.remove('hidden');
+        if (!title || title.length < 3) titleInput.focus();
+        else valInput.focus();
+        return;
+      }
+
+      // Ocultar mensaje de error si existía
+      errorBox.classList.add('hidden');
+
+      // Crear el nuevo registro
+      const newRecord = {
+        id: 'rec_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
+        title: title,
+        value: val,
+        category: cat,
+        completed: false,
+        date: date,
+        timestamp: Date.now()
+      };
+
+      // Insertar al inicio de la lista
+      records.unshift(newRecord);
       saveRecords();
       renderAll();
-      showToast('Ejemplos cargados', '✦');
+
+      // Limpiar formulario y reenfocar
+      titleInput.value = '';
+      valInput.value = '';
+      dateInput.value = getIsoToday();
+      titleInput.focus();
+
+      showToast(`Elemento registrado: "${title}" (+${val} pts)`, '✓');
     }
 
-    // --- ACCIÓN RÁPIDA / PRESETS ---
+    // Atajos de acción rápida
     function quickAdd(title, value, category) {
       const newRecord = {
         id: 'rec_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
@@ -535,6 +775,7 @@
         value: Number(value),
         category: category,
         completed: false,
+        date: getIsoToday(),
         timestamp: Date.now()
       };
 
@@ -544,72 +785,12 @@
       showToast(`+${value} pts agregados: ${title}`, '⚡');
     }
 
-    // --- MANEJO DEL FORMULARIO PRINCIPAL ---
-    function handleFormSubmit(event) {
-      event.preventDefault();
-      const titleInput = document.getElementById('input-title');
-      const valInput = document.getElementById('input-value');
-      const catInput = document.getElementById('input-category');
+    // =========================================================================
+    // FUNCIÓN 2: CONSULTAR / FILTRAR (ESTADO, CATEGORÍA, FECHA, TEXTO)
+    // =========================================================================
 
-      const title = titleInput.value.trim();
-      const val = parseInt(valInput.value, 10);
-      const cat = catInput.value;
-
-      if (!title) {
-        titleInput.focus();
-        return;
-      }
-      if (isNaN(val) || val <= 0) {
-        valInput.focus();
-        return;
-      }
-
-      const newRecord = {
-        id: 'rec_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
-        title: title,
-        value: val,
-        category: cat,
-        completed: false,
-        timestamp: Date.now()
-      };
-
-      records.unshift(newRecord);
-      saveRecords();
-      renderAll();
-
-      // Reset y foco
-      titleInput.value = '';
-      valInput.value = '';
-      titleInput.focus();
-
-      showToast(`Registro guardado: "${title}"`, '✓');
-    }
-
-    // --- ACCIONES EN LOS ELEMENTOS DE LA LISTA ---
-    function toggleCompleted(id) {
-      const item = records.find(r => r.id === id);
-      if (item) {
-        item.completed = !item.completed;
-        saveRecords();
-        renderAll();
-        showToast(item.completed ? 'Marcado como completado' : 'Marcado como pendiente', item.completed ? '✓' : '○');
-      }
-    }
-
-    function deleteRecord(id) {
-      const index = records.findIndex(r => r.id === id);
-      if (index !== -1) {
-        const deleted = records.splice(index, 1)[0];
-        saveRecords();
-        renderAll();
-        showToast(`Eliminado: "${deleted.title}"`, '✕');
-      }
-    }
-
-    // --- FILTRADO Y BÚSQUEDA ---
-    function setFilter(filterType) {
-      currentFilter = filterType;
-      
+    function setFilterState(state) {
+      currentFilterState = state;
       const buttons = {
         all: document.getElementById('filter-all'),
         pending: document.getElementById('filter-pending'),
@@ -617,13 +798,23 @@
       };
 
       Object.keys(buttons).forEach(key => {
-        if (key === filterType) {
-          buttons[key].className = 'px-2.5 py-1 rounded-md text-white bg-night-800 transition-colors shadow-sm';
+        if (key === state) {
+          buttons[key].className = 'flex-1 py-1.5 rounded-lg text-white bg-night-800 transition-colors text-center font-medium shadow-sm';
         } else {
-          buttons[key].className = 'px-2.5 py-1 rounded-md text-slate-400 hover:text-white transition-colors';
+          buttons[key].className = 'flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition-colors text-center';
         }
       });
 
+      renderList();
+    }
+
+    function handleCategoryFilter(category) {
+      currentFilterCategory = category;
+      renderList();
+    }
+
+    function handleDateRangeFilter(range) {
+      currentFilterDate = range;
       renderList();
     }
 
@@ -632,7 +823,179 @@
       renderList();
     }
 
-    // --- RENDERIZADO GLOBAL ---
+    function resetFilters() {
+      currentFilterState = 'all';
+      currentFilterCategory = 'all';
+      currentFilterDate = 'all';
+      searchQuery = '';
+
+      const searchInput = document.getElementById('search-input');
+      const catSelect = document.getElementById('filter-category');
+      const dateSelect = document.getElementById('filter-date-range');
+
+      if (searchInput) searchInput.value = '';
+      if (catSelect) catSelect.value = 'all';
+      if (dateSelect) dateSelect.value = 'all';
+
+      setFilterState('all');
+      showToast('Filtros restablecidos', '↺');
+    }
+
+    // Evalúa si un registro cumple con todos los filtros activos
+    function filterItem(item) {
+      // 1. Filtro por texto
+      if (searchQuery) {
+        const titleMatch = item.title.toLowerCase().includes(searchQuery);
+        const catMatch = item.category.toLowerCase().includes(searchQuery);
+        if (!titleMatch && !catMatch) return false;
+      }
+
+      // 2. Filtro por estado
+      if (currentFilterState === 'pending' && item.completed) return false;
+      if (currentFilterState === 'completed' && !item.completed) return false;
+
+      // 3. Filtro por categoría
+      if (currentFilterCategory !== 'all' && item.category !== currentFilterCategory) return false;
+
+      // 4. Filtro por fecha
+      if (currentFilterDate !== 'all') {
+        const todayStr = getIsoToday();
+        const itemDateStr = item.date || new Date(item.timestamp).toISOString().split('T')[0];
+
+        if (currentFilterDate === 'today') {
+          if (itemDateStr !== todayStr) return false;
+        } else if (currentFilterDate === 'week') {
+          const sevenDaysAgo = getIsoDaysAgo(7);
+          if (itemDateStr < sevenDaysAgo) return false;
+        }
+      }
+
+      return true;
+    }
+
+    // =========================================================================
+    // FUNCIÓN 3: ACTUALIZAR / ELIMINAR (ESTADO, EDICIÓN Y BORRADO EN TIEMPO REAL)
+    // =========================================================================
+
+    // 3.1 Cambiar estado (toggle completado / pendiente)
+    function toggleCompleted(id) {
+      const item = records.find(r => r.id === id);
+      if (item) {
+        item.completed = !item.completed;
+        saveRecords();
+        renderAll();
+        showToast(
+          item.completed ? `Completado: "${item.title}"` : `Pendiente: "${item.title}"`,
+          item.completed ? '✓' : '○'
+        );
+      }
+    }
+
+    // 3.2 Modal de Edición (Actualizar todos los campos)
+    function openEditModal(id) {
+      const item = records.find(r => r.id === id);
+      if (!item) return;
+
+      document.getElementById('edit-id').value = item.id;
+      document.getElementById('edit-title').value = item.title;
+      document.getElementById('edit-value').value = item.value;
+      document.getElementById('edit-category').value = item.category;
+      document.getElementById('edit-date').value = item.date || new Date(item.timestamp).toISOString().split('T')[0];
+      document.getElementById('edit-completed').value = item.completed ? 'true' : 'false';
+
+      const errorBox = document.getElementById('modal-error');
+      if (errorBox) errorBox.classList.add('hidden');
+
+      const modal = document.getElementById('edit-modal');
+      modal.classList.remove('hidden');
+    }
+
+    function closeEditModal() {
+      const modal = document.getElementById('edit-modal');
+      modal.classList.add('hidden');
+    }
+
+    function saveEdit(event) {
+      event.preventDefault();
+      const id = document.getElementById('edit-id').value;
+      const title = document.getElementById('edit-title').value.trim();
+      const val = parseInt(document.getElementById('edit-value').value, 10);
+      const cat = document.getElementById('edit-category').value;
+      const date = document.getElementById('edit-date').value;
+      const completed = document.getElementById('edit-completed').value === 'true';
+
+      const errorBox = document.getElementById('modal-error');
+
+      const validationError = validateRecordForm(title, val, date);
+      if (validationError) {
+        errorBox.textContent = validationError;
+        errorBox.classList.remove('hidden');
+        return;
+      }
+
+      const item = records.find(r => r.id === id);
+      if (item) {
+        item.title = title;
+        item.value = val;
+        item.category = cat;
+        item.date = date;
+        item.completed = completed;
+
+        saveRecords();
+        renderAll();
+        closeEditModal();
+        showToast(`Registro actualizado: "${title}"`, '✎');
+      }
+    }
+
+    // 3.3 Eliminar registro con opción Deshacer (Undo)
+    function deleteRecord(id) {
+      const index = records.findIndex(r => r.id === id);
+      if (index !== -1) {
+        const deleted = records.splice(index, 1)[0];
+        lastDeletedRecord = { item: deleted, index: index };
+        saveRecords();
+        renderAll();
+        showToast(`Eliminado: "${deleted.title}"`, '✕', true);
+      }
+    }
+
+    function handleUndo() {
+      if (lastDeletedRecord) {
+        records.splice(lastDeletedRecord.index, 0, lastDeletedRecord.item);
+        saveRecords();
+        renderAll();
+        const title = lastDeletedRecord.item.title;
+        lastDeletedRecord = null;
+        showToast(`Restaurado: "${title}"`, '↺', false);
+      }
+    }
+
+    function resetDataWithConfirm() {
+      if (confirm('¿Deseas reiniciar la lista de registros a los valores iniciales del Ejercicio 24?')) {
+        records = [...DEFAULT_RECORDS];
+        saveRecords();
+        renderAll();
+        showToast('Datos reiniciados con éxito', '↺');
+      }
+    }
+
+    function seedInitialData() {
+      records = [
+        { id: 'rec-' + Date.now() + '-1', title: 'Diseño de interfaz de usuario con Tailwind', value: 40, category: 'Enfoque', completed: true, timestamp: Date.now() - 7200000, date: getIsoToday() },
+        { id: 'rec-' + Date.now() + '-2', title: 'Sesión de entrenamiento de fuerza', value: 35, category: 'Salud', completed: true, timestamp: Date.now() - 3600000, date: getIsoToday() },
+        { id: 'rec-' + Date.now() + '-3', title: 'Lectura de documentación técnica JS', value: 25, category: 'Estudio', completed: false, timestamp: Date.now() - 1800000, date: getIsoToday() },
+        { id: 'rec-' + Date.now() + '-4', title: 'Depuración y prueba en navegador', value: 30, category: 'Proyecto', completed: false, timestamp: Date.now() - 600000, date: getIsoDaysAgo(1) }
+      ];
+      saveRecords();
+      renderAll();
+      showToast('Ejemplos cargados', '✦');
+    }
+
+    // =========================================================================
+    // RENDERIZADO GLOBAL & COMPONENTES VISUALES
+    // =========================================================================
+
     function renderAll() {
       renderHeaderCounters();
       renderSummaryCards();
@@ -640,21 +1003,21 @@
       renderList();
     }
 
-    // 1. Render Encabezado y Contador Destacado
+    // 1. Contador Principal
     function renderHeaderCounters() {
       const totalValue = records.reduce((acc, curr) => acc + (Number(curr.value) || 0), 0);
       const totalCount = records.length;
 
       const heroValEl = document.getElementById('hero-total-value');
       const heroCountEl = document.getElementById('hero-items-count');
-      const badgeCountEl = document.getElementById('badge-total-items');
+      const badgeTotalItems = document.getElementById('badge-total-items');
 
       if (heroValEl) heroValEl.textContent = totalValue.toLocaleString('es-ES');
       if (heroCountEl) heroCountEl.textContent = totalCount;
-      if (badgeCountEl) badgeCountEl.textContent = totalCount;
+      if (badgeTotalItems) badgeTotalItems.textContent = `${totalCount} registros en memoria`;
     }
 
-    // 2. Render Panel de Resumen Neón
+    // 2. Tarjetas Neón
     function renderSummaryCards() {
       const totalCount = records.length;
       const totalValue = records.reduce((acc, curr) => acc + (Number(curr.value) || 0), 0);
@@ -666,7 +1029,7 @@
       const statAvgEl = document.getElementById('stat-average');
       if (statAvgEl) statAvgEl.textContent = avg;
 
-      // Tasa de Cumplimiento
+      // Cumplimiento
       const rate = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
       const statRateEl = document.getElementById('stat-completed-rate');
       const statCompCountEl = document.getElementById('stat-completed-count');
@@ -709,7 +1072,7 @@
       }
     }
 
-    // 3. Render Barra de Distribución Neón
+    // 3. Barra de Distribución Neón
     function renderDistributionBar() {
       const totalValue = records.reduce((acc, curr) => acc + (Number(curr.value) || 0), 0);
       const barContainer = document.getElementById('distribution-bar');
@@ -719,16 +1082,11 @@
       if (totalPtsEl) totalPtsEl.textContent = `${totalValue} pts totales`;
 
       if (records.length === 0 || totalValue === 0) {
-        if (barContainer) {
-          barContainer.innerHTML = '<div class="h-full bg-night-800 w-full" title="Sin datos registrados"></div>';
-        }
-        if (legendContainer) {
-          legendContainer.innerHTML = '<span class="text-slate-500 italic">No hay suficientes datos para graficar la distribución.</span>';
-        }
+        if (barContainer) barContainer.innerHTML = '<div class="h-full bg-night-800 w-full" title="Sin datos"></div>';
+        if (legendContainer) legendContainer.innerHTML = '<span class="text-slate-500 italic">No hay registros para graficar distribución.</span>';
         return;
       }
 
-      // Calcular puntos por categoría
       const catTotals = {};
       records.forEach(r => {
         catTotals[r.category] = (catTotals[r.category] || 0) + r.value;
@@ -753,7 +1111,7 @@
           <div class="flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full" style="background-color: ${config.barColor}; box-shadow: 0 0 6px ${config.barColor}"></span>
             <span class="text-slate-300 font-medium">${cat}:</span>
-            <span class="text-slate-400 font-mono">${percent}%</span>
+            <span class="text-slate-400 font-mono">${pts}p (${percent}%)</span>
           </div>
         `;
       });
@@ -762,22 +1120,18 @@
       if (legendContainer) legendContainer.innerHTML = legendHtml;
     }
 
-    // 4. Render Lista Interactiva de Elementos
+    // 4. Lista Visual e Interactiva
     function renderList() {
       const listEl = document.getElementById('records-list');
       const emptyEl = document.getElementById('empty-state');
+      const badgeFilteredCount = document.getElementById('badge-filtered-count');
       if (!listEl) return;
 
-      // Filtrar
-      let filtered = records.filter(item => {
-        const matchesSearch = item.title.toLowerCase().includes(searchQuery) ||
-                              item.category.toLowerCase().includes(searchQuery);
+      const filtered = records.filter(filterItem);
 
-        if (!matchesSearch) return false;
-        if (currentFilter === 'pending') return !item.completed;
-        if (currentFilter === 'completed') return item.completed;
-        return true;
-      });
+      if (badgeFilteredCount) {
+        badgeFilteredCount.textContent = `${filtered.length} de ${records.length} mostrados`;
+      }
 
       if (filtered.length === 0) {
         listEl.innerHTML = '';
@@ -791,6 +1145,7 @@
       filtered.forEach(item => {
         const config = CATEGORY_CONFIG[item.category] || CATEGORY_CONFIG['General'];
         const isDone = item.completed;
+        const formattedDate = item.date || new Date(item.timestamp).toISOString().split('T')[0];
         const timeAgo = formatTimeAgo(item.timestamp);
 
         html += `
@@ -803,12 +1158,12 @@
               <button 
                 type="button" 
                 onclick="toggleCompleted('${item.id}')"
-                class="w-7 h-7 shrink-0 rounded-lg flex items-center justify-center border transition-all-200 cursor-pointer ${
+                class="w-8 h-8 shrink-0 rounded-lg flex items-center justify-center border transition-all-200 cursor-pointer ${
                   isDone 
                     ? 'bg-emerald-500/20 border-emerald-400 text-emerald-300 shadow-neon-emerald' 
                     : 'border-night-700 bg-night-950 text-transparent hover:border-cyan-400'
                 }"
-                title="${isDone ? 'Marcar como pendiente' : 'Marcar como completado'}"
+                title="${isDone ? 'Cambiar a pendiente' : 'Marcar como completado'}"
               >
                 <svg class="w-4 h-4 stroke-[3]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
@@ -821,14 +1176,16 @@
                     ${escapeHtml(item.title)}
                   </span>
                   
-                  <!-- Tag de categoría unboxed con punto neón -->
+                  <!-- Tag de categoría unboxed -->
                   <span class="inline-flex items-center gap-1 text-[11px] font-mono ${config.color}">
                     <span class="w-1.5 h-1.5 rounded-full ${config.dot}"></span>
                     ${item.category}
                   </span>
                 </div>
 
-                <div class="flex items-center gap-2 mt-0.5 text-[11px] font-mono text-slate-500">
+                <div class="flex items-center gap-2 mt-0.5 text-[11px] font-mono text-slate-500 flex-wrap">
+                  <span>📅 ${formattedDate}</span>
+                  <span>·</span>
                   <span>${timeAgo}</span>
                   <span>·</span>
                   <span class="${isDone ? 'text-emerald-400 font-medium' : 'text-slate-400'}">
@@ -838,19 +1195,32 @@
               </div>
             </div>
 
-            <!-- Valor destacado & Botón Eliminar -->
-            <div class="flex items-center gap-3 shrink-0">
-              <div class="text-right">
+            <!-- Puntos & Botones de Acción (Actualizar / Eliminar) -->
+            <div class="flex items-center gap-2.5 shrink-0">
+              <div class="text-right mr-1">
                 <span class="text-lg sm:text-xl font-mono font-bold ${isDone ? 'text-slate-400' : config.color} tabular-nums">
                   +${item.value}
                 </span>
                 <span class="text-[10px] font-mono text-slate-500 block -mt-1">pts</span>
               </div>
 
+              <!-- Botón Editar (Actualizar) -->
+              <button 
+                type="button" 
+                onclick="openEditModal('${item.id}')"
+                class="w-8 h-8 rounded-lg bg-night-950 hover:bg-cyan-950/60 border border-night-800 hover:border-cyan-500/40 text-slate-400 hover:text-cyan-300 flex items-center justify-center transition-all-200 cursor-pointer"
+                title="Editar / Actualizar"
+              >
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+              </button>
+
+              <!-- Botón Eliminar -->
               <button 
                 type="button" 
                 onclick="deleteRecord('${item.id}')"
-                class="w-8 h-8 rounded-lg bg-night-950 hover:bg-pink-950/60 border border-night-800 hover:border-pink-500/40 text-slate-500 hover:text-pink-400 flex items-center justify-center transition-all-200 cursor-pointer"
+                class="w-8 h-8 rounded-lg bg-night-950 hover:bg-pink-950/60 border border-night-800 hover:border-pink-500/40 text-slate-400 hover:text-pink-400 flex items-center justify-center transition-all-200 cursor-pointer"
                 title="Eliminar registro"
               >
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -885,15 +1255,21 @@
     }
 
     let toastTimer = null;
-    function showToast(message, icon = '✓') {
+    function showToast(message, icon = '✓', showUndo = false) {
       const toast = document.getElementById('toast');
       const toastMsg = document.getElementById('toast-message');
       const toastIcon = document.getElementById('toast-icon');
+      const toastUndo = document.getElementById('toast-undo-btn');
 
       if (!toast) return;
 
       toastMsg.textContent = message;
       toastIcon.textContent = icon;
+
+      if (toastUndo) {
+        if (showUndo) toastUndo.classList.remove('hidden');
+        else toastUndo.classList.add('hidden');
+      }
 
       toast.classList.remove('translate-y-20', 'opacity-0');
       toast.classList.add('translate-y-0', 'opacity-100');
@@ -902,7 +1278,7 @@
       toastTimer = setTimeout(() => {
         toast.classList.remove('translate-y-0', 'opacity-100');
         toast.classList.add('translate-y-20', 'opacity-0');
-      }, 2500);
+      }, showUndo ? 4000 : 2500);
     }
   </script>
 </body>

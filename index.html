@@ -2,18 +2,18 @@
 <html lang="es" class="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <title>Ejercicio 24 - Neon Tracker</title>
-  <meta name="description" content="Aplicación web oscura de alto rendimiento con JavaScript vanilla y TailwindCSS para registro rápido y métricas visuales neón." />
+  <meta name="description" content="Aplicación web oscura Mobile-First de alto rendimiento con JavaScript vanilla y TailwindCSS para registro rápido y métricas visuales neón." />
   <meta property="og:title" content="Ejercicio 24 - Neon Tracker" />
-  <meta property="og:description" content="Aplicación web oscura de alto rendimiento con JavaScript vanilla y TailwindCSS para registro rápido y métricas visuales neón." />
+  <meta property="og:description" content="Aplicación web oscura Mobile-First con persistencia local, badges de estado neón y controles táctiles optimizados." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -33,6 +33,7 @@
               pink: '#FF007F',
               purple: '#A855F7',
               amber: '#FFB800',
+              yellow: '#FFE600',
               blue: '#3B82F6'
             },
             night: {
@@ -62,6 +63,7 @@
       font-family: 'Inter', system-ui, sans-serif;
       min-height: 100vh;
       -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
 
     /* Ambient background lighting */
@@ -73,16 +75,22 @@
     }
 
     .border-glow-cyan {
-      box-shadow: 0 0 15px -3px rgba(0, 245, 255, 0.25);
+      box-shadow: 0 0 15px -2px rgba(0, 245, 255, 0.25);
     }
     .border-glow-emerald {
-      box-shadow: 0 0 15px -3px rgba(0, 255, 136, 0.25);
+      box-shadow: 0 0 15px -2px rgba(0, 255, 136, 0.25);
     }
     .border-glow-pink {
-      box-shadow: 0 0 15px -3px rgba(255, 0, 127, 0.25);
+      box-shadow: 0 0 15px -2px rgba(255, 0, 127, 0.25);
     }
     .border-glow-amber {
-      box-shadow: 0 0 15px -3px rgba(255, 184, 0, 0.25);
+      box-shadow: 0 0 15px -2px rgba(255, 184, 0, 0.25);
+    }
+
+    /* Mobile-first touch enhancements */
+    .touch-target-min {
+      min-height: 44px;
+      min-width: 44px;
     }
 
     /* Scrollbar */
@@ -106,127 +114,160 @@
     }
   </style>
 </head>
-<body class="ambient-glow antialiased selection:bg-neon-cyan/20 selection:text-neon-cyan">
+<body class="ambient-glow antialiased selection:bg-neon-cyan/20 selection:text-neon-cyan pb-12">
 
-  <!-- Contenedor Principal Centrado y Responsivo -->
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-8">
+  <!-- Contenedor Principal Centrado con padding táctil amigable -->
+  <div class="max-w-5xl mx-auto px-3.5 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-6 sm:space-y-8">
 
-    <!-- 1. ENCABEZADO PRINCIPAL CON INDICADOR / CONTADOR DESTACADO -->
-    <header class="bg-night-900/90 backdrop-blur border border-night-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
-      <!-- Glow decorativo superior multicolor -->
-      <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-neon-cyan via-neon-emerald to-neon-pink"></div>
+    <!-- 1. ENCABEZADO PRINCIPAL CON CONTADOR RESUMEN DESTACADO -->
+    <header class="bg-night-900/90 backdrop-blur border border-night-800 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xl relative overflow-hidden">
+      <!-- Glow decorativo multicolor -->
+      <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-neon-cyan via-neon-emerald via-neon-amber to-neon-pink"></div>
       
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-5 sm:gap-6">
         <div>
-          <div class="flex items-center gap-2 mb-1">
+          <div class="flex items-center gap-2 mb-1.5 flex-wrap">
             <span class="inline-block w-2.5 h-2.5 rounded-full bg-neon-cyan animate-pulse"></span>
-            <span class="text-xs font-mono tracking-wider uppercase text-neon-cyan font-semibold">Sistema Activo · Ejercicio 24</span>
-            <span class="text-slate-600">·</span>
-            <span class="text-[11px] font-mono text-emerald-400 flex items-center gap-1">
-              <svg class="w-3 h-3 text-emerald-400 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            <span class="text-[11px] sm:text-xs font-mono tracking-wider uppercase text-neon-cyan font-bold">Ejercicio 24 · Mobile-First</span>
+            <span class="text-slate-600 hidden xs:inline">·</span>
+            <span class="text-[11px] font-mono text-emerald-400 inline-flex items-center gap-1">
+              <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
               </svg>
-              localStorage Sincronizado
+              localStorage Activo
             </span>
           </div>
           <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
             Control Dinámico & Registros
           </h1>
           <p class="text-xs sm:text-sm text-slate-400 mt-1 max-w-md">
-            Persistencia automática en el navegador. Guarda, filtra y edita tus registros en tiempo real.
+            Optimizado para dedos y pantallas móviles. Crea, filtra y actualiza tus registros con colores neón.
           </p>
         </div>
 
-        <!-- Indicador / Contador Destacado con Tipografía Grande -->
-        <div class="bg-night-950/80 border border-night-700/60 rounded-xl p-4 sm:p-5 flex items-center gap-5 sm:gap-6 border-glow-cyan">
-          <div class="text-left">
-            <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400 block mb-0.5">
-              Valor Acumulado
+        <!-- CONTADOR RESUMEN EN LA PARTE SUPERIOR (CON BADGES NEÓN DE ESTADO) -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 bg-night-950/80 border border-night-700/60 rounded-xl sm:rounded-2xl p-3 sm:p-4 border-glow-cyan">
+          <!-- Total Puntos -->
+          <div class="p-2 sm:p-2.5 rounded-lg bg-night-900/60 border border-night-800">
+            <span class="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-slate-400 block mb-0.5">
+              Total Puntos
             </span>
-            <div class="flex items-baseline gap-1.5">
-              <span class="text-xs font-mono text-neon-cyan font-bold">TOTAL</span>
-              <span id="hero-total-value" class="text-3xl sm:text-5xl font-mono font-black tracking-tight text-white tabular-nums drop-shadow-[0_0_12px_rgba(0,245,255,0.4)]">
+            <div class="flex items-baseline gap-1">
+              <span id="hero-total-value" class="text-2xl sm:text-3xl font-mono font-black text-neon-cyan tabular-nums drop-shadow-[0_0_8px_rgba(0,245,255,0.4)]">
                 0
               </span>
-              <span class="text-xs font-mono text-slate-400">pts</span>
+              <span class="text-[10px] font-mono text-slate-500">pts</span>
             </div>
           </div>
 
-          <div class="h-10 w-[1px] bg-night-800"></div>
-
-          <div class="text-right">
-            <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400 block mb-0.5">
+          <!-- Total Registros -->
+          <div class="p-2 sm:p-2.5 rounded-lg bg-night-900/60 border border-night-800">
+            <span class="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-slate-400 block mb-0.5">
               Registros
             </span>
-            <span id="hero-items-count" class="text-2xl sm:text-3xl font-mono font-bold text-neon-emerald tabular-nums">
-              0
-            </span>
-            <span class="text-[10px] block text-slate-500 font-mono">entradas</span>
+            <div class="flex items-baseline gap-1">
+              <span id="hero-items-count" class="text-2xl sm:text-3xl font-mono font-bold text-white tabular-nums">
+                0
+              </span>
+              <span class="text-[10px] font-mono text-slate-500">items</span>
+            </div>
+          </div>
+
+          <!-- Badge Neón Verde: Completados -->
+          <div class="p-2 sm:p-2.5 rounded-lg bg-emerald-950/40 border border-emerald-500/30 shadow-[0_0_10px_rgba(0,255,136,0.15)]">
+            <div class="flex items-center justify-between mb-0.5">
+              <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-semibold">
+                Completados
+              </span>
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            </div>
+            <div class="flex items-baseline gap-1">
+              <span id="hero-completed-count" class="text-2xl sm:text-3xl font-mono font-black text-emerald-400 tabular-nums">
+                0
+              </span>
+              <span id="hero-completed-rate" class="text-[10px] font-mono text-emerald-400/80">(0%)</span>
+            </div>
+          </div>
+
+          <!-- Badge Neón Amarillo: Pendientes -->
+          <div class="p-2 sm:p-2.5 rounded-lg bg-amber-950/40 border border-amber-500/30 shadow-[0_0_10px_rgba(255,184,0,0.15)]">
+            <div class="flex items-center justify-between mb-0.5">
+              <span class="text-[10px] font-mono uppercase tracking-wider text-amber-400 font-semibold">
+                Pendientes
+              </span>
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+            </div>
+            <div class="flex items-baseline gap-1">
+              <span id="hero-pending-count" class="text-2xl sm:text-3xl font-mono font-black text-amber-300 tabular-nums">
+                0
+              </span>
+              <span class="text-[10px] font-mono text-amber-400/80">activos</span>
+            </div>
           </div>
         </div>
       </div>
     </header>
 
-    <!-- 2. PANEL DE RESUMEN VISUAL CON COLORES NEÓN SOBRE FONDO OSCURO -->
-    <section aria-labelledby="summary-title" class="space-y-4">
+    <!-- 2. PANEL DE RESUMEN VISUAL CON COLORES NEÓN -->
+    <section aria-labelledby="summary-title" class="space-y-3.5">
       <div class="flex items-center justify-between">
-        <h2 id="summary-title" class="text-sm font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-2">
+        <h2 id="summary-title" class="text-xs sm:text-sm font-semibold tracking-wide uppercase text-slate-300 flex items-center gap-2">
           <svg class="w-4 h-4 text-neon-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
           </svg>
-          Panel de Resumen Neón
+          Métricas Visuales Neón
         </h2>
-        <span class="text-xs font-mono text-slate-500">Métricas calculadas en vivo</span>
+        <span class="text-[11px] font-mono text-slate-500">Actualización en vivo</span>
       </div>
 
       <!-- Tarjetas Neón -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
         <!-- Tarjeta Neón 1: Cyan (Promedio) -->
-        <div class="bg-night-900 border border-cyan-500/30 rounded-xl p-4 relative overflow-hidden transition-all duration-300 hover:border-cyan-400 hover:shadow-neon-cyan">
+        <div class="bg-night-900 border border-cyan-500/30 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 relative overflow-hidden transition-all duration-300 hover:border-cyan-400 hover:shadow-neon-cyan">
           <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-cyan-500/10 rounded-full blur-xl pointer-events-none"></div>
           <span class="text-[11px] font-mono uppercase text-cyan-400 font-medium block">Promedio</span>
-          <div class="mt-2 flex items-baseline gap-1">
-            <span id="stat-average" class="text-2xl sm:text-3xl font-mono font-bold text-white tabular-nums">0.0</span>
-            <span class="text-xs font-mono text-cyan-400/80">/item</span>
+          <div class="mt-1 flex items-baseline gap-1">
+            <span id="stat-average" class="text-xl sm:text-2xl font-mono font-bold text-white tabular-nums">0.0</span>
+            <span class="text-[11px] font-mono text-cyan-400/80">/item</span>
           </div>
-          <p class="text-[11px] text-slate-400 mt-1">Media por registro</p>
+          <p class="text-[11px] text-slate-400 mt-0.5">Media por registro</p>
         </div>
 
-        <!-- Tarjeta Neón 2: Esmeralda (Completados) -->
-        <div class="bg-night-900 border border-emerald-500/30 rounded-xl p-4 relative overflow-hidden transition-all duration-300 hover:border-emerald-400 hover:shadow-neon-emerald">
+        <!-- Tarjeta Neón 2: Esmeralda (Cumplimiento) -->
+        <div class="bg-night-900 border border-emerald-500/30 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 relative overflow-hidden transition-all duration-300 hover:border-emerald-400 hover:shadow-neon-emerald">
           <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-emerald-500/10 rounded-full blur-xl pointer-events-none"></div>
-          <span class="text-[11px] font-mono uppercase text-emerald-400 font-medium block">Cumplimiento</span>
-          <div class="mt-2 flex items-baseline gap-1">
-            <span id="stat-completed-rate" class="text-2xl sm:text-3xl font-mono font-bold text-white tabular-nums">0%</span>
-            <span id="stat-completed-count" class="text-xs font-mono text-emerald-400/80">(0/0)</span>
+          <span class="text-[11px] font-mono uppercase text-emerald-400 font-medium block">Eficacia</span>
+          <div class="mt-1 flex items-baseline gap-1">
+            <span id="stat-completed-rate" class="text-xl sm:text-2xl font-mono font-bold text-white tabular-nums">0%</span>
+            <span id="stat-completed-count" class="text-[11px] font-mono text-emerald-400/80">(0/0)</span>
           </div>
-          <p class="text-[11px] text-slate-400 mt-1">Tasa de finalizados</p>
+          <p class="text-[11px] text-slate-400 mt-0.5">Tasa finalizada</p>
         </div>
 
         <!-- Tarjeta Neón 3: Rosa Neón (Máximo Valor) -->
-        <div class="bg-night-900 border border-pink-500/30 rounded-xl p-4 relative overflow-hidden transition-all duration-300 hover:border-pink-400 hover:shadow-neon-pink">
+        <div class="bg-night-900 border border-pink-500/30 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 relative overflow-hidden transition-all duration-300 hover:border-pink-400 hover:shadow-neon-pink">
           <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-pink-500/10 rounded-full blur-xl pointer-events-none"></div>
           <span class="text-[11px] font-mono uppercase text-pink-400 font-medium block">Pico Máximo</span>
-          <div class="mt-2 flex items-baseline gap-1">
-            <span id="stat-max-val" class="text-2xl sm:text-3xl font-mono font-bold text-white tabular-nums">0</span>
-            <span class="text-xs font-mono text-pink-400/80">pts</span>
+          <div class="mt-1 flex items-baseline gap-1">
+            <span id="stat-max-val" class="text-xl sm:text-2xl font-mono font-bold text-white tabular-nums">0</span>
+            <span class="text-[11px] font-mono text-pink-400/80">pts</span>
           </div>
-          <p id="stat-max-label" class="text-[11px] text-slate-400 mt-1 truncate">Ninguno registrado</p>
+          <p id="stat-max-label" class="text-[11px] text-slate-400 mt-0.5 truncate">Ninguno registrado</p>
         </div>
 
         <!-- Tarjeta Neón 4: Ámbar Neón (Categoría Líder) -->
-        <div class="bg-night-900 border border-amber-500/30 rounded-xl p-4 relative overflow-hidden transition-all duration-300 hover:border-amber-400 hover:shadow-neon-amber">
+        <div class="bg-night-900 border border-amber-500/30 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 relative overflow-hidden transition-all duration-300 hover:border-amber-400 hover:shadow-neon-amber">
           <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-amber-500/10 rounded-full blur-xl pointer-events-none"></div>
-          <span class="text-[11px] font-mono uppercase text-amber-400 font-medium block">Categoría Líder</span>
-          <div class="mt-2 flex items-baseline gap-1">
-            <span id="stat-top-cat" class="text-lg sm:text-xl font-bold text-white truncate">-</span>
+          <span class="text-[11px] font-mono uppercase text-amber-400 font-medium block">Líder</span>
+          <div class="mt-1 flex items-baseline gap-1">
+            <span id="stat-top-cat" class="text-base sm:text-lg font-bold text-white truncate">-</span>
           </div>
-          <p id="stat-top-cat-sub" class="text-[11px] text-slate-400 mt-1">Mayor acumulación</p>
+          <p id="stat-top-cat-sub" class="text-[11px] text-slate-400 mt-0.5">Mayor acumulación</p>
         </div>
       </div>
 
       <!-- Barra de Distribución Neón Visual -->
-      <div class="bg-night-900/60 border border-night-800 rounded-xl p-4">
+      <div class="bg-night-900/60 border border-night-800 rounded-xl sm:rounded-2xl p-3.5 sm:p-4">
         <div class="flex items-center justify-between text-xs font-mono mb-2">
           <span class="text-slate-400">Distribución de Puntos por Categoría:</span>
           <span id="dist-total-pts" class="text-neon-cyan font-bold">0 pts totales</span>
@@ -239,45 +280,57 @@
       </div>
     </section>
 
-    <!-- 3. FUNCIÓN 1: CREAR / REGISTRAR (GUARDADO AUTOMÁTICO EN LOCALSTORAGE) -->
-    <section class="bg-night-900/80 border border-night-800 rounded-2xl p-5 sm:p-6 shadow-xl">
+    <!-- 3. FORMULARIO Y ACCIONES RÁPIDAS MOBILE-FIRST (BOTONES AMPLIOS CÓMODOS AL TACTO) -->
+    <section class="bg-night-900/80 border border-night-800 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-xl">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
         <div>
-          <h2 class="text-base font-bold text-white flex items-center gap-2">
+          <h2 class="text-base sm:text-lg font-bold text-white flex items-center gap-2">
             <span class="w-2.5 h-2.5 rounded-full bg-neon-emerald"></span>
-            Crear / Registrar Nuevo Elemento
+            Crear Registro Rápido
           </h2>
-          <p class="text-xs text-slate-400">Cada registro se valida y se almacena automáticamente en localStorage.</p>
+          <p class="text-xs text-slate-400">Botones grandes para registrar fácilmente con una sola mano.</p>
         </div>
 
-        <!-- Presets de Acción Rápida -->
-        <div class="flex items-center gap-1.5 flex-wrap">
-          <span class="text-[11px] font-mono text-slate-500 mr-1 hidden sm:inline">Atajos:</span>
-          <button type="button" onclick="quickAdd('Sprint 25m Enfoque', 25, 'Enfoque')" class="px-2.5 py-1 text-xs font-mono bg-night-950 hover:bg-cyan-950/60 text-cyan-400 border border-cyan-500/30 hover:border-cyan-400 rounded-lg transition-all-200">
-            + Sprint 25m
+        <!-- Presets de Acción Rápida con Touch Targets Amplios (≥ 44px) -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-[11px] font-mono text-slate-500 hidden sm:inline">Atajos:</span>
+          <button 
+            type="button" 
+            onclick="quickAdd('Sprint 25m Enfoque', 25, 'Enfoque')" 
+            class="min-h-[44px] px-3.5 py-2 text-xs font-mono bg-night-950 active:bg-cyan-950 text-cyan-300 border border-cyan-500/40 rounded-xl transition-all-200 active:scale-95 flex items-center gap-1.5 cursor-pointer"
+          >
+            <span class="text-cyan-400 font-bold">+</span> Sprint 25m
           </button>
-          <button type="button" onclick="quickAdd('Hidratación & Pausa Activa', 15, 'Salud')" class="px-2.5 py-1 text-xs font-mono bg-night-950 hover:bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 hover:border-emerald-400 rounded-lg transition-all-200">
-            + Salud 15p
+          <button 
+            type="button" 
+            onclick="quickAdd('Hidratación & Pausa', 15, 'Salud')" 
+            class="min-h-[44px] px-3.5 py-2 text-xs font-mono bg-night-950 active:bg-emerald-950 text-emerald-300 border border-emerald-500/40 rounded-xl transition-all-200 active:scale-95 flex items-center gap-1.5 cursor-pointer"
+          >
+            <span class="text-emerald-400 font-bold">+</span> Salud 15p
           </button>
-          <button type="button" onclick="quickAdd('Estudio de Documentación', 30, 'Estudio')" class="px-2.5 py-1 text-xs font-mono bg-night-950 hover:bg-pink-950/60 text-pink-400 border border-pink-500/30 hover:border-pink-400 rounded-lg transition-all-200">
-            + Estudio 30p
+          <button 
+            type="button" 
+            onclick="quickAdd('Lectura y Estudio', 30, 'Estudio')" 
+            class="min-h-[44px] px-3.5 py-2 text-xs font-mono bg-night-950 active:bg-pink-950 text-pink-300 border border-pink-500/40 rounded-xl transition-all-200 active:scale-95 flex items-center gap-1.5 cursor-pointer"
+          >
+            <span class="text-pink-400 font-bold">+</span> Estudio 30p
           </button>
         </div>
       </div>
 
-      <!-- Alerta de validación -->
-      <div id="form-error" class="hidden mb-3 p-2.5 bg-pink-950/50 border border-pink-500/40 rounded-xl text-xs text-pink-300 font-mono flex items-center gap-2">
-        <svg class="w-4 h-4 shrink-0 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <!-- Alerta de validación táctil -->
+      <div id="form-error" class="hidden mb-3 p-3 bg-pink-950/60 border border-pink-500/50 rounded-xl text-xs text-pink-300 font-mono flex items-center gap-2.5">
+        <svg class="w-5 h-5 shrink-0 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
         </svg>
         <span id="form-error-msg">Por favor corrige los campos indicados.</span>
       </div>
 
-      <!-- Formulario Directo Validador -->
+      <!-- Formulario Mobile-First con inputs amplios (text-base para evitar zoom involuntario en iOS) -->
       <form id="record-form" class="grid grid-cols-1 sm:grid-cols-12 gap-3" onsubmit="handleFormSubmit(event)" novalidate>
         <!-- Concepto -->
         <div class="sm:col-span-4">
-          <label for="input-title" class="block text-[11px] font-mono text-slate-400 mb-1">
+          <label for="input-title" class="block text-xs font-mono text-slate-400 mb-1.5">
             Concepto / Actividad <span class="text-neon-pink">*</span>
           </label>
           <input 
@@ -285,13 +338,13 @@
             id="input-title" 
             placeholder="Mínimo 3 caracteres..." 
             maxlength="60"
-            class="w-full bg-night-950 border border-night-700 focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-slate-600 outline-none transition-all-200"
+            class="w-full min-h-[48px] bg-night-950 border border-night-700 focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan rounded-xl px-4 py-3 text-base sm:text-sm text-white placeholder-slate-600 outline-none transition-all-200"
           />
         </div>
 
         <!-- Valor / Puntos -->
         <div class="sm:col-span-2">
-          <label for="input-value" class="block text-[11px] font-mono text-slate-400 mb-1">
+          <label for="input-value" class="block text-xs font-mono text-slate-400 mb-1.5">
             Puntos (1-1000) <span class="text-neon-pink">*</span>
           </label>
           <input 
@@ -300,16 +353,16 @@
             placeholder="50" 
             min="1" 
             max="1000"
-            class="w-full bg-night-950 border border-night-700 focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan rounded-xl px-3.5 py-2.5 text-sm text-white font-mono placeholder-slate-600 outline-none transition-all-200"
+            class="w-full min-h-[48px] bg-night-950 border border-night-700 focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan rounded-xl px-4 py-3 text-base sm:text-sm text-white font-mono placeholder-slate-600 outline-none transition-all-200"
           />
         </div>
 
         <!-- Categoría -->
-        <div class="sm:col-span-2">
-          <label for="input-category" class="block text-[11px] font-mono text-slate-400 mb-1">Categoría</label>
+        <div class="sm:col-span-3">
+          <label for="input-category" class="block text-xs font-mono text-slate-400 mb-1.5">Categoría</label>
           <select 
             id="input-category" 
-            class="w-full bg-night-950 border border-night-700 focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan rounded-xl px-3 py-2.5 text-sm text-white outline-none transition-all-200 cursor-pointer"
+            class="w-full min-h-[48px] bg-night-950 border border-night-700 focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan rounded-xl px-3.5 py-3 text-base sm:text-sm text-white outline-none transition-all-200 cursor-pointer"
           >
             <option value="Enfoque">Enfoque (Cian)</option>
             <option value="Salud">Salud (Verde)</option>
@@ -319,63 +372,52 @@
           </select>
         </div>
 
-        <!-- Fecha del Registro -->
-        <div class="sm:col-span-2">
-          <label for="input-date" class="block text-[11px] font-mono text-slate-400 mb-1">Fecha</label>
-          <input 
-            type="date" 
-            id="input-date" 
-            class="w-full bg-night-950 border border-night-700 focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan rounded-xl px-3 py-2.5 text-sm text-white font-mono outline-none transition-all-200 cursor-pointer"
-          />
-        </div>
-
-        <!-- Botón de Envío -->
-        <div class="sm:col-span-2 flex items-end">
+        <!-- Botón de Envío Táctil Principal (Grande, min-h-[48px]) -->
+        <div class="sm:col-span-3 flex items-end">
           <button 
             type="submit" 
             id="btn-submit"
-            class="w-full h-[42px] bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 active:scale-[0.98] text-night-950 font-bold text-sm rounded-xl flex items-center justify-center gap-1.5 shadow-neon-cyan transition-all-200 cursor-pointer"
+            class="w-full min-h-[48px] bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 active:scale-[0.97] text-night-950 font-extrabold text-base rounded-xl flex items-center justify-center gap-2 shadow-neon-cyan transition-all-200 cursor-pointer"
           >
-            <svg class="w-4 h-4 stroke-[2.5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="w-5 h-5 stroke-[2.5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
             </svg>
-            <span>Registrar</span>
+            <span>Agregar Registro</span>
           </button>
         </div>
       </form>
     </section>
 
-    <!-- 4. CONSULTAR / FILTRAR & ACTUALIZAR / ELIMINAR -->
+    <!-- 4. CONSULTAR, FILTRAR Y LISTA INTERACTIVA (MOBILE-FIRST) -->
     <section class="space-y-4">
-      <!-- Barra de Consulta y Filtros Multidimensionales -->
-      <div class="bg-night-900/90 border border-night-800 rounded-2xl p-4 sm:p-5 shadow-lg space-y-3.5">
+      <!-- Filtros táctiles amplios -->
+      <div class="bg-night-900/90 border border-night-800 rounded-2xl sm:rounded-3xl p-4 sm:p-5 shadow-lg space-y-3.5">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div class="flex items-center gap-2">
             <h2 class="text-base font-bold text-white flex items-center gap-2">
               <span class="w-2.5 h-2.5 rounded-full bg-neon-cyan"></span>
-              Consultar & Filtrar Registros
+              Consultar & Filtrar
             </h2>
             <span id="badge-filtered-count" class="text-xs font-mono px-2 py-0.5 rounded-full bg-night-800 text-neon-cyan border border-night-700">
               0 mostrados
             </span>
           </div>
 
-          <!-- Acciones de Filtro y Restablecer Almacenamiento -->
+          <!-- Acciones de Filtro y Restablecer -->
           <div class="flex items-center gap-2.5 flex-wrap">
             <button 
               type="button" 
               onclick="resetFilters()" 
-              class="text-xs font-mono text-slate-400 hover:text-neon-cyan transition-colors"
+              class="min-h-[38px] px-3 text-xs font-mono text-slate-400 hover:text-neon-cyan active:bg-night-800 rounded-lg transition-colors flex items-center"
             >
               Limpiar Filtros
             </button>
             <span class="text-slate-600">·</span>
             
-            <!-- Botón Destacado: Restablecer Datos (Abre Modal de Confirmación) -->
             <button 
               type="button" 
               onclick="openResetConfirmModal()" 
-              class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono text-pink-400 hover:text-pink-300 bg-pink-950/40 hover:bg-pink-950/70 border border-pink-500/30 hover:border-pink-500/60 rounded-lg transition-all-200 shadow-sm cursor-pointer"
+              class="min-h-[38px] inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono text-pink-400 hover:text-pink-300 bg-pink-950/40 hover:bg-pink-950/70 border border-pink-500/30 rounded-xl transition-all-200 active:scale-95 cursor-pointer"
             >
               <svg class="w-3.5 h-3.5 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -385,31 +427,31 @@
           </div>
         </div>
 
-        <!-- Controles de Filtro en Grid Responsivo -->
+        <!-- Controles en Grid con hitboxes táctiles generosos -->
         <div class="grid grid-cols-1 sm:grid-cols-12 gap-2.5">
-          <!-- Búsqueda textual en tiempo real -->
-          <div class="sm:col-span-4 relative">
+          <!-- Búsqueda en vivo -->
+          <div class="sm:col-span-5 relative">
             <input 
               type="text" 
               id="search-input" 
               oninput="handleSearch(this.value)"
               placeholder="Buscar por concepto o categoría..." 
-              class="w-full bg-night-950 border border-night-800 focus:border-cyan-500 rounded-xl pl-8 pr-3 py-2 text-xs text-white placeholder-slate-500 outline-none"
+              class="w-full min-h-[44px] bg-night-950 border border-night-800 focus:border-cyan-500 rounded-xl pl-9 pr-4 py-2.5 text-sm text-white placeholder-slate-500 outline-none"
             />
-            <svg class="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="w-4 h-4 text-slate-500 absolute left-3 top-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
 
-          <!-- Filtro por Estado (Tabs Segmentadas) -->
-          <div class="sm:col-span-3 flex items-center p-0.5 bg-night-950 border border-night-800 rounded-xl text-xs font-mono">
-            <button type="button" onclick="setFilterState('all')" id="filter-all" class="flex-1 py-1.5 rounded-lg text-white bg-night-800 transition-colors text-center font-medium">
+          <!-- Filtro por Estado (Tabs amplias para dedos, min-h-[44px]) -->
+          <div class="sm:col-span-4 flex items-center p-1 bg-night-950 border border-night-800 rounded-xl text-xs font-mono min-h-[44px]">
+            <button type="button" onclick="setFilterState('all')" id="filter-all" class="flex-1 min-h-[36px] py-1.5 rounded-lg text-white bg-night-800 transition-colors text-center font-semibold">
               Todos
             </button>
-            <button type="button" onclick="setFilterState('pending')" id="filter-pending" class="flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition-colors text-center">
+            <button type="button" onclick="setFilterState('pending')" id="filter-pending" class="flex-1 min-h-[36px] py-1.5 rounded-lg text-amber-400 hover:text-white transition-colors text-center font-medium">
               Pendientes
             </button>
-            <button type="button" onclick="setFilterState('completed')" id="filter-completed" class="flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition-colors text-center">
+            <button type="button" onclick="setFilterState('completed')" id="filter-completed" class="flex-1 min-h-[36px] py-1.5 rounded-lg text-emerald-400 hover:text-white transition-colors text-center font-medium">
               Hechos
             </button>
           </div>
@@ -419,7 +461,7 @@
             <select 
               id="filter-category" 
               onchange="handleCategoryFilter(this.value)"
-              class="w-full bg-night-950 border border-night-800 focus:border-cyan-500 rounded-xl px-3 py-2 text-xs text-slate-300 font-mono outline-none cursor-pointer"
+              class="w-full min-h-[44px] bg-night-950 border border-night-800 focus:border-cyan-500 rounded-xl px-3.5 py-2.5 text-xs text-slate-300 font-mono outline-none cursor-pointer"
             >
               <option value="all">Todas las Categorías</option>
               <option value="Enfoque">Enfoque (Cian)</option>
@@ -429,52 +471,85 @@
               <option value="General">General (Azul)</option>
             </select>
           </div>
-
-          <!-- Filtro por Fecha -->
-          <div class="sm:col-span-2">
-            <select 
-              id="filter-date-range" 
-              onchange="handleDateRangeFilter(this.value)"
-              class="w-full bg-night-950 border border-night-800 focus:border-cyan-500 rounded-xl px-3 py-2 text-xs text-slate-300 font-mono outline-none cursor-pointer"
-            >
-              <option value="all">Cualquier Fecha</option>
-              <option value="today">Solo Hoy</option>
-              <option value="week">Últimos 7 días</option>
-            </select>
-          </div>
         </div>
       </div>
 
-      <!-- Info de estado de persistencia y conteo -->
+      <!-- Guía interactiva -->
       <div class="flex items-center justify-between px-1">
         <span class="text-xs font-mono text-slate-400 flex items-center gap-1.5">
           <span class="w-2 h-2 rounded-full bg-neon-pink"></span>
-          Acciones en vivo: clic en check para estado, lápiz para editar o basura para borrar.
+          Toca el check para completar/activar, lápiz para editar o papelera para eliminar.
         </span>
         <span id="badge-total-items" class="text-xs font-mono text-slate-500">0 en localStorage</span>
       </div>
 
-      <!-- Contenedor Dinámico de la Lista -->
-      <div id="records-list" class="space-y-2.5 min-h-[160px]">
+      <!-- CONTENEDOR DINÁMICO DE LA LISTA -->
+      <div id="records-list" class="space-y-3 min-h-[160px]">
       </div>
 
-      <!-- Estado Vacío -->
-      <div id="empty-state" class="hidden text-center py-12 px-4 bg-night-900/40 border border-dashed border-night-800 rounded-2xl">
-        <div class="w-12 h-12 mx-auto rounded-full bg-night-800/80 flex items-center justify-center text-slate-500 mb-3">
-          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+      <!-- 2. ESTADO VACÍO (EMPTY STATE) CON ÍCONO SVG CLARO Y ACCIONES DIRECTAS -->
+      <div id="empty-state" class="hidden text-center py-12 sm:py-16 px-6 bg-night-900/40 border border-dashed border-night-800 rounded-3xl relative overflow-hidden">
+        <!-- SVG Claro y Estilizado con acentos Neón -->
+        <div class="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-4 relative flex items-center justify-center">
+          <div class="absolute inset-0 bg-cyan-500/10 rounded-full blur-xl pointer-events-none"></div>
+          
+          <svg class="w-16 h-16 sm:w-20 sm:h-20 text-slate-600 relative z-10" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Portapapeles oscuro -->
+            <rect x="18" y="16" width="44" height="54" rx="8" fill="#0B0F19" stroke="#24304F" stroke-width="2" />
+            
+            <!-- Clip superior con acento neón cian -->
+            <path d="M30 14C30 11.7909 31.7909 10 34 10H46C48.2091 10 50 11.7909 50 14V18H30V14Z" fill="#111728" stroke="#00F5FF" stroke-width="1.8" />
+            <circle cx="40" cy="14" r="2" fill="#00F5FF" />
+            
+            <!-- Líneas de lista estilizadas -->
+            <line x1="28" y1="28" x2="52" y2="28" stroke="#24304F" stroke-width="2" stroke-linecap="round" />
+            <line x1="28" y1="38" x2="48" y2="38" stroke="#24304F" stroke-width="2" stroke-linecap="round" />
+            <line x1="28" y1="48" x2="42" y2="48" stroke="#24304F" stroke-width="2" stroke-linecap="round" />
+            
+            <!-- Chispas neón decorativas -->
+            <circle cx="58" cy="22" r="3" fill="#00FF88" className="animate-pulse" />
+            <circle cx="22" cy="62" r="2.5" fill="#FFB800" />
+            <circle cx="62" cy="56" r="2" fill="#FF007F" />
           </svg>
         </div>
-        <h3 class="text-sm font-semibold text-slate-300">No se encontraron registros</h3>
-        <p class="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
-          Prueba a relajar los filtros activos o ingresa un nuevo registro con el botón "Registrar".
+
+        <h3 class="text-base sm:text-lg font-bold text-white tracking-tight">
+          ¡Tu lista está totalmente despejada!
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1.5 max-w-sm mx-auto leading-relaxed">
+          No tienes registros pendientes en este momento o ningún elemento coincide con tus filtros de búsqueda.
         </p>
+
+        <!-- Botones de Acción Directa en el Empty State (Fáciles de tocar) -->
+        <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <button 
+            type="button" 
+            onclick="focusCreateInput()" 
+            class="w-full sm:w-auto min-h-[44px] px-5 py-2.5 rounded-xl bg-neon-cyan text-night-950 font-bold text-xs sm:text-sm shadow-neon-cyan active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <svg class="w-4 h-4 stroke-[3]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+            <span>Crear primer registro</span>
+          </button>
+
+          <button 
+            type="button" 
+            onclick="restoreTwoDefaults()" 
+            class="w-full sm:w-auto min-h-[44px] px-4 py-2.5 rounded-xl bg-night-800 hover:bg-night-700 text-slate-300 border border-night-700 font-mono text-xs active:scale-95 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+          >
+            <svg class="w-4 h-4 text-neon-emerald" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            <span>Cargar 2 ejemplos</span>
+          </button>
+        </div>
       </div>
     </section>
 
     <!-- PIE DE PÁGINA LIMPIO -->
     <footer class="pt-6 border-t border-night-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 font-mono gap-2">
-      <div>Ejercicio 24 · JavaScript Vanilla & TailwindCSS con localStorage</div>
+      <div>Ejercicio 24 · Mobile-First Touch & localStorage</div>
       <div class="flex items-center gap-3">
         <span class="inline-flex items-center gap-1.5">
           <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Modo Oscuro Permanente
@@ -486,22 +561,22 @@
 
   </div>
 
-  <!-- MODAL 1: ACTUALIZAR / EDITAR EN TIEMPO REAL -->
-  <div id="edit-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-night-950/80 backdrop-blur-sm">
-    <div class="bg-night-900 border border-neon-cyan/50 rounded-2xl p-6 w-full max-w-md shadow-neon-cyan relative transform transition-all">
-      <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-neon-cyan to-neon-emerald rounded-t-2xl"></div>
+  <!-- MODAL DE EDICIÓN EN TIEMPO REAL (TOUCH-FRIENDLY) -->
+  <div id="edit-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-night-950/85 backdrop-blur-md">
+    <div class="bg-night-900 border border-neon-cyan/50 rounded-2xl sm:rounded-3xl p-5 sm:p-6 w-full max-w-md shadow-neon-cyan relative transform transition-all">
+      <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-neon-cyan to-neon-emerald rounded-t-3xl"></div>
 
       <div class="flex items-center justify-between mb-4">
-        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+        <h3 class="text-base sm:text-lg font-bold text-white flex items-center gap-2">
           <svg class="w-5 h-5 text-neon-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
           </svg>
           Actualizar Elemento
         </h3>
-        <button onclick="closeEditModal()" class="w-7 h-7 rounded-lg text-slate-400 hover:text-white hover:bg-night-800 flex items-center justify-center">✕</button>
+        <button onclick="closeEditModal()" class="touch-target-min rounded-xl text-slate-400 hover:text-white hover:bg-night-800 flex items-center justify-center cursor-pointer">✕</button>
       </div>
 
-      <div id="modal-error" class="hidden mb-3 p-2 bg-pink-950/50 border border-pink-500/40 rounded-lg text-xs text-pink-300 font-mono"></div>
+      <div id="modal-error" class="hidden mb-3 p-2.5 bg-pink-950/60 border border-pink-500/40 rounded-xl text-xs text-pink-300 font-mono"></div>
 
       <form id="edit-form" onsubmit="saveEdit(event)" class="space-y-3.5">
         <input type="hidden" id="edit-id" />
@@ -513,7 +588,7 @@
             id="edit-title" 
             required 
             maxlength="60"
-            class="w-full bg-night-950 border border-night-700 focus:border-neon-cyan rounded-xl px-3.5 py-2 text-sm text-white outline-none"
+            class="w-full min-h-[48px] bg-night-950 border border-night-700 focus:border-neon-cyan rounded-xl px-4 py-2.5 text-base sm:text-sm text-white outline-none"
           />
         </div>
 
@@ -526,7 +601,7 @@
               min="1" 
               max="1000" 
               required
-              class="w-full bg-night-950 border border-night-700 focus:border-neon-cyan rounded-xl px-3.5 py-2 text-sm text-white font-mono outline-none"
+              class="w-full min-h-[48px] bg-night-950 border border-night-700 focus:border-neon-cyan rounded-xl px-4 py-2.5 text-base sm:text-sm text-white font-mono outline-none"
             />
           </div>
 
@@ -534,7 +609,7 @@
             <label for="edit-category" class="block text-xs font-mono text-slate-400 mb-1">Categoría</label>
             <select 
               id="edit-category" 
-              class="w-full bg-night-950 border border-night-700 focus:border-neon-cyan rounded-xl px-3 py-2 text-sm text-white outline-none cursor-pointer"
+              class="w-full min-h-[48px] bg-night-950 border border-night-700 focus:border-neon-cyan rounded-xl px-3 py-2.5 text-base sm:text-sm text-white outline-none cursor-pointer"
             >
               <option value="Enfoque">Enfoque (Cian)</option>
               <option value="Salud">Salud (Verde)</option>
@@ -545,40 +620,28 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label for="edit-date" class="block text-xs font-mono text-slate-400 mb-1">Fecha</label>
-            <input 
-              type="date" 
-              id="edit-date" 
-              required
-              class="w-full bg-night-950 border border-night-700 focus:border-neon-cyan rounded-xl px-3 py-2 text-sm text-white font-mono outline-none cursor-pointer"
-            />
-          </div>
-
-          <div>
-            <label for="edit-completed" class="block text-xs font-mono text-slate-400 mb-1">Estado</label>
-            <select 
-              id="edit-completed" 
-              class="w-full bg-night-950 border border-night-700 focus:border-neon-cyan rounded-xl px-3 py-2 text-sm text-white outline-none cursor-pointer"
-            >
-              <option value="false">⏳ Pendiente</option>
-              <option value="true">✓ Completado</option>
-            </select>
-          </div>
+        <div>
+          <label for="edit-completed" class="block text-xs font-mono text-slate-400 mb-1">Estado</label>
+          <select 
+            id="edit-completed" 
+            class="w-full min-h-[48px] bg-night-950 border border-night-700 focus:border-neon-cyan rounded-xl px-3.5 py-2.5 text-base sm:text-sm text-white outline-none cursor-pointer"
+          >
+            <option value="false">⏳ Pendiente (Amarillo neón)</option>
+            <option value="true">✓ Completado (Verde neón)</option>
+          </select>
         </div>
 
-        <div class="flex items-center justify-end gap-2 pt-3 border-t border-night-800">
+        <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-night-800">
           <button 
             type="button" 
             onclick="closeEditModal()" 
-            class="px-4 py-2 text-xs font-mono rounded-xl border border-night-700 text-slate-300 hover:bg-night-800 transition-colors"
+            class="min-h-[44px] px-4 py-2 text-xs font-mono rounded-xl border border-night-700 text-slate-300 hover:bg-night-800 transition-colors cursor-pointer"
           >
             Cancelar
           </button>
           <button 
             type="submit" 
-            class="px-5 py-2 text-xs font-mono font-bold rounded-xl bg-neon-cyan text-night-950 hover:bg-cyan-300 shadow-neon-cyan transition-colors"
+            class="min-h-[44px] px-5 py-2 text-xs font-mono font-bold rounded-xl bg-neon-cyan text-night-950 hover:bg-cyan-300 shadow-neon-cyan transition-colors cursor-pointer"
           >
             Guardar Cambios
           </button>
@@ -587,44 +650,37 @@
     </div>
   </div>
 
-  <!-- MODAL 2: CONFIRMACIÓN DE RESTABLECER ALMACENAMIENTO LOCAL -->
-  <div id="reset-confirm-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-night-950/80 backdrop-blur-sm">
-    <div class="bg-night-900 border border-pink-500/50 rounded-2xl p-6 w-full max-w-md shadow-neon-pink relative transform transition-all">
-      <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-pink-500 to-amber-500 rounded-t-2xl"></div>
+  <!-- MODAL DE CONFIRMACIÓN: RESTABLECER ALMACENAMIENTO -->
+  <div id="reset-confirm-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-night-950/85 backdrop-blur-md">
+    <div class="bg-night-900 border border-pink-500/50 rounded-2xl sm:rounded-3xl p-5 sm:p-6 w-full max-w-md shadow-neon-pink relative transform transition-all">
+      <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-pink-500 to-amber-500 rounded-t-3xl"></div>
 
       <div class="flex items-start gap-3.5 mb-4">
-        <div class="w-10 h-10 rounded-xl bg-pink-950/60 border border-pink-500/40 text-pink-400 flex items-center justify-center shrink-0">
+        <div class="w-11 h-11 rounded-2xl bg-pink-950/70 border border-pink-500/50 text-pink-400 flex items-center justify-center shrink-0">
           <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
           </svg>
         </div>
         <div>
-          <h3 class="text-base font-bold text-white">¿Restablecer almacenamiento local?</h3>
-          <p class="text-xs text-slate-400 mt-1">
-            Esta acción borrará todos los registros actuales de <code class="text-neon-cyan font-mono">localStorage</code> y restaurará los 2 datos de ejemplo iniciales.
+          <h3 class="text-base font-bold text-white">¿Restablecer datos locales?</h3>
+          <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+            Esta acción vaciará el <code class="text-neon-cyan font-mono">localStorage</code> y restaurará los 2 registros de ejemplo iniciales.
           </p>
         </div>
       </div>
 
-      <div class="p-3 bg-night-950/60 border border-night-800 rounded-xl text-xs font-mono text-slate-400 space-y-1 mb-5">
-        <div class="flex items-center gap-1.5 text-slate-300">
-          <span class="text-pink-400 font-bold">!</span> Los datos eliminados no se podrán recuperar.
-        </div>
-        <div>Clave afectada: <span class="text-slate-500">ejercicio24_records</span></div>
-      </div>
-
-      <div class="flex items-center justify-end gap-2">
+      <div class="flex items-center justify-end gap-2.5 mt-5">
         <button 
           type="button" 
           onclick="closeResetConfirmModal()" 
-          class="px-4 py-2 text-xs font-mono rounded-xl border border-night-700 text-slate-300 hover:bg-night-800 transition-colors cursor-pointer"
+          class="min-h-[44px] px-4 py-2 text-xs font-mono rounded-xl border border-night-700 text-slate-300 hover:bg-night-800 transition-colors cursor-pointer"
         >
           Cancelar
         </button>
         <button 
           type="button" 
           onclick="executeResetStorage()" 
-          class="px-5 py-2 text-xs font-mono font-bold rounded-xl bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-400 hover:to-rose-500 text-white shadow-neon-pink transition-all-200 cursor-pointer"
+          class="min-h-[44px] px-5 py-2 text-xs font-mono font-bold rounded-xl bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-neon-pink active:scale-95 transition-all cursor-pointer"
         >
           Sí, Restablecer Todo
         </button>
@@ -632,8 +688,8 @@
     </div>
   </div>
 
-  <!-- Notificación Toast Flotante con Soporte de Deshacer (Undo) -->
-  <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none bg-night-900 border border-cyan-500/40 text-white text-xs font-mono px-4 py-2.5 rounded-xl shadow-neon-cyan flex items-center gap-3">
+  <!-- Notificación Toast Flotante -->
+  <div id="toast" class="fixed bottom-5 right-5 left-5 sm:left-auto z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none bg-night-900 border border-cyan-500/40 text-white text-xs font-mono px-4 py-3 rounded-2xl shadow-neon-cyan flex items-center justify-between gap-3">
     <div class="flex items-center gap-2">
       <span id="toast-icon" class="text-neon-cyan font-bold">✓</span>
       <span id="toast-message">Registro guardado</span>
@@ -641,15 +697,14 @@
     <button 
       id="toast-undo-btn" 
       onclick="handleUndo()" 
-      class="hidden pointer-events-auto underline text-cyan-300 hover:text-white font-bold ml-1 cursor-pointer"
+      class="hidden pointer-events-auto underline text-cyan-300 hover:text-white font-bold px-2 py-1 cursor-pointer"
     >
       Deshacer
     </button>
   </div>
 
-  <!-- JAVASCRIPT VANILLA CON PERSISTENCIA LOCALSTORAGE -->
+  <!-- JAVASCRIPT VANILLA -->
   <script>
-    // --- 0. CONSTANTES Y CONFIGURACIÓN ---
     const STORAGE_KEY = 'ejercicio24_records';
 
     const CATEGORY_CONFIG = {
@@ -695,67 +750,39 @@
       }
     };
 
-    // Función auxiliar para generar 2 datos de ejemplo iniciales
     function getTwoDefaultRecords() {
       return [
         {
           id: 'rec-init-1',
-          title: 'Sprint 24: Configuración de persistencia con localStorage',
+          title: 'Sprint 24: Configuración Mobile-First con Tailwind',
           value: 50,
           category: 'Enfoque',
           completed: true,
-          date: getIsoToday(),
           timestamp: Date.now() - 3600000 * 2
         },
         {
           id: 'rec-init-2',
-          title: 'Rutina de hidratación y acondicionamiento saludable',
+          title: 'Rutina de hidratación y ergonomía táctil',
           value: 30,
           category: 'Salud',
           completed: false,
-          date: getIsoToday(),
           timestamp: Date.now() - 1800000
         }
       ];
     }
 
-    // Estado en memoria
     let records = [];
-    let lastDeletedRecord = null; // Soporte para acción deshacer (undo)
+    let lastDeletedRecord = null;
 
-    // Filtros activos
     let currentFilterState = 'all';
     let currentFilterCategory = 'all';
-    let currentFilterDate = 'all';
     let searchQuery = '';
 
-    // =========================================================================
-    // 1. INICIALIZACIÓN Y RECUPERACIÓN AUTOMÁTICA DESDE LOCALSTORAGE
-    // =========================================================================
-
     window.addEventListener('DOMContentLoaded', () => {
-      const dateInput = document.getElementById('input-date');
-      if (dateInput) dateInput.value = getIsoToday();
-
-      // Recuperación automática al cargar o recargar
       loadRecordsFromLocalStorage();
       renderAll();
     });
 
-    function getIsoToday() {
-      return new Date().toISOString().split('T')[0];
-    }
-
-    function getIsoDaysAgo(days) {
-      const d = new Date();
-      d.setDate(d.getDate() - days);
-      return d.toISOString().split('T')[0];
-    }
-
-    /**
-     * Recupera automáticamente los datos almacenados en localStorage.
-     * Si no existen registros o el arreglo está vacío, carga exactamente 2 datos de ejemplo.
-     */
     function loadRecordsFromLocalStorage() {
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
@@ -766,65 +793,45 @@
             return;
           }
         }
-        // Si está vacío o no existe, mostrar exactamente 2 datos de ejemplo
         records = getTwoDefaultRecords();
         saveRecordsToLocalStorage();
       } catch (err) {
-        console.warn('Error leyendo de localStorage, inicializando datos de ejemplo:', err);
         records = getTwoDefaultRecords();
         saveRecordsToLocalStorage();
       }
     }
 
-    /**
-     * Guarda automáticamente todo el estado de registros en localStorage.
-     */
     function saveRecordsToLocalStorage() {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
       } catch (err) {
         console.error('Error escribiendo en localStorage:', err);
-        showToast('Error al guardar en almacenamiento local', '✕');
       }
     }
 
-    // =========================================================================
-    // 2. CREAR / REGISTRAR (GUARDA AUTOMÁTICAMENTE EN LOCALSTORAGE)
-    // =========================================================================
-
-    function validateRecordForm(title, value, date) {
-      if (!title || title.trim().length < 3) {
-        return 'El concepto o actividad debe tener al menos 3 caracteres.';
-      }
-      if (isNaN(value) || value < 1 || value > 1000) {
-        return 'El valor debe ser un número entero positivo entre 1 y 1000.';
-      }
-      if (!date) {
-        return 'Por favor especifica una fecha válida.';
-      }
-      return null;
-    }
-
+    // --- FUNCIÓN 1: CREAR REGISTRO ---
     function handleFormSubmit(event) {
       event.preventDefault();
       const titleInput = document.getElementById('input-title');
       const valInput = document.getElementById('input-value');
       const catInput = document.getElementById('input-category');
-      const dateInput = document.getElementById('input-date');
       const errorBox = document.getElementById('form-error');
       const errorMsg = document.getElementById('form-error-msg');
 
       const title = titleInput.value.trim();
       const val = parseInt(valInput.value, 10);
       const cat = catInput.value;
-      const date = dateInput.value || getIsoToday();
 
-      const validationError = validateRecordForm(title, val, date);
-      if (validationError) {
-        errorMsg.textContent = validationError;
+      if (!title || title.length < 3) {
+        errorMsg.textContent = 'El concepto debe tener al menos 3 caracteres.';
         errorBox.classList.remove('hidden');
-        if (!title || title.length < 3) titleInput.focus();
-        else valInput.focus();
+        titleInput.focus();
+        return;
+      }
+      if (isNaN(val) || val < 1 || val > 1000) {
+        errorMsg.textContent = 'El valor debe ser un número entero entre 1 y 1000.';
+        errorBox.classList.remove('hidden');
+        valInput.focus();
         return;
       }
 
@@ -836,21 +843,18 @@
         value: val,
         category: cat,
         completed: false,
-        date: date,
         timestamp: Date.now()
       };
 
       records.unshift(newRecord);
-      // Auto-guardado en localStorage
       saveRecordsToLocalStorage();
       renderAll();
 
       titleInput.value = '';
       valInput.value = '';
-      dateInput.value = getIsoToday();
       titleInput.focus();
 
-      showToast(`Guardado en localStorage: "${title}" (+${val} pts)`, '✓');
+      showToast(`Guardado: "${title}" (+${val} pts)`, '✓');
     }
 
     function quickAdd(title, value, category) {
@@ -860,21 +864,24 @@
         value: Number(value),
         category: category,
         completed: false,
-        date: getIsoToday(),
         timestamp: Date.now()
       };
 
       records.unshift(newRecord);
-      // Auto-guardado en localStorage
       saveRecordsToLocalStorage();
       renderAll();
-      showToast(`+${value} pts guardados: ${title}`, '⚡');
+      showToast(`+${value} pts agregados: ${title}`, '⚡');
     }
 
-    // =========================================================================
-    // 3. CONSULTAR / FILTRAR (ESTADO, CATEGORÍA, FECHA, TEXTO)
-    // =========================================================================
+    function focusCreateInput() {
+      const input = document.getElementById('input-title');
+      if (input) {
+        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        input.focus();
+      }
+    }
 
+    // --- FUNCIÓN 2: CONSULTAR / FILTRAR ---
     function setFilterState(state) {
       currentFilterState = state;
       const buttons = {
@@ -885,9 +892,9 @@
 
       Object.keys(buttons).forEach(key => {
         if (key === state) {
-          buttons[key].className = 'flex-1 py-1.5 rounded-lg text-white bg-night-800 transition-colors text-center font-medium shadow-sm';
+          buttons[key].className = 'flex-1 min-h-[36px] py-1.5 rounded-lg text-white bg-night-800 transition-colors text-center font-bold shadow-sm';
         } else {
-          buttons[key].className = 'flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition-colors text-center';
+          buttons[key].className = 'flex-1 min-h-[36px] py-1.5 rounded-lg text-slate-400 hover:text-white transition-colors text-center font-medium';
         }
       });
 
@@ -899,11 +906,6 @@
       renderList();
     }
 
-    function handleDateRangeFilter(range) {
-      currentFilterDate = range;
-      renderList();
-    }
-
     function handleSearch(query) {
       searchQuery = (query || '').toLowerCase().trim();
       renderList();
@@ -912,16 +914,13 @@
     function resetFilters() {
       currentFilterState = 'all';
       currentFilterCategory = 'all';
-      currentFilterDate = 'all';
       searchQuery = '';
 
       const searchInput = document.getElementById('search-input');
       const catSelect = document.getElementById('filter-category');
-      const dateSelect = document.getElementById('filter-date-range');
 
       if (searchInput) searchInput.value = '';
       if (catSelect) catSelect.value = 'all';
-      if (dateSelect) dateSelect.value = 'all';
 
       setFilterState('all');
       showToast('Filtros restablecidos', '↺');
@@ -939,41 +938,23 @@
 
       if (currentFilterCategory !== 'all' && item.category !== currentFilterCategory) return false;
 
-      if (currentFilterDate !== 'all') {
-        const todayStr = getIsoToday();
-        const itemDateStr = item.date || new Date(item.timestamp).toISOString().split('T')[0];
-
-        if (currentFilterDate === 'today') {
-          if (itemDateStr !== todayStr) return false;
-        } else if (currentFilterDate === 'week') {
-          const sevenDaysAgo = getIsoDaysAgo(7);
-          if (itemDateStr < sevenDaysAgo) return false;
-        }
-      }
-
       return true;
     }
 
-    // =========================================================================
-    // 4. ACTUALIZAR / ELIMINAR (GUARDA AUTOMÁTICAMENTE EN LOCALSTORAGE)
-    // =========================================================================
-
-    // Cambiar estado en tiempo real
+    // --- FUNCIÓN 3: ACTUALIZAR Y ELIMINAR ---
     function toggleCompleted(id) {
       const item = records.find(r => r.id === id);
       if (item) {
         item.completed = !item.completed;
-        // Auto-guardado
         saveRecordsToLocalStorage();
         renderAll();
         showToast(
-          item.completed ? `Completado y guardado: "${item.title}"` : `Pendiente y guardado: "${item.title}"`,
+          item.completed ? `✓ Completado (Verde neón)` : `⏳ Pendiente (Amarillo neón)`,
           item.completed ? '✓' : '○'
         );
       }
     }
 
-    // Modal de Edición
     function openEditModal(id) {
       const item = records.find(r => r.id === id);
       if (!item) return;
@@ -982,7 +963,6 @@
       document.getElementById('edit-title').value = item.title;
       document.getElementById('edit-value').value = item.value;
       document.getElementById('edit-category').value = item.category;
-      document.getElementById('edit-date').value = item.date || new Date(item.timestamp).toISOString().split('T')[0];
       document.getElementById('edit-completed').value = item.completed ? 'true' : 'false';
 
       const errorBox = document.getElementById('modal-error');
@@ -1003,14 +983,17 @@
       const title = document.getElementById('edit-title').value.trim();
       const val = parseInt(document.getElementById('edit-value').value, 10);
       const cat = document.getElementById('edit-category').value;
-      const date = document.getElementById('edit-date').value;
       const completed = document.getElementById('edit-completed').value === 'true';
 
       const errorBox = document.getElementById('modal-error');
 
-      const validationError = validateRecordForm(title, val, date);
-      if (validationError) {
-        errorBox.textContent = validationError;
+      if (!title || title.length < 3) {
+        errorBox.textContent = 'El concepto debe tener al menos 3 caracteres.';
+        errorBox.classList.remove('hidden');
+        return;
+      }
+      if (isNaN(val) || val < 1 || val > 1000) {
+        errorBox.textContent = 'El valor debe estar entre 1 y 1000.';
         errorBox.classList.remove('hidden');
         return;
       }
@@ -1020,46 +1003,38 @@
         item.title = title;
         item.value = val;
         item.category = cat;
-        item.date = date;
         item.completed = completed;
 
-        // Auto-guardado en localStorage
         saveRecordsToLocalStorage();
         renderAll();
         closeEditModal();
-        showToast(`Registro actualizado en localStorage: "${title}"`, '✎');
+        showToast(`Actualizado: "${title}"`, '✎');
       }
     }
 
-    // Eliminar con auto-guardado
     function deleteRecord(id) {
       const index = records.findIndex(r => r.id === id);
       if (index !== -1) {
         const deleted = records.splice(index, 1)[0];
         lastDeletedRecord = { item: deleted, index: index };
-        // Auto-guardado
         saveRecordsToLocalStorage();
         renderAll();
-        showToast(`Eliminado de localStorage: "${deleted.title}"`, '✕', true);
+        showToast(`Eliminado: "${deleted.title}"`, '✕', true);
       }
     }
 
     function handleUndo() {
       if (lastDeletedRecord) {
         records.splice(lastDeletedRecord.index, 0, lastDeletedRecord.item);
-        // Auto-guardado
         saveRecordsToLocalStorage();
         renderAll();
         const title = lastDeletedRecord.item.title;
         lastDeletedRecord = null;
-        showToast(`Restaurado y guardado: "${title}"`, '↺', false);
+        showToast(`Restaurado: "${title}"`, '↺', false);
       }
     }
 
-    // =========================================================================
-    // 5. RESTABLECER ALMACENAMIENTO LOCAL CON MODAL DE CONFIRMACIÓN
-    // =========================================================================
-
+    // --- RESTABLECER ALMACENAMIENTO ---
     function openResetConfirmModal() {
       const modal = document.getElementById('reset-confirm-modal');
       if (modal) modal.classList.remove('hidden');
@@ -1070,26 +1045,16 @@
       if (modal) modal.classList.add('hidden');
     }
 
-    /**
-     * Ejecuta el borrado del almacenamiento local y restablece los 2 datos de ejemplo iniciales.
-     */
     function executeResetStorage() {
       try {
-        // Borrar el almacenamiento local
         localStorage.removeItem(STORAGE_KEY);
-
-        // Restaurar exactamente los 2 datos de ejemplo
         records = getTwoDefaultRecords();
         saveRecordsToLocalStorage();
-
-        // Actualizar vista completa
         renderAll();
         closeResetConfirmModal();
-
-        showToast('localStorage restablecido con 2 ejemplos iniciales', '↺');
+        showToast('Restablecido con 2 ejemplos iniciales', '↺');
       } catch (err) {
-        console.error('Error al restablecer localStorage:', err);
-        showToast('Ocurrió un error al restablecer el almacenamiento', '✕');
+        showToast('Error al restablecer', '✕');
       }
     }
 
@@ -1100,10 +1065,7 @@
       showToast('2 registros de ejemplo cargados', '✦');
     }
 
-    // =========================================================================
-    // 6. RENDERIZADO GLOBAL & COMPONENTES VISUALES
-    // =========================================================================
-
+    // --- RENDERIZADO VISUAL ---
     function renderAll() {
       renderHeaderCounters();
       renderSummaryCards();
@@ -1111,16 +1073,26 @@
       renderList();
     }
 
+    // Contador resumen superior con badges neón
     function renderHeaderCounters() {
       const totalValue = records.reduce((acc, curr) => acc + (Number(curr.value) || 0), 0);
       const totalCount = records.length;
+      const completedCount = records.filter(r => r.completed).length;
+      const pendingCount = totalCount - completedCount;
+      const completionRate = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
 
       const heroValEl = document.getElementById('hero-total-value');
       const heroCountEl = document.getElementById('hero-items-count');
+      const heroCompCount = document.getElementById('hero-completed-count');
+      const heroCompRate = document.getElementById('hero-completed-rate');
+      const heroPendCount = document.getElementById('hero-pending-count');
       const badgeTotalItems = document.getElementById('badge-total-items');
 
       if (heroValEl) heroValEl.textContent = totalValue.toLocaleString('es-ES');
       if (heroCountEl) heroCountEl.textContent = totalCount;
+      if (heroCompCount) heroCompCount.textContent = completedCount;
+      if (heroCompRate) heroCompRate.textContent = `(${completionRate}%)`;
+      if (heroPendCount) heroPendCount.textContent = pendingCount;
       if (badgeTotalItems) badgeTotalItems.textContent = `${totalCount} en localStorage`;
     }
 
@@ -1221,6 +1193,7 @@
       if (legendContainer) legendContainer.innerHTML = legendHtml;
     }
 
+    // Lista interactiva con badges neón diferenciados y botones táctiles grandes (≥ 44px)
     function renderList() {
       const listEl = document.getElementById('records-list');
       const emptyEl = document.getElementById('empty-state');
@@ -1245,85 +1218,95 @@
       filtered.forEach(item => {
         const config = CATEGORY_CONFIG[item.category] || CATEGORY_CONFIG['General'];
         const isDone = item.completed;
-        const formattedDate = item.date || new Date(item.timestamp).toISOString().split('T')[0];
         const timeAgo = formatTimeAgo(item.timestamp);
+
+        // BADGE NEÓN DIFERENCIADO:
+        // Verde neón = Completado | Amarillo/Ámbar neón = Pendiente
+        const statusBadgeHtml = isDone
+          ? `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono font-bold bg-emerald-950/80 text-emerald-300 border border-emerald-500/50 shadow-[0_0_10px_rgba(0,255,136,0.25)]">
+               <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+               Completado
+             </span>`
+          : `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono font-bold bg-amber-950/80 text-amber-300 border border-amber-500/50 shadow-[0_0_10px_rgba(255,184,0,0.25)]">
+               <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+               Pendiente
+             </span>`;
 
         html += `
           <div 
-            class="group bg-night-900/90 border ${isDone ? 'border-night-800 opacity-75' : config.border} ${config.hoverBorder} rounded-xl p-3.5 sm:p-4 flex items-center justify-between gap-3 transition-all-200 hover:shadow-lg hover:bg-night-850"
+            class="group bg-night-900/90 border ${isDone ? 'border-emerald-500/20 bg-night-900/70' : 'border-amber-500/20'} ${config.hoverBorder} rounded-2xl p-3.5 sm:p-4 flex items-center justify-between gap-3 transition-all-200 hover:shadow-lg hover:bg-night-850"
             id="item-${item.id}"
           >
-            <!-- Checkbox de estado + Contenido -->
+            <!-- Checkbox de estado táctil grande (Touch Target ≥ 44px) -->
             <div class="flex items-center gap-3 min-w-0 flex-1">
               <button 
                 type="button" 
                 onclick="toggleCompleted('${item.id}')"
-                class="w-8 h-8 shrink-0 rounded-lg flex items-center justify-center border transition-all-200 cursor-pointer ${
+                class="touch-target-min shrink-0 rounded-xl flex items-center justify-center border transition-all-200 cursor-pointer active:scale-90 ${
                   isDone 
-                    ? 'bg-emerald-500/20 border-emerald-400 text-emerald-300 shadow-neon-emerald' 
-                    : 'border-night-700 bg-night-950 text-transparent hover:border-cyan-400'
+                    ? 'bg-emerald-500/25 border-emerald-400 text-emerald-300 shadow-neon-emerald' 
+                    : 'border-night-700 bg-night-950 text-slate-600 hover:border-amber-400 hover:text-amber-400'
                 }"
                 title="${isDone ? 'Cambiar a pendiente' : 'Marcar como completado'}"
               >
-                <svg class="w-4 h-4 stroke-[3]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="w-5 h-5 stroke-[2.8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
               </button>
 
               <div class="min-w-0 flex-1">
                 <div class="flex items-center gap-2 flex-wrap">
-                  <span class="text-sm font-semibold text-white truncate ${isDone ? 'line-through text-slate-500' : ''}">
+                  <span class="text-sm sm:text-base font-semibold text-white truncate ${isDone ? 'line-through text-slate-400' : ''}">
                     ${escapeHtml(item.title)}
                   </span>
-                  
+                </div>
+
+                <div class="flex items-center gap-2 mt-1.5 flex-wrap">
+                  <!-- Badge Neón Diferenciado de Estado -->
+                  ${statusBadgeHtml}
+
+                  <!-- Categoría con punto neón -->
                   <span class="inline-flex items-center gap-1 text-[11px] font-mono ${config.color}">
                     <span class="w-1.5 h-1.5 rounded-full ${config.dot}"></span>
                     ${item.category}
                   </span>
-                </div>
 
-                <div class="flex items-center gap-2 mt-0.5 text-[11px] font-mono text-slate-500 flex-wrap">
-                  <span>📅 ${formattedDate}</span>
-                  <span>·</span>
-                  <span>${timeAgo}</span>
-                  <span>·</span>
-                  <span class="${isDone ? 'text-emerald-400 font-medium' : 'text-slate-400'}">
-                    ${isDone ? '✓ Completado' : '⏳ Pendiente'}
-                  </span>
+                  <span class="text-slate-600 hidden xs:inline">·</span>
+                  <span class="text-[11px] font-mono text-slate-500">${timeAgo}</span>
                 </div>
               </div>
             </div>
 
-            <!-- Puntos & Botones de Acción -->
-            <div class="flex items-center gap-2.5 shrink-0">
-              <div class="text-right mr-1">
-                <span class="text-lg sm:text-xl font-mono font-bold ${isDone ? 'text-slate-400' : config.color} tabular-nums">
+            <!-- Puntos & Botones Táctiles de Acción (Touch Target ≥ 44px) -->
+            <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+              <div class="text-right mr-1 hidden xs:block">
+                <span class="text-lg sm:text-xl font-mono font-bold ${isDone ? 'text-emerald-400' : 'text-amber-300'} tabular-nums">
                   +${item.value}
                 </span>
                 <span class="text-[10px] font-mono text-slate-500 block -mt-1">pts</span>
               </div>
 
-              <!-- Botón Editar -->
+              <!-- Botón Editar (≥ 44px) -->
               <button 
                 type="button" 
                 onclick="openEditModal('${item.id}')"
-                class="w-8 h-8 rounded-lg bg-night-950 hover:bg-cyan-950/60 border border-night-800 hover:border-cyan-500/40 text-slate-400 hover:text-cyan-300 flex items-center justify-center transition-all-200 cursor-pointer"
+                class="touch-target-min rounded-xl bg-night-950 active:bg-cyan-950 border border-night-800 hover:border-cyan-500/40 text-slate-400 hover:text-cyan-300 flex items-center justify-center transition-all-200 active:scale-90 cursor-pointer"
                 title="Editar / Actualizar"
               >
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                 </svg>
               </button>
 
-              <!-- Botón Eliminar -->
+              <!-- Botón Eliminar (≥ 44px) -->
               <button 
                 type="button" 
                 onclick="deleteRecord('${item.id}')"
-                class="w-8 h-8 rounded-lg bg-night-950 hover:bg-pink-950/60 border border-night-800 hover:border-pink-500/40 text-slate-400 hover:text-pink-400 flex items-center justify-center transition-all-200 cursor-pointer"
+                class="touch-target-min rounded-xl bg-night-950 active:bg-pink-950 border border-night-800 hover:border-pink-500/40 text-slate-400 hover:text-pink-400 flex items-center justify-center transition-all-200 active:scale-90 cursor-pointer"
                 title="Eliminar registro"
               >
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                 </svg>
               </button>
             </div>
@@ -1338,13 +1321,13 @@
     function formatTimeAgo(timestamp) {
       if (!timestamp) return 'Reciente';
       const diffSec = Math.floor((Date.now() - timestamp) / 1000);
-      if (diffSec < 60) return 'Hace un momento';
+      if (diffSec < 60) return 'Hace instantes';
       const diffMin = Math.floor(diffSec / 60);
-      if (diffMin < 60) return `Hace ${diffMin} min`;
+      if (diffMin < 60) return `${diffMin}m`;
       const diffHours = Math.floor(diffMin / 60);
-      if (diffHours < 24) return `Hace ${diffHours} h`;
+      if (diffHours < 24) return `${diffHours}h`;
       const diffDays = Math.floor(diffHours / 24);
-      return `Hace ${diffDays} d`;
+      return `${diffDays}d`;
     }
 
     function escapeHtml(text) {
@@ -1370,13 +1353,13 @@
         else toastUndo.classList.add('hidden');
       }
 
-      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.remove('translate-y-24', 'opacity-0');
       toast.classList.add('translate-y-0', 'opacity-100');
 
       if (toastTimer) clearTimeout(toastTimer);
       toastTimer = setTimeout(() => {
         toast.classList.remove('translate-y-0', 'opacity-100');
-        toast.classList.add('translate-y-20', 'opacity-0');
+        toast.classList.add('translate-y-24', 'opacity-0');
       }, showUndo ? 4500 : 2500);
     }
   </script>

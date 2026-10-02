@@ -1,0 +1,6 @@
+{
+  "name": "Ejercicio 24 - Neon Tracker",
+  "description": "Aplicación web oscura de alto rendimiento con JavaScript vanilla y TailwindCSS para registro rápido y métricas visuales neón.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

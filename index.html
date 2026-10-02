@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <title>Ejercicio 24 - Neon Tracker</title>
-  <meta name="description" content="Aplicación web oscura de alta estabilidad con JavaScript vanilla y TailwindCSS para registro rápido y métricas visuales neón." />
+  <meta name="description" content="Aplicación web oscura de alta estabilidad con JavaScript vanilla, TailwindCSS, métricas visuales neón y análisis inteligente con la API de Gemini." />
   <meta property="og:title" content="Ejercicio 24 - Neon Tracker" />
-  <meta property="og:description" content="Gestor de registros robusto con persistencia segura en localStorage, validación rigurosa y notificaciones flotantes neón." />
+  <meta property="og:description" content="Gestor de registros robusto con persistencia en localStorage, validación rigurosa, notificaciones flotantes neón y diagnóstico inteligente con Gemini 1.5 Flash." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
 
@@ -32,6 +32,7 @@
               emerald: '#00FF88',
               pink: '#FF007F',
               purple: '#A855F7',
+              violet: '#8B5CF6',
               amber: '#FFB800',
               yellow: '#FFE600',
               blue: '#3B82F6'
@@ -48,7 +49,8 @@
             'neon-cyan': '0 0 22px rgba(0, 245, 255, 0.28)',
             'neon-pink': '0 0 22px rgba(255, 0, 127, 0.28)',
             'neon-emerald': '0 0 22px rgba(0, 255, 136, 0.28)',
-            'neon-amber': '0 0 22px rgba(255, 184, 0, 0.28)'
+            'neon-amber': '0 0 22px rgba(255, 184, 0, 0.28)',
+            'neon-purple': '0 0 24px rgba(168, 85, 247, 0.32)'
           }
         }
       }
@@ -71,6 +73,7 @@
       background-image: 
         radial-gradient(circle at 10% 10%, rgba(0, 245, 255, 0.08) 0%, transparent 40%),
         radial-gradient(circle at 90% 20%, rgba(255, 0, 127, 0.07) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.06) 0%, transparent 45%),
         radial-gradient(circle at 50% 90%, rgba(0, 255, 136, 0.05) 0%, transparent 50%);
     }
 
@@ -85,6 +88,9 @@
     }
     .border-glow-amber {
       box-shadow: 0 0 15px -2px rgba(255, 184, 0, 0.25);
+    }
+    .border-glow-purple {
+      box-shadow: 0 0 20px -2px rgba(168, 85, 247, 0.3);
     }
 
     /* Mobile-first touch enhancements */
@@ -101,6 +107,15 @@
     }
     .animate-shake {
       animation: shake 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
+
+    /* Shimmering pulse for AI processing */
+    @keyframes aiPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.75; transform: scale(1.02); }
+    }
+    .animate-ai-pulse {
+      animation: aiPulse 2s ease-in-out infinite;
     }
 
     /* Scrollbar */
@@ -131,27 +146,27 @@
 
     <!-- 1. ENCABEZADO PRINCIPAL CON CONTADOR RESUMEN DESTACADO -->
     <header class="bg-night-900/90 backdrop-blur border border-night-800 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xl relative overflow-hidden">
-      <!-- Glow decorativo multicolor -->
-      <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-neon-cyan via-neon-emerald via-neon-amber to-neon-pink"></div>
+      <!-- Glow decorativo multicolor con toque púrpura IA -->
+      <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-neon-cyan via-purple-500 via-neon-emerald to-neon-pink"></div>
       
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-5 sm:gap-6">
         <div>
           <div class="flex items-center gap-2 mb-1.5 flex-wrap">
             <span class="inline-block w-2.5 h-2.5 rounded-full bg-neon-cyan animate-pulse"></span>
-            <span class="text-[11px] sm:text-xs font-mono tracking-wider uppercase text-neon-cyan font-bold">Ejercicio 24 · Sistema Estable</span>
+            <span class="text-[11px] sm:text-xs font-mono tracking-wider uppercase text-neon-cyan font-bold">Ejercicio 24 · Gemini 1.5 Flash</span>
             <span class="text-slate-600 hidden xs:inline">·</span>
             <span id="storage-status-badge" class="text-[11px] font-mono text-emerald-400 inline-flex items-center gap-1">
               <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
               </svg>
-              localStorage Protegido
+              localStorage Seguro
             </span>
           </div>
           <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
             Control Dinámico & Registros
           </h1>
           <p class="text-xs sm:text-sm text-slate-400 mt-1 max-w-md">
-            Validación estricta de formularios, notificaciones neón y almacenamiento local blindado con gestión de errores.
+            Métricas neón en tiempo real, persistencia local protegida y diagnóstico analítico inteligente impulsado por IA.
           </p>
         </div>
 
@@ -290,7 +305,142 @@
       </div>
     </section>
 
-    <!-- 3. FORMULARIO CON VALIDACIÓN ESTRICTA Y ATRIBUTOS DE SEGURIDAD -->
+    <!-- 3. TARJETA "ANÁLISIS CON IA" (INTEGRACIÓN GEMINI 1.5 FLASH CON RESPONSESCHEMA) -->
+    <section aria-labelledby="ai-card-title" class="bg-night-900/90 border border-purple-500/40 rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-2xl relative overflow-hidden border-glow-purple">
+      <!-- Glow superior púrpura a cian -->
+      <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-purple-500 via-pink-500 to-neon-cyan"></div>
+      <div class="absolute -right-12 -top-12 w-48 h-48 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Cabecera de la tarjeta IA -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-purple-950/80 border border-purple-500/50 text-purple-400 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(168,85,247,0.3)]">
+            <svg class="w-6 h-6 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <h2 id="ai-card-title" class="text-base sm:text-lg font-bold text-white tracking-tight flex items-center gap-2">
+                Análisis con IA
+              </h2>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-purple-950 text-purple-300 border border-purple-500/40 uppercase tracking-wide">
+                Gemini 1.5 Flash
+              </span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-mono text-cyan-300 bg-cyan-950/70 border border-cyan-500/30">
+                JSON Estricto
+              </span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">
+              Diagnóstico en tiempo real evaluando equilibrio de categorías, tasa de cumplimiento y metas.
+            </p>
+          </div>
+        </div>
+
+        <!-- Botón "Generar Diagnóstico" (Touch Target Amplio ≥ 48px) -->
+        <button 
+          type="button" 
+          id="btn-ai-generate" 
+          onclick="generateAIDiagnosis()" 
+          class="w-full sm:w-auto min-h-[48px] px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 via-pink-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 active:scale-[0.97] text-white font-extrabold text-sm flex items-center justify-center gap-2.5 shadow-neon-purple transition-all-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed shrink-0"
+        >
+          <!-- Spinner de carga -->
+          <svg id="btn-ai-spinner" class="hidden w-4 h-4 animate-spin text-white shrink-0" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+          </svg>
+          <!-- Icono de chispa estelar -->
+          <svg id="btn-ai-icon" class="w-4 h-4 text-cyan-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+          </svg>
+          <span id="btn-ai-text">Generar Diagnóstico</span>
+        </button>
+      </div>
+
+      <!-- Estado Inicial / Placeholder de la tarjeta IA -->
+      <div id="ai-initial-notice" class="bg-night-950/70 border border-night-800 rounded-xl p-4 text-xs text-slate-400 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="flex items-center gap-2.5">
+          <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
+          <span>Presiona <strong>"Generar Diagnóstico"</strong> para enviar los registros al endpoint de Gemini 1.5 Flash con esquema JSON validado.</span>
+        </div>
+        <span class="text-[11px] font-mono text-purple-400 shrink-0">responseSchema: JSON Object</span>
+      </div>
+
+      <!-- Contenedor Dinámico del Diagnóstico con IA -->
+      <div id="ai-results-container" class="hidden mt-4 space-y-4">
+        <!-- Tarjeta de Puntuación & Resumen -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3.5">
+          <!-- Puntuación Global de la IA -->
+          <div class="md:col-span-4 bg-night-950/90 border border-purple-500/30 rounded-2xl p-4 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-[0_0_15px_rgba(168,85,247,0.15)]">
+            <span class="text-[11px] font-mono uppercase tracking-wider text-purple-300 font-semibold mb-1">
+              Puntuación de Eficacia
+            </span>
+            <div class="flex items-baseline gap-1 my-1">
+              <span id="ai-score-value" class="text-4xl sm:text-5xl font-mono font-black text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan via-purple-300 to-neon-pink">
+                --
+              </span>
+              <span class="text-sm font-mono text-slate-500">/ 100</span>
+            </div>
+            <div id="ai-score-badge" class="mt-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-purple-950/80 text-purple-300 border border-purple-500/40">
+              Evaluando...
+            </div>
+          </div>
+
+          <!-- Resumen Ejecutivo -->
+          <div class="md:col-span-8 bg-night-950/90 border border-night-800 rounded-2xl p-4 flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-mono uppercase tracking-wider text-cyan-400 font-semibold block mb-1">
+                Resumen Ejecutivo
+              </span>
+              <p id="ai-summary-text" class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+                Cargando resumen estructurado...
+              </p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-night-800 flex items-center justify-between text-[11px] font-mono text-slate-500">
+              <span id="ai-timestamp">Generado recientemente</span>
+              <span class="text-purple-400">Gemini 1.5 Flash</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta de Diagnóstico Detallado -->
+        <div class="bg-night-950/90 border border-night-800 rounded-2xl p-4">
+          <span class="text-[11px] font-mono uppercase tracking-wider text-pink-400 font-semibold block mb-1.5 flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-pink-400"></span>
+            Diagnóstico Analítico
+          </span>
+          <p id="ai-diagnosis-text" class="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+            Cargando evaluación analítica...
+          </p>
+        </div>
+
+        <!-- Tarjeta de Recomendaciones Prácticas -->
+        <div class="bg-night-950/90 border border-night-800 rounded-2xl p-4">
+          <span class="text-[11px] font-mono uppercase tracking-wider text-emerald-400 font-semibold block mb-2 flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            Recomendaciones de Alto Rendimiento
+          </span>
+          <ul id="ai-recommendations-list" class="space-y-2 text-xs sm:text-sm text-slate-200">
+            <!-- Items insertados dinámicamente -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Contenedor de Error en el Análisis de IA -->
+      <div id="ai-error-container" class="hidden mt-4 p-4 bg-pink-950/40 border border-pink-500/50 rounded-2xl text-xs font-mono text-pink-300 space-y-2">
+        <div class="flex items-center gap-2 font-bold text-pink-400">
+          <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+          <span id="ai-error-title">No fue posible completar el análisis con Gemini</span>
+        </div>
+        <p id="ai-error-detail" class="text-slate-300 text-[11px] leading-relaxed">
+          Verifica tu clave de API de Gemini reemplazando <code class="text-cyan-300 bg-night-900 px-1 py-0.5 rounded">TU_API_KEY</code> en el script con tu credencial válida de Google AI Studio.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. FORMULARIO CON VALIDACIÓN ESTRICTA Y ATRIBUTOS DE SEGURIDAD -->
     <section class="bg-night-900/80 border border-night-800 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-xl">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
         <div>
@@ -364,7 +514,7 @@
             id="input-value" 
             placeholder="50" 
             min="1" 
-            max="1000"
+            max="1000" 
             step="1"
             autocomplete="off"
             oninput="clearFieldValidation(this)"
@@ -391,7 +541,7 @@
         <div class="sm:col-span-3 flex items-end">
           <button 
             type="submit" 
-            id="btn-submit"
+            id="btn-submit" 
             class="w-full min-h-[48px] bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 active:scale-[0.97] text-night-950 font-extrabold text-base rounded-xl flex items-center justify-center gap-2 shadow-neon-cyan transition-all-200 cursor-pointer"
           >
             <svg class="w-5 h-5 stroke-[2.5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -403,7 +553,7 @@
       </form>
     </section>
 
-    <!-- 4. CONSULTAR, FILTRAR Y LISTA INTERACTIVA -->
+    <!-- 5. CONSULTAR, FILTRAR Y LISTA INTERACTIVA -->
     <section class="space-y-4">
       <!-- Filtros táctiles amplios -->
       <div class="bg-night-900/90 border border-night-800 rounded-2xl sm:rounded-3xl p-4 sm:p-5 shadow-lg space-y-3.5">
@@ -449,7 +599,7 @@
             <input 
               type="text" 
               id="search-input" 
-              oninput="handleSearch(this.value)"
+              oninput="handleSearch(this.value)" 
               placeholder="Buscar por concepto o categoría..." 
               class="w-full min-h-[44px] bg-night-950 border border-night-800 focus:border-cyan-500 rounded-xl pl-9 pr-4 py-2.5 text-sm text-white placeholder-slate-500 outline-none"
             />
@@ -475,7 +625,7 @@
           <div class="sm:col-span-3">
             <select 
               id="filter-category" 
-              onchange="handleCategoryFilter(this.value)"
+              onchange="handleCategoryFilter(this.value)" 
               class="w-full min-h-[44px] bg-night-950 border border-night-800 focus:border-cyan-500 rounded-xl px-3.5 py-2.5 text-xs text-slate-300 font-mono outline-none cursor-pointer"
             >
               <option value="all">Todas las Categorías</option>
@@ -555,13 +705,13 @@
 
     <!-- PIE DE PÁGINA LIMPIO -->
     <footer class="pt-6 border-t border-night-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 font-mono gap-2">
-      <div>Ejercicio 24 · Mobile-First Touch & localStorage Seguro</div>
+      <div>Ejercicio 24 · Gemini 1.5 Flash & localStorage Seguro</div>
       <div class="flex items-center gap-3">
         <span class="inline-flex items-center gap-1.5">
           <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Modo Oscuro Permanente
         </span>
         <span>·</span>
-        <button onclick="restoreTwoDefaults()" class="hover:text-neon-cyan transition-colors">Cargar 2 ejemplos</button>
+        <button onclick="restoreTwoDefaults()" class="hover:text-neon-cyan transition-colors cursor-pointer">Cargar 2 ejemplos</button>
       </div>
     </footer>
 
@@ -592,8 +742,8 @@
           <input 
             type="text" 
             id="edit-title" 
-            maxlength="60"
-            oninput="clearFieldValidation(this)"
+            maxlength="60" 
+            oninput="clearFieldValidation(this)" 
             class="w-full min-h-[48px] bg-night-950 border border-night-700 focus:border-neon-cyan rounded-xl px-4 py-2.5 text-base sm:text-sm text-white outline-none"
           />
         </div>
@@ -606,8 +756,8 @@
               id="edit-value" 
               min="1" 
               max="1000" 
-              step="1"
-              oninput="clearFieldValidation(this)"
+              step="1" 
+              oninput="clearFieldValidation(this)" 
               class="w-full min-h-[48px] bg-night-950 border border-night-700 focus:border-neon-cyan rounded-xl px-4 py-2.5 text-base sm:text-sm text-white font-mono outline-none"
             />
           </div>
@@ -737,10 +887,14 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT VANILLA CON PROTECCIÓN LOCALSTORAGE Y VALIDACIONES ESTRICTAS -->
+  <!-- JAVASCRIPT VANILLA CON PROTECCIÓN LOCALSTORAGE, VALIDACIONES Y API DE GEMINI -->
   <script>
     // --- 0. CONSTANTES Y CONFIGURACIÓN ---
     const STORAGE_KEY = 'ejercicio24_records';
+
+    // Clave de API de Gemini según requerimiento del Ejercicio 24
+    // Para probar directamente en navegador se puede sustituir TU_API_KEY por tu clave real
+    const GEMINI_API_KEY = 'TU_API_KEY';
 
     const CATEGORY_CONFIG = {
       'Enfoque': {
@@ -890,7 +1044,7 @@
       // 2. Indicador visual del estado de persistencia
       const statusBadge = document.getElementById('storage-status-badge');
       if (statusBadge && !SafeStorage.isAvailable()) {
-        statusBadge.innerHTML = `<span class="text-amber-400">⚠ Memoria Temporal (Sin almacenamiento persistente)</span>`;
+        statusBadge.innerHTML = `<span class="text-amber-400">⚠ Memoria Temporal (Sin persistencia)</span>`;
         statusBadge.className = 'text-[11px] font-mono text-amber-400 inline-flex items-center gap-1';
       }
 
@@ -940,9 +1094,9 @@
         iconColor = 'text-amber-300 bg-amber-950/80 border border-amber-500/50';
         iconSymbol = '⚠';
       } else if (type === 'info') {
-        borderClass = 'border-blue-500/50';
-        shadowClass = 'shadow-neon-cyan';
-        iconColor = 'text-blue-400 bg-blue-950/80 border border-blue-500/40';
+        borderClass = 'border-purple-500/60';
+        shadowClass = 'shadow-neon-purple';
+        iconColor = 'text-purple-300 bg-purple-950/80 border border-purple-500/40';
         iconSymbol = '✦';
       }
 
@@ -952,128 +1106,214 @@
       msgEl.textContent = message;
 
       if (undoBtn) {
-        if (showUndo) undoBtn.classList.remove('hidden');
-        else undoBtn.classList.add('hidden');
+        if (showUndo) {
+          undoBtn.classList.remove('hidden');
+        } else {
+          undoBtn.classList.add('hidden');
+        }
       }
 
-      // Animación de entrada suave
+      // Animación de entrada
       container.classList.remove('translate-y-24', 'opacity-0');
       container.classList.add('translate-y-0', 'opacity-100');
 
-      // Auto ocultar
+      // Cierre automático
+      const duration = showUndo ? 5000 : 3200;
       toastTimeout = setTimeout(() => {
         hideToast();
-      }, showUndo ? 5000 : 3500);
+      }, duration);
     }
 
     function hideToast() {
       const container = document.getElementById('toast-container');
-      if (!container) return;
-      container.classList.remove('translate-y-0', 'opacity-100');
-      container.classList.add('translate-y-24', 'opacity-0');
-      if (toastTimeout) clearTimeout(toastTimeout);
+      if (container) {
+        container.classList.remove('translate-y-0', 'opacity-100');
+        container.classList.add('translate-y-24', 'opacity-0');
+      }
     }
 
-    // --- 3. VALIDACIÓN RIGUROSA DE CAMPOS (REGLAS DE ESTABILIDAD) ---
+    function handleUndo() {
+      if (lastDeletedRecord) {
+        records.unshift(lastDeletedRecord);
+        saveState();
+        renderAll();
+        showToast(`Registro "${lastDeletedRecord.title}" restaurado.`, 'success');
+        lastDeletedRecord = null;
+        hideToast();
+      }
+    }
 
+    // --- 3. VALIDACIÓN ESTRICTA DE ENTRADAS ---
+    /**
+     * Valida de manera exhaustiva los datos ingresados.
+     * @param {string} title 
+     * @param {number|string} value 
+     * @param {string} category 
+     * @returns {{isValid: boolean, error?: string, field?: string}}
+     */
     function validateRecordData(title, value, category) {
-      // 1. Validar Título/Concepto
-      if (typeof title !== 'string') {
-        return { valid: false, field: 'title', message: 'El concepto debe ser una cadena de texto válida.' };
-      }
-      const trimmed = title.trim();
-      if (!trimmed || trimmed.length === 0) {
-        return { valid: false, field: 'title', message: 'El concepto no puede estar vacío.' };
-      }
-      if (trimmed.length < 3) {
-        return { valid: false, field: 'title', message: 'El concepto debe contener al menos 3 caracteres.' };
-      }
-      if (trimmed.length > 60) {
-        return { valid: false, field: 'title', message: 'El concepto no puede exceder los 60 caracteres.' };
-      }
-      // Evitar que sea exclusivamente números o caracteres especiales
-      if (/^\d+$/.test(trimmed)) {
-        return { valid: false, field: 'title', message: 'El concepto no puede ser únicamente una cifra numérica.' };
+      const trimmedTitle = typeof title === 'string' ? title.trim() : '';
+
+      if (!trimmedTitle) {
+        return {
+          isValid: false,
+          error: 'El concepto no puede estar vacío.',
+          field: 'title'
+        };
       }
 
-      // 2. Validar Puntos/Valor
-      if (value === null || value === undefined || value === '') {
-        return { valid: false, field: 'value', message: 'El campo de puntos es obligatorio.' };
-      }
-      const num = Number(value);
-      if (isNaN(num) || !Number.isFinite(num)) {
-        return { valid: false, field: 'value', message: 'Los puntos deben ser un número válido.' };
-      }
-      if (!Number.isInteger(num)) {
-        return { valid: false, field: 'value', message: 'Los puntos deben ser un número entero (sin decimales).' };
-      }
-      if (num < 1) {
-        return { valid: false, field: 'value', message: 'Los puntos deben ser mayores a cero (mínimo 1).' };
-      }
-      if (num > 1000) {
-        return { valid: false, field: 'value', message: 'Los puntos no pueden exceder 1,000 unidades.' };
+      if (trimmedTitle.length < 3) {
+        return {
+          isValid: false,
+          error: 'El concepto debe tener al menos 3 caracteres significativos.',
+          field: 'title'
+        };
       }
 
-      // 3. Validar Categoría
-      const validCategories = ['Enfoque', 'Salud', 'Estudio', 'Proyecto', 'General'];
+      if (trimmedTitle.length > 60) {
+        return {
+          isValid: false,
+          error: 'El concepto no debe exceder los 60 caracteres.',
+          field: 'title'
+        };
+      }
+
+      // Evitar entradas compuestas exclusivamente de números en el concepto
+      if (/^\d+$/.test(trimmedTitle)) {
+        return {
+          isValid: false,
+          error: 'El concepto debe contener una descripción textual legible, no solo números.',
+          field: 'title'
+        };
+      }
+
+      const numVal = Number(value);
+      if (value === '' || value === null || isNaN(numVal)) {
+        return {
+          isValid: false,
+          error: 'El campo puntos es obligatorio y debe ser un número entero.',
+          field: 'value'
+        };
+      }
+
+      if (!Number.isInteger(numVal)) {
+        return {
+          isValid: false,
+          error: 'Los puntos deben ser un número entero sin decimales.',
+          field: 'value'
+        };
+      }
+
+      if (numVal < 1 || numVal > 1000) {
+        return {
+          isValid: false,
+          error: 'El rango de puntos permitido es de 1 a 1000 puntos.',
+          field: 'value'
+        };
+      }
+
+      const validCategories = Object.keys(CATEGORY_CONFIG);
       if (!validCategories.includes(category)) {
-        return { valid: false, field: 'category', message: 'La categoría seleccionada no es válida.' };
+        return {
+          isValid: false,
+          error: 'Categoría no válida. Selecciona una opción del listado.',
+          field: 'category'
+        };
       }
 
-      return { valid: true, sanitizedTitle: trimmed, sanitizedValue: num };
+      return { isValid: true };
     }
 
-    function markFieldInvalid(fieldEl) {
-      if (!fieldEl) return;
-      fieldEl.classList.add('border-pink-500', 'ring-1', 'ring-pink-500', 'animate-shake');
-      setTimeout(() => fieldEl.classList.remove('animate-shake'), 400);
+    function clearFieldValidation(inputEl) {
+      if (!inputEl) return;
+      inputEl.classList.remove('border-pink-500', 'focus:border-pink-500', 'focus:ring-pink-500');
+      inputEl.classList.add('border-night-700');
+
+      const formErrorEl = document.getElementById('form-error');
+      if (formErrorEl) formErrorEl.classList.add('hidden');
+
+      const modalErrorEl = document.getElementById('modal-error');
+      if (modalErrorEl) modalErrorEl.classList.add('hidden');
     }
 
-    function clearFieldValidation(fieldEl) {
-      if (!fieldEl) return;
-      fieldEl.classList.remove('border-pink-500', 'ring-1', 'ring-pink-500');
-      const errorBox = document.getElementById('form-error');
-      if (errorBox) errorBox.classList.add('hidden');
+    function highlightErrorField(inputId) {
+      const el = document.getElementById(inputId);
+      if (el) {
+        el.classList.remove('border-night-700', 'focus:border-neon-cyan');
+        el.classList.add('border-pink-500', 'focus:border-pink-500', 'focus:ring-pink-500');
+        el.focus();
+      }
     }
 
-    // --- 4. MANEJO DE CREAR REGISTRO ---
-    function handleFormSubmit(event) {
-      event.preventDefault();
+    // --- 4. FUNCIÓN: CREAR / REGISTRAR ---
+    function handleFormSubmit(e) {
+      e.preventDefault();
+
       const titleInput = document.getElementById('input-title');
-      const valInput = document.getElementById('input-value');
-      const catInput = document.getElementById('input-category');
-      const errorBox = document.getElementById('form-error');
+      const valueInput = document.getElementById('input-value');
+      const categoryInput = document.getElementById('input-category');
+      const errorContainer = document.getElementById('form-error');
       const errorMsg = document.getElementById('form-error-msg');
 
-      const titleRaw = titleInput.value;
-      const valRaw = valInput.value;
-      const cat = catInput.value;
+      const rawTitle = titleInput.value;
+      const rawValue = valueInput.value;
+      const rawCategory = categoryInput.value;
 
-      const validation = validateRecordData(titleRaw, valRaw, cat);
-
-      if (!validation.valid) {
-        errorMsg.textContent = validation.message;
-        errorBox.classList.remove('hidden');
-
-        if (validation.field === 'title') {
-          markFieldInvalid(titleInput);
-          titleInput.focus();
-        } else if (validation.field === 'value') {
-          markFieldInvalid(valInput);
-          valInput.focus();
+      // Validación estricta
+      const validation = validateRecordData(rawTitle, rawValue, rawCategory);
+      if (!validation.isValid) {
+        if (errorContainer && errorMsg) {
+          errorMsg.textContent = validation.error;
+          errorContainer.classList.remove('hidden');
+          // Forzar animación shake
+          errorContainer.classList.remove('animate-shake');
+          void errorContainer.offsetWidth;
+          errorContainer.classList.add('animate-shake');
         }
-        showToast(validation.message, 'warning');
+
+        if (validation.field === 'title') highlightErrorField('input-title');
+        else if (validation.field === 'value') highlightErrorField('input-value');
+
+        showToast(validation.error, 'error');
         return;
       }
 
-      errorBox.classList.add('hidden');
+      if (errorContainer) errorContainer.classList.add('hidden');
+
+      // Crear nuevo registro
+      const newRecord = {
+        id: 'rec-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
+        title: rawTitle.trim(),
+        value: parseInt(rawValue, 10),
+        category: rawCategory,
+        completed: false,
+        timestamp: Date.now()
+      };
+
+      records.unshift(newRecord);
+      saveState();
+
+      // Limpiar formulario y resetear foco
+      titleInput.value = '';
+      valueInput.value = '';
       clearFieldValidation(titleInput);
-      clearFieldValidation(valInput);
+      clearFieldValidation(valueInput);
+
+      renderAll();
+      showToast(`¡Registro "${newRecord.title}" agregado exitosamente!`, 'success');
+    }
+
+    function quickAdd(concept, pts, cat) {
+      const validation = validateRecordData(concept, pts, cat);
+      if (!validation.isValid) {
+        showToast(validation.error, 'error');
+        return;
+      }
 
       const newRecord = {
-        id: 'rec_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
-        title: validation.sanitizedTitle,
-        value: validation.sanitizedValue,
+        id: 'rec-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
+        title: concept,
+        value: pts,
         category: cat,
         completed: false,
         timestamp: Date.now()
@@ -1082,66 +1322,29 @@
       records.unshift(newRecord);
       saveState();
       renderAll();
-
-      titleInput.value = '';
-      valInput.value = '';
-      titleInput.focus();
-
-      showToast(`Guardado con éxito: "${newRecord.title}" (+${newRecord.value} pts)`, 'success');
+      showToast(`Preset rápido agregado: ${concept} (+${pts} pts)`, 'success');
     }
 
-    function quickAdd(title, value, category) {
-      const validation = validateRecordData(title, value, category);
-      if (!validation.valid) {
-        showToast(validation.message, 'warning');
-        return;
-      }
-
-      const newRecord = {
-        id: 'rec_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
-        title: validation.sanitizedTitle,
-        value: validation.sanitizedValue,
-        category: category,
-        completed: false,
-        timestamp: Date.now()
-      };
-
-      records.unshift(newRecord);
-      saveState();
-      renderAll();
-      showToast(`+${validation.sanitizedValue} pts agregados: ${validation.sanitizedTitle}`, 'info');
-    }
-
-    function focusCreateInput() {
-      const input = document.getElementById('input-title');
-      if (input) {
-        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        input.focus();
-      }
-    }
-
-    // --- 5. CONSULTAR / FILTRAR ---
+    // --- 5. FUNCIÓN: CONSULTAR / FILTRAR ---
     function setFilterState(state) {
       currentFilterState = state;
-      const buttons = {
-        all: document.getElementById('filter-all'),
-        pending: document.getElementById('filter-pending'),
-        completed: document.getElementById('filter-completed')
-      };
 
-      Object.keys(buttons).forEach(key => {
-        if (key === state) {
-          buttons[key].className = 'flex-1 min-h-[36px] py-1.5 rounded-lg text-white bg-night-800 transition-colors text-center font-bold shadow-sm';
+      ['all', 'pending', 'completed'].forEach(s => {
+        const btn = document.getElementById(`filter-${s}`);
+        if (!btn) return;
+        if (s === state) {
+          btn.className = 'flex-1 min-h-[36px] py-1.5 rounded-lg text-white bg-night-800 transition-colors text-center font-bold shadow-sm';
         } else {
-          buttons[key].className = 'flex-1 min-h-[36px] py-1.5 rounded-lg text-slate-400 hover:text-white transition-colors text-center font-medium';
+          const colorText = s === 'pending' ? 'text-amber-400' : s === 'completed' ? 'text-emerald-400' : 'text-slate-400';
+          btn.className = `flex-1 min-h-[36px] py-1.5 rounded-lg ${colorText} hover:text-white transition-colors text-center font-medium`;
         }
       });
 
       renderList();
     }
 
-    function handleCategoryFilter(category) {
-      currentFilterCategory = category;
+    function handleCategoryFilter(cat) {
+      currentFilterCategory = cat;
       renderList();
     }
 
@@ -1162,133 +1365,125 @@
       if (catSelect) catSelect.value = 'all';
 
       setFilterState('all');
-      showToast('Filtros restablecidos', 'info');
+      renderList();
+      showToast('Filtros restablecidos a la vista completa', 'info');
     }
 
     function filterItem(item) {
-      if (searchQuery) {
-        const titleMatch = (item.title || '').toLowerCase().includes(searchQuery);
-        const catMatch = (item.category || '').toLowerCase().includes(searchQuery);
-        if (!titleMatch && !catMatch) return false;
-      }
-
       if (currentFilterState === 'pending' && item.completed) return false;
       if (currentFilterState === 'completed' && !item.completed) return false;
 
-      if (currentFilterCategory !== 'all' && item.category !== currentFilterCategory) return false;
+      if (currentFilterCategory !== 'all' && item.category !== currentFilterCategory) {
+        return false;
+      }
+
+      if (searchQuery) {
+        const titleMatch = (item.title || '').toLowerCase().includes(searchQuery);
+        const catMatch = (item.category || '').toLowerCase().includes(searchQuery);
+        const valMatch = String(item.value).includes(searchQuery);
+        if (!titleMatch && !catMatch && !valMatch) return false;
+      }
 
       return true;
     }
 
-    // --- 6. ACTUALIZAR Y ELIMINAR ---
+    // --- 6. FUNCIÓN: ACTUALIZAR / ELIMINAR ---
     function toggleCompleted(id) {
-      const item = records.find(r => r.id === id);
-      if (item) {
-        item.completed = !item.completed;
-        saveState();
-        renderAll();
-        showToast(
-          item.completed ? `✓ "${item.title}" marcado como Completado.` : `⏳ "${item.title}" cambiado a Pendiente.`,
-          item.completed ? 'success' : 'warning'
-        );
-      }
+      const idx = records.findIndex(r => r.id === id);
+      if (idx === -1) return;
+
+      records[idx].completed = !records[idx].completed;
+      saveState();
+      renderAll();
+
+      const item = records[idx];
+      const msg = item.completed 
+        ? `"${item.title}" marcado como COMPLETADO (Verde neón)`
+        : `"${item.title}" marcado como PENDIENTE (Amarillo neón)`;
+      showToast(msg, item.completed ? 'success' : 'warning');
+    }
+
+    function deleteRecord(id) {
+      const idx = records.findIndex(r => r.id === id);
+      if (idx === -1) return;
+
+      const [removed] = records.splice(idx, 1);
+      lastDeletedRecord = removed;
+      saveState();
+      renderAll();
+
+      showToast(`Elemento "${removed.title}" eliminado.`, 'info', true);
     }
 
     function openEditModal(id) {
       const item = records.find(r => r.id === id);
       if (!item) return;
 
-      const idEl = document.getElementById('edit-id');
-      const titleEl = document.getElementById('edit-title');
-      const valEl = document.getElementById('edit-value');
-      const catEl = document.getElementById('edit-category');
-      const compEl = document.getElementById('edit-completed');
-
-      idEl.value = item.id;
-      titleEl.value = item.title;
-      valEl.value = item.value;
-      catEl.value = item.category;
-      compEl.value = item.completed ? 'true' : 'false';
-
-      clearFieldValidation(titleEl);
-      clearFieldValidation(valEl);
-
-      const errorBox = document.getElementById('modal-error');
-      if (errorBox) errorBox.classList.add('hidden');
-
       const modal = document.getElementById('edit-modal');
-      modal.classList.remove('hidden');
-    }
-
-    function closeEditModal() {
-      const modal = document.getElementById('edit-modal');
-      modal.classList.add('hidden');
-    }
-
-    function saveEdit(event) {
-      event.preventDefault();
-      const id = document.getElementById('edit-id').value;
+      const idInput = document.getElementById('edit-id');
       const titleInput = document.getElementById('edit-title');
       const valInput = document.getElementById('edit-value');
       const catInput = document.getElementById('edit-category');
       const compInput = document.getElementById('edit-completed');
-      const errorBox = document.getElementById('modal-error');
+      const modalError = document.getElementById('modal-error');
 
-      const validation = validateRecordData(titleInput.value, valInput.value, catInput.value);
+      if (modalError) modalError.classList.add('hidden');
 
-      if (!validation.valid) {
-        if (errorBox) {
-          errorBox.textContent = validation.message;
-          errorBox.classList.remove('hidden');
+      idInput.value = item.id;
+      titleInput.value = item.title;
+      valInput.value = item.value;
+      catInput.value = item.category;
+      compInput.value = String(item.completed);
+
+      clearFieldValidation(titleInput);
+      clearFieldValidation(valInput);
+
+      modal.classList.remove('hidden');
+      setTimeout(() => titleInput.focus(), 50);
+    }
+
+    function closeEditModal() {
+      const modal = document.getElementById('edit-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function saveEdit(e) {
+      e.preventDefault();
+
+      const id = document.getElementById('edit-id').value;
+      const title = document.getElementById('edit-title').value;
+      const val = document.getElementById('edit-value').value;
+      const cat = document.getElementById('edit-category').value;
+      const completed = document.getElementById('edit-completed').value === 'true';
+      const modalError = document.getElementById('modal-error');
+
+      const validation = validateRecordData(title, val, cat);
+      if (!validation.isValid) {
+        if (modalError) {
+          modalError.textContent = validation.error;
+          modalError.classList.remove('hidden');
         }
-        if (validation.field === 'title') {
-          markFieldInvalid(titleInput);
-          titleInput.focus();
-        } else if (validation.field === 'value') {
-          markFieldInvalid(valInput);
-          valInput.focus();
-        }
-        showToast(validation.message, 'warning');
+        if (validation.field === 'title') highlightErrorField('edit-title');
+        else if (validation.field === 'value') highlightErrorField('edit-value');
+        showToast(validation.error, 'error');
         return;
       }
 
-      const item = records.find(r => r.id === id);
-      if (item) {
-        item.title = validation.sanitizedTitle;
-        item.value = validation.sanitizedValue;
-        item.category = catInput.value;
-        item.completed = compInput.value === 'true';
+      const idx = records.findIndex(r => r.id === id);
+      if (idx !== -1) {
+        records[idx].title = title.trim();
+        records[idx].value = parseInt(val, 10);
+        records[idx].category = cat;
+        records[idx].completed = completed;
 
         saveState();
         renderAll();
         closeEditModal();
-        showToast(`Registro actualizado: "${item.title}"`, 'success');
+        showToast(`Registro "${records[idx].title}" actualizado en tiempo real.`, 'success');
       }
     }
 
-    function deleteRecord(id) {
-      const index = records.findIndex(r => r.id === id);
-      if (index !== -1) {
-        const deleted = records.splice(index, 1)[0];
-        lastDeletedRecord = { item: deleted, index: index };
-        saveState();
-        renderAll();
-        showToast(`Eliminado: "${deleted.title}"`, 'error', true);
-      }
-    }
-
-    function handleUndo() {
-      if (lastDeletedRecord) {
-        records.splice(lastDeletedRecord.index, 0, lastDeletedRecord.item);
-        saveState();
-        renderAll();
-        const title = lastDeletedRecord.item.title;
-        lastDeletedRecord = null;
-        showToast(`Restaurado con éxito: "${title}"`, 'success', false);
-      }
-    }
-
-    // --- 7. RESTABLECER ALMACENAMIENTO (SIN ALERTAS NATIVAS) ---
+    // --- 7. MODAL DE RESTABLECIMIENTO DE ALMACENAMIENTO ---
     function openResetConfirmModal() {
       const modal = document.getElementById('reset-confirm-modal');
       if (modal) modal.classList.remove('hidden');
@@ -1300,53 +1495,283 @@
     }
 
     function executeResetStorage() {
-      try {
-        SafeStorage.remove(STORAGE_KEY);
-        records = getTwoDefaultRecords();
-        saveState();
-        renderAll();
-        closeResetConfirmModal();
-        showToast('localStorage restablecido con 2 ejemplos iniciales.', 'info');
-      } catch (err) {
-        console.error('Error al restablecer:', err);
-        showToast('Ocurrió un error al restablecer el almacenamiento.', 'error');
-      }
+      SafeStorage.remove(STORAGE_KEY);
+      records = getTwoDefaultRecords();
+      saveState();
+      closeResetConfirmModal();
+      resetFilters();
+      renderAll();
+      showToast('Almacenamiento local restablecido a los 2 registros de ejemplo.', 'info');
     }
 
     function restoreTwoDefaults() {
       records = getTwoDefaultRecords();
       saveState();
+      resetFilters();
       renderAll();
-      showToast('2 registros de ejemplo cargados.', 'info');
+      showToast('Se cargaron los 2 registros de ejemplo iniciales.', 'success');
     }
 
-    // --- 8. RENDERIZADO VISUAL & COMPONENTES NEÓN ---
+    function focusCreateInput() {
+      const input = document.getElementById('input-title');
+      if (input) {
+        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        input.focus();
+      }
+    }
+
+    // --- 8. ANÁLISIS INTELIGENTE CON API DE GEMINI (1.5 FLASH + RESPONSESCHEMA) ---
+    /**
+     * Realiza un fetch a la API de Gemini 1.5 Flash exigiendo responseSchema
+     * con formato JSON estricto:
+     * {
+     *   "resumen": "string",
+     *   "diagnostico": "string",
+     *   "recomendaciones": ["string"],
+     *   "puntuacion": 90
+     * }
+     */
+    async function generateAIDiagnosis() {
+      const btn = document.getElementById('btn-ai-generate');
+      const btnText = document.getElementById('btn-ai-text');
+      const btnSpinner = document.getElementById('btn-ai-spinner');
+      const btnIcon = document.getElementById('btn-ai-icon');
+      const initialNotice = document.getElementById('ai-initial-notice');
+      const resultsContainer = document.getElementById('ai-results-container');
+      const errorContainer = document.getElementById('ai-error-container');
+
+      // Validar que haya registros para analizar
+      if (records.length === 0) {
+        showToast('Agrega al menos un registro antes de generar el diagnóstico con IA.', 'warning');
+        return;
+      }
+
+      // Preparar resumen estructurado de datos actuales
+      const totalPoints = records.reduce((acc, curr) => acc + (Number(curr.value) || 0), 0);
+      const completedList = records.filter(r => r.completed);
+      const pendingList = records.filter(r => !r.completed);
+
+      const recordsData = records.map(r => ({
+        concepto: r.title,
+        puntos: r.value,
+        categoria: r.category,
+        estado: r.completed ? 'Completado' : 'Pendiente'
+      }));
+
+      // Prompt para el modelo
+      const promptText = `Eres un experto consultor y mentor de productividad para el 'Ejercicio 24 - Neon Tracker'.
+Analiza el estado actual de los registros del usuario:
+- Cantidad de registros: ${records.length}
+- Puntos acumulados totales: ${totalPoints}
+- Registros completados: ${completedList.length}
+- Registros pendientes: ${pendingList.length}
+- Tasa de cumplimiento: ${Math.round((completedList.length / records.length) * 100)}%
+- Lista detallada de tareas: ${JSON.stringify(recordsData, null, 2)}
+
+Genera una evaluación diagnóstica en español, estructurada estrictamente bajo el esquema JSON solicitado.`;
+
+      // Cuerpo de petición REST con responseSchema para formato JSON estricto
+      const requestBody = {
+        contents: [
+          {
+            parts: [
+              {
+                text: promptText
+              }
+            ]
+          }
+        ],
+        generationConfig: {
+          responseMimeType: "application/json",
+          responseSchema: {
+            type: "OBJECT",
+            properties: {
+              resumen: {
+                type: "STRING"
+              },
+              diagnostico: {
+                type: "STRING"
+              },
+              recomendaciones: {
+                type: "ARRAY",
+                items: {
+                  type: "STRING"
+                }
+              },
+              puntuacion: {
+                type: "INTEGER"
+              }
+            },
+            required: ["resumen", "diagnostico", "recomendaciones", "puntuacion"]
+          }
+        }
+      };
+
+      // Estado de carga táctil
+      if (btn) btn.disabled = true;
+      if (btnText) btnText.textContent = 'Analizando con Gemini...';
+      if (btnSpinner) btnSpinner.classList.remove('hidden');
+      if (btnIcon) btnIcon.classList.add('hidden');
+      if (errorContainer) errorContainer.classList.add('hidden');
+
+      try {
+        let aiResult = null;
+
+        // 1. Si la constante GEMINI_API_KEY no ha sido reemplazada (es 'TU_API_KEY'),
+        // intentamos usar el proxy seguro del servidor de desarrollo si está disponible
+        if (GEMINI_API_KEY === 'TU_API_KEY') {
+          try {
+            const proxyRes = await fetch('/api/gemini-diagnostico', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ records: recordsData })
+            });
+            if (proxyRes.ok) {
+              aiResult = await proxyRes.json();
+            }
+          } catch (proxyErr) {
+            console.warn('[Proxy IA]', proxyErr);
+          }
+        }
+
+        // 2. Fetch directo al endpoint oficial de la API de Gemini 1.5 Flash:
+        // https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=TU_API_KEY
+        if (!aiResult) {
+          const endpointUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+          const response = await fetch(endpointUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestBody)
+          });
+
+          if (!response.ok) {
+            const errorJson = await response.json().catch(() => null);
+            const errorMsg = errorJson?.error?.message || `HTTP ${response.status}: ${response.statusText}`;
+            throw new Error(errorMsg);
+          }
+
+          const responseData = await response.json();
+          const responseText = responseData.candidates?.[0]?.content?.parts?.[0]?.text;
+
+          if (!responseText) {
+            throw new Error('La API de Gemini devolvió un contenido vacío.');
+          }
+
+          aiResult = JSON.parse(responseText);
+        }
+
+        // Validar formato del resultado
+        if (!aiResult || typeof aiResult.puntuacion === 'undefined') {
+          throw new Error('La respuesta recibida no cumple con el esquema JSON exigido.');
+        }
+
+        // Renderizar en la interfaz
+        renderAIResponse(aiResult);
+        if (initialNotice) initialNotice.classList.add('hidden');
+        if (resultsContainer) resultsContainer.classList.remove('hidden');
+
+        showToast('¡Diagnóstico inteligente generado exitosamente con Gemini!', 'info');
+
+      } catch (err) {
+        console.error('[Error Gemini AI]', err);
+        showToast(`Fallo al consultar Gemini: ${err.message}`, 'error');
+        renderAIError(err.message);
+      } finally {
+        if (btn) btn.disabled = false;
+        if (btnText) btnText.textContent = 'Actualizar Diagnóstico';
+        if (btnSpinner) btnSpinner.classList.add('hidden');
+        if (btnIcon) btnIcon.classList.remove('hidden');
+      }
+    }
+
+    function renderAIResponse(data) {
+      const scoreVal = document.getElementById('ai-score-value');
+      const scoreBadge = document.getElementById('ai-score-badge');
+      const summaryText = document.getElementById('ai-summary-text');
+      const diagnosisText = document.getElementById('ai-diagnosis-text');
+      const recsList = document.getElementById('ai-recommendations-list');
+      const timestampEl = document.getElementById('ai-timestamp');
+
+      const score = Math.max(0, Math.min(100, Number(data.puntuacion) || 0));
+
+      if (scoreVal) scoreVal.textContent = score;
+
+      if (scoreBadge) {
+        if (score >= 80) {
+          scoreBadge.textContent = '★ Rendimiento Óptimo';
+          scoreBadge.className = 'mt-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-950 text-emerald-300 border border-emerald-500/40';
+        } else if (score >= 60) {
+          scoreBadge.textContent = '▲ Ritmo Estable';
+          scoreBadge.className = 'mt-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-950 text-amber-300 border border-amber-500/40';
+        } else {
+          scoreBadge.textContent = '▼ Requiere Enfoque';
+          scoreBadge.className = 'mt-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-pink-950 text-pink-300 border border-pink-500/40';
+        }
+      }
+
+      if (summaryText) summaryText.textContent = data.resumen || 'Sin resumen disponible.';
+      if (diagnosisText) diagnosisText.textContent = data.diagnostico || 'Sin diagnóstico detallado.';
+
+      if (recsList) {
+        const recommendations = Array.isArray(data.recomendaciones) ? data.recomendaciones : [];
+        if (recommendations.length === 0) {
+          recsList.innerHTML = '<li class="text-slate-500 italic">No se proporcionaron recomendaciones específicas.</li>';
+        } else {
+          recsList.innerHTML = recommendations.map(rec => `
+            <li class="flex items-start gap-2.5 bg-night-900/60 border border-night-800/80 rounded-xl p-2.5">
+              <span class="w-5 h-5 rounded-md bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 flex items-center justify-center text-xs shrink-0 mt-0.5">
+                ✓
+              </span>
+              <span class="text-slate-300 leading-snug">${escapeHtml(rec)}</span>
+            </li>
+          `).join('');
+        }
+      }
+
+      if (timestampEl) {
+        const now = new Date();
+        timestampEl.textContent = `Generado a las ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+      }
+    }
+
+    function renderAIError(errorMsg) {
+      const errorContainer = document.getElementById('ai-error-container');
+      const errorDetail = document.getElementById('ai-error-detail');
+      if (errorContainer && errorDetail) {
+        errorContainer.classList.remove('hidden');
+        errorDetail.textContent = `Detalle del fallo: ${errorMsg}. Verifica que GEMINI_API_KEY contenga una clave válida de Google AI Studio o que el servidor proxy esté activo.`;
+      }
+    }
+
+    // --- 9. RENDERIZADO GLOBAL DE LA INTERFAZ ---
     function renderAll() {
-      renderHeaderCounters();
+      renderHeroSummary();
       renderSummaryCards();
       renderDistributionBar();
       renderList();
     }
 
-    function renderHeaderCounters() {
-      const totalValue = records.reduce((acc, curr) => acc + (Number(curr.value) || 0), 0);
+    function renderHeroSummary() {
+      const totalPoints = records.reduce((acc, curr) => acc + (Number(curr.value) || 0), 0);
       const totalCount = records.length;
       const completedCount = records.filter(r => r.completed).length;
       const pendingCount = totalCount - completedCount;
-      const completionRate = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
+      const rate = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
 
-      const heroValEl = document.getElementById('hero-total-value');
-      const heroCountEl = document.getElementById('hero-items-count');
-      const heroCompCount = document.getElementById('hero-completed-count');
-      const heroCompRate = document.getElementById('hero-completed-rate');
-      const heroPendCount = document.getElementById('hero-pending-count');
+      const heroTotalVal = document.getElementById('hero-total-value');
+      const heroItemsCount = document.getElementById('hero-items-count');
+      const heroCompletedCount = document.getElementById('hero-completed-count');
+      const heroCompletedRate = document.getElementById('hero-completed-rate');
+      const heroPendingCount = document.getElementById('hero-pending-count');
       const badgeTotalItems = document.getElementById('badge-total-items');
 
-      if (heroValEl) heroValEl.textContent = totalValue.toLocaleString('es-ES');
-      if (heroCountEl) heroCountEl.textContent = totalCount;
-      if (heroCompCount) heroCompCount.textContent = completedCount;
-      if (heroCompRate) heroCompRate.textContent = `(${completionRate}%)`;
-      if (heroPendCount) heroPendCount.textContent = pendingCount;
+      if (heroTotalVal) heroTotalVal.textContent = totalPoints;
+      if (heroItemsCount) heroItemsCount.textContent = totalCount;
+      if (heroCompletedCount) heroCompletedCount.textContent = completedCount;
+      if (heroCompletedRate) heroCompletedRate.textContent = `(${rate}%)`;
+      if (heroPendingCount) heroPendingCount.textContent = pendingCount;
       if (badgeTotalItems) badgeTotalItems.textContent = `${totalCount} en almacenamiento`;
     }
 
@@ -1492,7 +1917,7 @@
             <div class="flex items-center gap-3 min-w-0 flex-1">
               <button 
                 type="button" 
-                onclick="toggleCompleted('${item.id}')"
+                onclick="toggleCompleted('${item.id}')" 
                 class="touch-target-min shrink-0 rounded-xl flex items-center justify-center border transition-all-200 cursor-pointer active:scale-90 ${
                   isDone 
                     ? 'bg-emerald-500/25 border-emerald-400 text-emerald-300 shadow-neon-emerald' 
@@ -1538,7 +1963,7 @@
               <!-- Botón Editar -->
               <button 
                 type="button" 
-                onclick="openEditModal('${item.id}')"
+                onclick="openEditModal('${item.id}')" 
                 class="touch-target-min rounded-xl bg-night-950 active:bg-cyan-950 border border-night-800 hover:border-cyan-500/40 text-slate-400 hover:text-cyan-300 flex items-center justify-center transition-all-200 active:scale-90 cursor-pointer"
                 title="Editar / Actualizar"
               >
@@ -1550,7 +1975,7 @@
               <!-- Botón Eliminar -->
               <button 
                 type="button" 
-                onclick="deleteRecord('${item.id}')"
+                onclick="deleteRecord('${item.id}')" 
                 class="touch-target-min rounded-xl bg-night-950 active:bg-pink-950 border border-night-800 hover:border-pink-500/40 text-slate-400 hover:text-pink-400 flex items-center justify-center transition-all-200 active:scale-90 cursor-pointer"
                 title="Eliminar registro"
               >
